@@ -1,6 +1,8 @@
 require 'sinatra'
 require 'json'
 
+set :bind, '0.0.0.0'
+
 def search text
   return '' unless text
   words = text.scan /\w+/
