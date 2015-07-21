@@ -1,13 +1,13 @@
 
 function results (d) {
-  console.log('results', d)
-  $('#results').html(d.results)
+  $('#results').html("<hr>" + d.results + "<hr>")
 }
 
 function search (e) {
   if (e.keyCode == 13) {
-      console.log('search', $(this).val())
-      $.get('/search', {words: $(this).val()}, results, 'json')
+    $('#results').text('')
+    url = $('input:radio[name=query]:checked').val();
+    $.get(url, {words: $('input.query').val()}, results, 'json')
   }
 }
 
