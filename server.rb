@@ -63,6 +63,7 @@ get '/' do
   <head>
     <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js'></script>
     <script src='/search.js'></script>
+    <link id='favicon' href='/favicon.png' rel='icon' type='image/png'>
   </head>
   <body style="padding:20px;">
     <p>Search: <input class=query type=text></input>
@@ -89,4 +90,9 @@ get '/pages' do
   rescue => e
     {:result => "Trouble: #{e}"}.to_json
   end
+end
+
+get '/recent-activity.json' do
+  headers 'Access-Control-Allow-Origin' => '*'
+  send_file 'activity/recent-activity.json'
 end
