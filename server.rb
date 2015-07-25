@@ -5,37 +5,50 @@ set :bind, '0.0.0.0'
 
 helpers do
 
+  def has text, words
+    words.each do |word|
+      unless text.match /\b#{word}\b/
+        return false
+      end
+    end
+    return true
+  end
+
   def search text
     return '' unless text
     words = text.scan /\w+/
-    found = `grep -w -e '#{words[0]}' sites/*/words.txt`
     result = []
-    found.split(/\n/).each do |line|
+    Dir.glob 'sites/*/words.txt' do |filename|
+      result << filename if has(File.read(filename), words)
+    end
+    result = result.map do |line|
       site = line.split('/')[1]
-      result.push "<a href=//#{site} target=#{site}><img src=//#{site}/favicon.png width=16> #{site}</a>"
+      "<a href=//#{site} target=#{site}><img src=//#{site}/favicon.png width=16> #{site}</a>"
     end
     result.join '<br>'
   end
 
   def sites words
-    result = 'sites/*/words.txt'
-    words.each do |word|
-      result = `grep -w -l -e '#{word}' #{result.gsub /\n/, ' '}`
+    result = []
+    Dir.glob 'sites/*/words.txt' do |filename|
+      result << filename.split('/')[1] if has(File.read(filename), words)
     end
     result
   end
 
   def pages words, sites
-    result = sites.gsub /words.txt/, 'pages/*/words.txt'
-    words.each do |word|
-      result = `grep -w -l -e '#{word}' #{result.gsub /\n/, ' '}`
+    result = []
+    sites.each do |site|
+      Dir.glob "sites/#{site}/pages/*/words.txt" do |filename|
+        result << filename if has(File.read(filename), words)
+      end
     end
     result
   end
 
   def references pages
     result = Hash.new { |hash, key| hash[key] = [] }
-    pages.split(/\n/).each do |line|
+    pages.each do |line|
       dir, site, dir, slug, dir = line.split '/'
       result[slug] << site
     end
