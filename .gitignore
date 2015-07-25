@@ -2,3 +2,4 @@ sites
 activity
 logs
 *.txt
+public/sites.tgz

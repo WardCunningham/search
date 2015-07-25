@@ -1,5 +1,5 @@
 # run incrementail scrapes
-# usage: 0 */6 * * * (cd FedWiki/scrape; sh cron.sh)
+# usage: 0 */6 * * * (cd FedWiki/scrape; LANG="en_US.UTF-8" sh cron.sh)
 
 
 ruby scrape.rb > logs/`date -u +%a-%H00`

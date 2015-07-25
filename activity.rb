@@ -6,7 +6,7 @@ require 'json'
 @story = []
 
 def add item
-  item['id'] = rand(1000000000)
+  item['id'] = rand(1000000000).to_s
   @story << item
 end
 
