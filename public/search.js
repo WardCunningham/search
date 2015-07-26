@@ -5,7 +5,7 @@ function results (d) {
 
 function search (e) {
   if (e.keyCode == 13) {
-    $('#results').text('')
+    $('#results').html('<img src=spinner.gif>')
     url = $('input:radio[name=query]:checked').val();
     $.get(url, {words: $('input.query').val()}, results, 'json')
   }
