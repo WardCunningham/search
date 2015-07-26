@@ -80,6 +80,14 @@ def update site, pageinfo
             word = word[0].downcase
             words.push word unless words.include? word
           end
+          item['text'].scan /^ROSTER ([A-Za-z0-9.-:]+\/[a-z0-9-]+)$/ do |word|
+            word = word[0].downcase
+            words.push word unless words.include? word
+          end
+          item['text'].scan /^REFERENCES ([A-Za-z0-9.-:]+\/[a-z0-9-]+)$/ do |word|
+            word = word[0].downcase
+            words.push word unless words.include? word
+          end
         end
       end
       journal.each do |item|
