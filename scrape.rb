@@ -60,6 +60,7 @@ def update site, pageinfo
     scrape site, slug, 'links' do
       words = []
       story.each do |item|
+        words.push item['slug'] if item['slug']
         next unless text = item['text']
         text.scan /\[\[([^\]]+)\]\]/ do |word|
           word = asSlug word[0]
