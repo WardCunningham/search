@@ -21,18 +21,18 @@ helpers do
     result.join '<br>'
   end
 
-  def sites words
+  def sites find, words
     result = []
-    Dir.glob 'sites/*/words.txt' do |filename|
+    Dir.glob "sites/*/#{find}.txt" do |filename|
       result << filename.split('/')[1] if has(File.read(filename), words)
     end
     result
   end
 
-  def pages words, sites
+  def pages find, words, sites
     result = []
     sites.each do |site|
-      Dir.glob "sites/#{site}/pages/*/words.txt" do |filename|
+      Dir.glob "sites/#{site}/pages/*/#{find}.txt" do |filename|
         result << filename if has(File.read(filename), words)
       end
     end
@@ -92,19 +92,20 @@ end
 
 get '/search' do
   content_type 'text/json'
-  words = params['query'].downcase.scan /\w+/
+  find = params['find']||'words'
+  query = params['query'].downcase.scan /\w+/
   begin
     html = case params['within']||'sites'
       when 'sites'
-        search sites(words)
+        search sites(find, query)
       when 'pages'
-        format references pages(words, sites(words))
+        format references pages(find, query, sites(find, query))
       else
         "Don't yet know within: '#{params['within']}'"
     end
     {:results => html}.to_json
   rescue => e
-    {:result => "Trouble: #{e}"}.to_json
+    {:results => "Trouble: #{e}"}.to_json
   end
 end
 
