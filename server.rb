@@ -84,6 +84,8 @@ get '/' do
       <input class=query type=text size=40></input>
     </table>
     <div id=results style="padding-top:20px;"></div>
+    <a href="http://search.fed.wiki.org/federation-search.html">help</a> |
+    <a href="http://ward.asia.wiki.org/ruby-sitemap-scrape.html">about</a>
   </body>
 EOF
 end
