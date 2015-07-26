@@ -90,13 +90,12 @@ end
 
 get '/search' do
   content_type 'text/json'
-  puts params.inspect
-  {:results => search(params[:words])}.to_json
+  {:results => search(params[:words].downcase)}.to_json
 end
 
 get '/pages' do
   content_type 'text/json'
-  words = params['words'].scan /\w+/
+  words = params['words'].downcase.scan /\w+/
   begin
     html = format references pages(words, sites(words))
     {:results => html}.to_json
