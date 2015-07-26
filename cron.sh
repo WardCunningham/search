@@ -1,6 +1,8 @@
 # run incrementail scrapes
 # usage: 0 */6 * * * (cd FedWiki/search; LANG="en_US.UTF-8" sh cron.sh)
 
+mkdir activity logs sites 2>/dev/null
+
 
 ruby scrape.rb > logs/`date -u +%a-%H00`
 
