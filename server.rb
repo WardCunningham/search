@@ -14,15 +14,8 @@ helpers do
     return true
   end
 
-  def search text
-    return '' unless text
-    words = text.scan /\w+/
-    result = []
-    Dir.glob 'sites/*/words.txt' do |filename|
-      result << filename if has(File.read(filename), words)
-    end
-    result = result.map do |line|
-      site = line.split('/')[1]
+  def search sites
+    result = sites.map do |site|
       "<a href=//#{site} target=#{site}><img src=//#{site}/favicon.png width=16> #{site}</a>"
     end
     result.join '<br>'
@@ -79,10 +72,17 @@ get '/' do
     <link id='favicon' href='/favicon.png' rel='icon' type='image/png'>
   </head>
   <body style="padding:20px;">
-    <p>Search: <input class=query type=text></input>
-    <input type="radio" name="query" value="/search" checked>sites</input>
-    <input type="radio" name="query" value="/pages">pages</input>
-    </p>
+    <table>
+    <tr><td>find:
+      <td><input type="radio" name="find" value="words" checked>words</input>
+      <td><input type="radio" name="find" value="links">links</input>
+      <td><input type="radio" name="find" value="sites">sites</input>
+    <tr><td>within:
+      <td><input type="radio" name="within" value="sites" checked>sites</input>
+      <td><input type="radio" name="within" value="pages">pages</input>
+    <tr><td colspan=4>
+      <input class=query type=text size=40></input>
+    </table>
     <div id=results style="padding-top:20px;"></div>
   </body>
 EOF
@@ -90,14 +90,16 @@ end
 
 get '/search' do
   content_type 'text/json'
-  {:results => search(params[:words].downcase)}.to_json
-end
-
-get '/pages' do
-  content_type 'text/json'
-  words = params['words'].downcase.scan /\w+/
+  words = params['query'].downcase.scan /\w+/
   begin
-    html = format references pages(words, sites(words))
+    html = case params['within']||'sites'
+      when 'sites'
+        search sites(words)
+      when 'pages'
+        format references pages(words, sites(words))
+      else
+        "Don't yet know within: '#{params['within']}'"
+    end
     {:results => html}.to_json
   rescue => e
     {:result => "Trouble: #{e}"}.to_json
