@@ -12,11 +12,12 @@ end
 
 def roster
   result = []
-  Dir.glob 'activity/*00' do |filename|
-    result << File.read(filename)
+  Dir['activity/*00'].sort_by{ |f| File.ctime(f) }.reverse.each do |filename|
+puts filename
     result << filename.split('/')[1]
+    result << File.read(filename)
   end
-  result.reverse
+  result
 end
 
 add({:type => 'paragraph', :text => 'Here we report sites we find with recently edited pages.' })
