@@ -16,7 +16,7 @@ helpers do
 
   def search sites
     result = sites.map do |site|
-      "<a href=//#{site} target=#{site}><img src=//#{site}/favicon.png width=16> #{site}</a>"
+      "<a href=//#{site} target=#{site} title=#{site}><img src=//#{site}/favicon.png width=16> #{site}</a>"
     end
     result.join '<br>'
   end
@@ -55,7 +55,7 @@ helpers do
       sites.each do |site|
         href = "http://#{site}/view/#{slug}"
         flag = "http://#{site}/favicon.png"
-        result << "<a href='#{href}' target='#{site}'><img src='#{flag}' width=16></a> "
+        result << "<a href='#{href}' target='#{site}' title='#{site}'><img src='#{flag}' width=16></a> "
       end
       result << "</p>"
     end
