@@ -27,3 +27,5 @@ end
 sites 'links.txt'
 sites 'sites.txt'
 sites 'words.txt'
+sites 'items.txt'
+sites 'plugins.txt'
