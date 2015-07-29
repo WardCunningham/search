@@ -99,6 +99,25 @@ def update site, pageinfo
       words.sort
     end
 
+    scrape site, slug, 'items' do
+      words = []
+      story.each do |item|
+        id = item['alias'] || item['id']
+        words.push id unless words.include? id
+      end
+      words.sort
+    end
+
+    scrape site, slug, 'plugins' do
+      words = []
+      story.each do |item|
+        type = item['type']
+        words.push type unless words.include? type
+      end
+      words.sort
+    end
+
+
   rescue => e
     puts "can't do update for #{pageinfo['slug']}, #{e}"
   end
