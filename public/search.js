@@ -20,8 +20,16 @@ function search (e) {
   }
 }
 
+function explain(e) {
+  var eg = $(this).data('eg')
+  if (eg) {
+    $('#eg').text('eg. ' + eg)
+  }
+}
+
 function start () {
   $("input").keyup(search)
+  $("input").click(explain)
 }
 
 $(start)

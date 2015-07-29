@@ -74,14 +74,18 @@ get '/' do
   <body style="padding:20px;">
     <table>
     <tr><td>find:
-      <td><input type="radio" name="find" value="words" checked>words</input>
-      <td><input type="radio" name="find" value="links">links</input>
-      <td><input type="radio" name="find" value="sites">sites</input>
+      <td><input type="radio" name="find" data-eg="dorkbot" value="words" checked>words</input>
+      <td><input type="radio" name="find" data-eg="how-to-wiki" value="links">links</input>
+      <td><input type="radio" name="find" data-eg="ward.fed.wiki.org" value="sites">sites</input>
+      <td><input type="radio" name="find" data-eg="63ad2e58eecdd9e5" value="items">items</input>
+      <td><input type="radio" name="find" data-eg="video" value="plugins">plugins</input>
     <tr><td>within:
       <td><input type="radio" name="within" value="sites" checked>sites</input>
       <td><input type="radio" name="within" value="pages">pages</input>
-    <tr><td colspan=4>
-      <input class=query type=text size=40></input>
+    <tr><td>search: 
+      <td colspan=5><i><span id=eg></span></i>
+    <tr><td colspan=6>
+      <input class=query type=text size=50></input>
     </table>
     <div id=results style="padding-top:20px;"></div>
     <a href="http://search.fed.wiki.org/federation-search.html">help</a> |
