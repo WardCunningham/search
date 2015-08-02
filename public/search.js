@@ -7,16 +7,20 @@ function choice (name) {
   return $('input:radio[name=' + name + ']:checked').val()
 }
 
-function search (e) {
+function search () {
+  $('#results').html('<img src=spinner.gif>')
+  params = {
+    find: choice('find'),
+    within: choice('within'),
+    query: $('input.query').val()
+  }
+  window.history.pushState(params, "Search",'http://' + location.host + '/#/' + $.param(params))
+  $.get('/search', params, results, 'json')
+}
+
+function keystroke (e) {
   if (e.keyCode == 13) {
-    $('#results').html('<img src=spinner.gif>')
-    // url = $('input:radio[name=query]:checked').val();
-    params = {
-      find: choice('find'),
-      within: choice('within'),
-      query: $('input.query').val()
-    }
-    $.get('/search', params, results, 'json')
+    search()
   }
 }
 
@@ -27,9 +31,26 @@ function explain(e) {
   }
 }
 
+function run () {
+  var regex = /(\w+?)=([^&]+)/g
+  var params = decodeURIComponent(location.hash)
+  while ((p = regex.exec(params)) !== null) {
+    switch (p[1]) {
+      case 'find':
+      case 'within':
+        $('input:radio[name=' + p[1] + '][value=' + p[2] + ']').prop('checked',true)
+        break
+      case 'query':
+        $('input.query').val(p[2].replace(/\+/g,' '))
+    }
+  }
+  search()
+}
+
 function start () {
-  $("input").keyup(search)
+  $("input").keyup(keystroke)
   $("input").click(explain)
+  if (location.hash.length) {run()}
 }
 
 $(start)
