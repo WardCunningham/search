@@ -77,7 +77,7 @@ get '/' do
       <td><input type="radio" name="find" data-eg="dorkbot" value="words" checked>words</input>
       <td><input type="radio" name="find" data-eg="how-to-wiki" value="links">links</input>
       <td><input type="radio" name="find" data-eg="ward.fed.wiki.org" value="sites">sites</input>
-      <td><input type="radio" name="find" data-eg="63ad2e58eecdd9e5" value="items">items</input>
+      <td><input type="radio" name="find" data-eg="dbed99c5d3c702b1" value="items">items</input>
       <td><input type="radio" name="find" data-eg="video" value="plugins">plugins</input>
     <tr><td>within:
       <td><input type="radio" name="within" value="sites" checked>sites</input>
