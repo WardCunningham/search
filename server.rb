@@ -5,13 +5,15 @@ set :bind, '0.0.0.0'
 
 helpers do
 
-  def has text, words
+  def has text, words, op='and'
     words.each do |word|
-      unless text.match /\b#{word}\b/
-        return false
+      if text.match /\b#{word}\b/
+        return true if op == 'or'
+      else
+        return false if op == 'and'
       end
     end
-    return true
+    return op == 'and'
   end
 
   def search sites
@@ -21,19 +23,19 @@ helpers do
     result.join '<br>'
   end
 
-  def sites find, words
+  def sites find, words, op='and'
     result = []
     Dir.glob "sites/*/#{find}.txt" do |filename|
-      result << filename.split('/')[1] if has(File.read(filename), words)
+      result << filename.split('/')[1] if has(File.read(filename), words, op)
     end
     result
   end
 
-  def pages find, words, sites
+  def pages find, words, sites, op='and'
     result = []
     sites.each do |site|
       Dir.glob "sites/#{site}/pages/*/#{find}.txt" do |filename|
-        result << filename if has(File.read(filename), words)
+        result << filename if has(File.read(filename), words, op)
       end
     end
     result
@@ -111,6 +113,24 @@ get '/search' do
   rescue => e
     {:results => "Trouble: #{e}"}.to_json
   end
+end
+
+post '/match', :provides => :json do
+  # http://stackoverflow.com/questions/17870680/jquery-json-post-to-a-sinatra-route-not-working-correctly
+
+  # function items () {return $('.page:last .item').map(function(i, each) {return $(each).data('id')}).toArray().join(" ")}
+  # function success (data, xhr) {show([roster(data),code(data)])}
+  # function code (data) {return {type: 'code', text: JSON.stringify(data,null,' ')}}
+  # function show (story) {wiki.showResult(wiki.newPage({story: story}))}
+  # function roster (data) {return {type: 'roster', text: markup(data.result)}}
+  # function markup (result) {return Object.keys(result).join("\n\n")}
+  # $.post('http://localhost:3030/match',{query:items()},success,'json')
+
+  headers 'Access-Control-Allow-Origin' => '*'
+  find = params['find'] || 'items'
+  query = params['query'].downcase.scan /\w+/
+  result = references pages(find, query, sites(find, query, 'or'), 'or')
+  halt 200, {:params => params, :result => result}.to_json
 end
 
 get '/recent-activity.json' do
