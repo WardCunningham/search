@@ -81,13 +81,16 @@ get '/' do
       <td><input type="radio" name="find" data-eg="ward.fed.wiki.org" value="sites">sites</input>
       <td><input type="radio" name="find" data-eg="dbed99c5d3c702b1" value="items">items</input>
       <td><input type="radio" name="find" data-eg="video" value="plugins">plugins</input>
+    <tr><td>match:
+      <td><input type="radio" name="match" data-eg="kitchen coffee apple" value="and" checked>all</input>
+      <td><input type="radio" name="match" data-eg="dorkbot hackathon"value="or">any</input>
     <tr><td>within:
       <td><input type="radio" name="within" value="sites" checked>sites</input>
       <td><input type="radio" name="within" value="pages">pages</input>
     <tr><td>search: 
       <td colspan=5><i><span id=eg></span></i>
     <tr><td colspan=6>
-      <input class=query type=text size=50></input>
+      <input class=query type=text size=70></input>
     </table>
     <div id=results style="padding-top:20px;"></div>
     <a href="http://search.fed.wiki.org/federation-search.html">help</a> |
@@ -99,13 +102,14 @@ end
 get '/search' do
   content_type 'text/json'
   find = params['find']||'words'
+  match = params['match']||'and'
   query = params['query'].downcase.scan /\w+/
   begin
     html = case params['within']||'sites'
       when 'sites'
-        search sites(find, query)
+        search sites(find, query, match)
       when 'pages'
-        format references pages(find, query, sites(find, query))
+        format references pages(find, query, sites(find, query, match), match)
       else
         "Don't yet know within: '#{params['within']}'"
     end
@@ -117,19 +121,11 @@ end
 
 post '/match', :provides => :json do
   # http://stackoverflow.com/questions/17870680/jquery-json-post-to-a-sinatra-route-not-working-correctly
-
-  # function items () {return $('.page:last .item').map(function(i, each) {return $(each).data('id')}).toArray().join(" ")}
-  # function success (data, xhr) {show([roster(data),code(data)])}
-  # function code (data) {return {type: 'code', text: JSON.stringify(data,null,' ')}}
-  # function show (story) {wiki.showResult(wiki.newPage({story: story}))}
-  # function roster (data) {return {type: 'roster', text: markup(data.result)}}
-  # function markup (result) {return Object.keys(result).join("\n\n")}
-  # $.post('http://localhost:3030/match',{query:items()},success,'json')
-
   headers 'Access-Control-Allow-Origin' => '*'
   find = params['find'] || 'items'
+  match = params['match'] || 'or'
   query = params['query'].downcase.scan /\w+/
-  result = references pages(find, query, sites(find, query, 'or'), 'or')
+  result = references pages(find, query, sites(find, query, match), match)
   halt 200, {:params => params, :result => result}.to_json
 end
 

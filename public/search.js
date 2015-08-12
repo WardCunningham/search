@@ -12,6 +12,7 @@ function search () {
   params = {
     find: choice('find'),
     within: choice('within'),
+    match: choice('match'),
     query: $('input.query').val()
   }
   window.history.pushState(params, "Search",'http://' + location.host + '/#/' + $.param(params))
