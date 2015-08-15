@@ -122,8 +122,8 @@ end
 post '/match', :provides => :json do
   # http://stackoverflow.com/questions/17870680/jquery-json-post-to-a-sinatra-route-not-working-correctly
   headers 'Access-Control-Allow-Origin' => '*'
-  find = params['find'] || 'items'
-  match = params['match'] || 'or'
+  find = params['find'] || 'words'
+  match = params['match'] || 'and'
   query = params['query'].downcase.scan /\w+/
   result = references pages(find, query, sites(find, query, match), match)
   halt 200, {:params => params, :result => result}.to_json
