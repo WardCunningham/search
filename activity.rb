@@ -22,6 +22,7 @@ end
 
 add({:type => 'paragraph', :text => 'Here we report sites we find with recently edited pages.' })
 add({:type => 'paragraph', :text => `ruby counts.rb`.chomp})
+add({:type => 'paragraph', :text => "This and past scans found #{`cat items.txt | wc -l`.chomp} unique items."})
 add({:type => 'paragraph', :text => 'Click » for sites of interest. See [[Recent Changes]]' })
 add({:type => 'roster', :text => roster.join("\n\n")})
 
