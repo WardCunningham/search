@@ -21,6 +21,7 @@ puts filename
 end
 
 add({:type => 'paragraph', :text => 'Here we report sites we find with recently edited pages.' })
+add({:type => 'paragraph', :text => `ruby counts.rb`.chomp})
 add({:type => 'paragraph', :text => 'Click » for sites of interest. See [[Recent Changes]]' })
 add({:type => 'roster', :text => roster.join("\n\n")})
 
