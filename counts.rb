@@ -12,7 +12,7 @@ log.scan(/, (\d+) pages, /) do |count|
 	pages += count[0].to_i
 end
 
-counts = {scan: {sites: sites, pages: pages}, index: {}}
+counts = {date: Time.now.to_i, scan: {sites: sites, pages: pages}, index: {}}
 `wc -l *.txt`.scan(/(\d+) (\w+)\.txt/) {|v,k| counts[:index][k] = v.to_i}
 File.open('counts.txt','a') {|file| file.puts counts.to_json}
 
