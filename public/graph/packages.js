@@ -10,16 +10,29 @@
         if (!node) {
           node = map[name] = data || {name: name, children: []};
           if (name.length) {
-            node.parent = find(name.substring(0, i = name.lastIndexOf(".")));
+            var parent_name, p
+            if (p = name.match(/^(.*):(.*)$/)) {
+              parent_name = p[1]
+            } else if (p = name.match(/^(.*?)\.(.*)$/)) {
+              parent_name = p[2]
+            } else {
+              parent_name = ''
+            }
+            node.parent = find(parent_name);
+            if (!node.parent.children) {
+              console.log('children', name, data)
+              node.parent.children = []
+            }
             node.parent.children.push(node);
-            node.key = name.substring(i + 1);
+            node.key = name.replace(/\W/g,'-');
           }
         }
         return node;
       }
 
-      classes.forEach(function(d) {
-        find(d.name, d);
+      Object.keys(classes).forEach(function(k) {
+        var v = classes[k]
+        find(k, {name: k, size: v.pages, imports: v.links||[]});
       });
 
       return map[""];
