@@ -138,3 +138,8 @@ get '/system/sitemap.json' do
   headers 'Access-Control-Allow-Origin' => '*'
   send_file 'activity/sitemap.json'
 end
+
+get %r{/([a-z0-9-]+)\.json} do |slug|
+  headers 'Access-Control-Allow-Origin' => '*'
+  send_file "pages/#{slug}"
+end
