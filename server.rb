@@ -143,3 +143,7 @@ get %r{/([a-z0-9-]+)\.json} do |slug|
   headers 'Access-Control-Allow-Origin' => '*'
   send_file "pages/#{slug}"
 end
+
+get '/view/:anything' do
+  redirect '/'
+end
