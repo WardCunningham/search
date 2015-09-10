@@ -139,11 +139,11 @@ get '/system/sitemap.json' do
   send_file 'activity/sitemap.json'
 end
 
-get %r{/([a-z0-9-]+)\.json} do |slug|
+get %r{^/([a-z0-9-]+)\.json$} do |slug|
   headers 'Access-Control-Allow-Origin' => '*'
   send_file "pages/#{slug}"
 end
 
-get '/view/:anything' do
+get %r{^/view/} do
   redirect '/'
 end
