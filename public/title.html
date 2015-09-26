@@ -1,0 +1,42 @@
+<script src="slug-web.js"></script>
+<style>
+  td {vertical-align: top; width: 20%;}
+</style>
+<center>
+  <h1>Federated Wiki Title Network</h1>
+  <p>Click a title to center the display on that page of the federation.</p>
+  <table><tr>
+    <td id="l2">left left
+    <td id="l1">left 
+    <td id="c">left left
+    <td id="r1">right
+    <td id="r2">right right
+</center>
+<script>
+  var center = location.search.replace(/^\?/,'')
+  var left = inbound(center)
+  l2.innerHTML = left.map(inbound).map(link).join('<br>')
+  l1.innerHTML = link(left)
+  c.innerHTML = center
+  r1.innerHTML = outbound(center)
+  r2.innerHTML = slugs[center].links.map(outbound).join('<br>')
+
+  function inbound (slug) {
+    var result = []
+    for (var cite in slugs) {
+      if (slugs[cite].links.some(function(each) {return each == slug})) {
+        result.push(cite)
+      }
+    }
+    return result
+
+  }
+
+  function outbound (slug) {
+    return slugs[slug].links.join('<br>')
+  }
+
+  function link (slugs) {
+    return slugs.map(function(each) {return each}).join('<br>')
+  }
+</script>
