@@ -19,27 +19,24 @@ See count of forks ÷ sites.</p>
 
   var center = location.search.replace(/^\?/,'').split(/,/)
   column('me', center)
-  column('son', that = outbound(center))
-  column('gson', outbound(that))
-  column('dad', that = inbound(center))
-  column('gdad', inbound(that))
+  column('son', those = follow(center,outlinks))
+  column('gson', follow(those,outlinks))
+  column('dad', those = follow(center,inlinks))
+  column('gdad', follow(those,inlinks))
 
-  function outbound (titles) {
-    function links (list, slug) {return list.concat(slugs[slug].links)}
+  function follow (titles, links) {
+    function linked (list, slug) {return list.concat(links(slug))}
     function uniq (item, pos, self) {return self.indexOf(item) == pos}
-    return titles.reduce(links,[]).filter(uniq)
+    return titles.reduce(linked,[]).filter(uniq)
+  }
+
+  function outlinks(slug) {
+    return slugs[slug].links
   }
 
   function inlinks(slug) {
     function cites (key) {return slugs[key].links.indexOf(slug) >= 0}
     return Object.keys(slugs).filter(cites)
-  }
-
-  function inbound (titles) {
-    function from (slug) {return Object.keys(slugs).filter(cites)}
-    function links (list, slug) {return list.concat(inlinks(slug))}
-    function uniq (item, pos, self) {return self.indexOf(item) == pos}
-    return titles.reduce(links,[]).filter(uniq)
   }
 
   function column (id, list) {
@@ -53,7 +50,6 @@ See count of forks ÷ sites.</p>
 
   window.onclick = function (e) {
     if (e.target.localName == 'li') {
-      console.log(e.target.innerHTML.replace(/ /g,'-'))
       location = '/title.html?' + e.target.innerHTML.replace(/ /g,'-')
     }
   }
