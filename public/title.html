@@ -7,7 +7,8 @@
 </style>
 
 <h1>Federated Wiki Title Network</h1>
-<p>Click a title to center the display on that page of the federation.</p>
+<p>Click a title to center the display on that page of the federation.<br>
+See count of forks ÷ sites.</p>
 <table>
   <tr>
     <th id="gdadh"> <th id="dadh"> <th id="meh"> <th id="sonh"> <th id="gsonh">
@@ -16,32 +17,45 @@
 
 <script>
 
-  var center = location.search.replace(/^\?/,'')
-  var left = inbound(center)
+  var center = location.search.replace(/^\?/,'').split(/,/)
+  column('me', center)
+  column('son', that = outbound(center))
+  column('gson', outbound(that))
+  column('dad', that = inbound(center))
+  column('gdad', inbound(that))
 
-  gdad.innerHTML = left.map(inbound).map(link).join('<br>')
-  dad.innerHTML = link(left)
-  me.innerHTML = center
-  son.innerHTML = outbound(center)
-  gson.innerHTML = slugs[center].links.map(outbound).join('<br>')
+  function outbound (titles) {
+    function links (list, slug) {return list.concat(slugs[slug].links)}
+    function uniq (item, pos, self) {return self.indexOf(item) == pos}
+    return titles.reduce(links,[]).filter(uniq)
+  }
 
-  function inbound (slug) {
-    function here (each) {return each == slug}
-    var result = []
-    for (var cite in slugs) {
-      if (slugs[cite].links.some(here)) {
-        result.push(cite)
-      }
+  function inlinks(slug) {
+    function cites (key) {return slugs[key].links.indexOf(slug) >= 0}
+    return Object.keys(slugs).filter(cites)
+  }
+
+  function inbound (titles) {
+    function from (slug) {return Object.keys(slugs).filter(cites)}
+    function links (list, slug) {return list.concat(inlinks(slug))}
+    function uniq (item, pos, self) {return self.indexOf(item) == pos}
+    return titles.reduce(links,[]).filter(uniq)
+  }
+
+  function column (id, list) {
+    function forks (sum, slug) {return sum + slugs[slug].forks}
+    var html = list.reduce(forks,0) + ' ÷ ' + list.length
+    eval(id + 'h.innerHTML = html')
+    function li (text) {return '<li>' + text.replace(/-/g,' ')}
+    var html = list.map(li).join('')
+    eval(id + '.innerHTML = html')
+  }
+
+  window.onclick = function (e) {
+    if (e.target.localName == 'li') {
+      console.log(e.target.innerHTML.replace(/ /g,'-'))
+      location = '/title.html?' + e.target.innerHTML.replace(/ /g,'-')
     }
-    return result
-  }
-
-  function outbound (slug) {
-    return slugs[slug].links.join('<br>')
-  }
-
-  function link (slugs) {
-    return slugs.map(function(each) {return each}).join('<br>')
   }
 
 </script>
