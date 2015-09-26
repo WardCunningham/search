@@ -18,4 +18,6 @@ ruby found.rb
 ruby activity.rb
 
 ruby site-web.rb > public/site-web.json
+(perl -e 'print "window.sites="'; cat public/site-web.json) > public/site-web.js
 ruby slug-web.rb > public/slug-web.json
+(perl -e 'print "window.slugs="'; cat public/slug-web.json) > public/slug-web.js
