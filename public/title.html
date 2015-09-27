@@ -11,7 +11,7 @@
 <h1>Federated Wiki Title Network</h1>
 <p>Click a title to center on its paths through the federation.<br>
 See counts of pages ÷ titles nearby.
-<a href="http://ward.asia.wiki.org/title-network-browser.html" target="ward.asia.wiki.org">more</a></p>
+<a href="http://ward.asia.wiki.org/title-network-browser.html" target="ward.asia.wiki.org ">more</a></p>
 <table>
   <tr>
     <th id="gdadh"> <th id="dadh"> <th id="meh"> <th id="sonh"> <th id="gsonh">
@@ -33,13 +33,17 @@ See counts of pages ÷ titles nearby.
     return titles.reduce(linked,[]).filter(uniq)
   }
 
+  function jackpot (slug) {
+    return slugs[slug].forks <= 50
+  }
+
   function outlinks(slug) {
-    return slugs[slug].links
+    return slugs[slug].links.filter(jackpot)
   }
 
   function inlinks(slug) {
     function cites (key) {return slugs[key].links.indexOf(slug) >= 0}
-    return Object.keys(slugs).filter(cites)
+    return Object.keys(slugs).filter(cites).filter(jackpot)
   }
 
   function column (id, list) {
