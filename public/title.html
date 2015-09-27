@@ -52,7 +52,12 @@ See counts of pages ÷ titles nearby.</p>
 
   window.onclick = function (e) {
     if (e.target.localName == 'li') {
-      location = '/title.html?' + e.target.innerHTML.replace(/ /g,'-')
+      var target = e.target.innerHTML.replace(/ /g,'-')
+      if (e.shiftKey) {
+        location = '/#/find=links&within=pages&match=and&query=' + target
+      } else {
+        location = '/title.html?' + target
+      }
     }
   }
 
