@@ -46,7 +46,7 @@ See counts of pages ÷ titles nearby.
 
   function column (id, list) {
     function forks (sum, slug) {return sum + slugs[slug].forks}
-    var html = list.reduce(forks,0) + ' ÷ ' + list.length
+    var html = list.reduce(forks,0) + ' &divide; ' + list.length
     eval(id + 'h.innerHTML = html')
     function li (text) {return '<li>' + text.replace(/-/g,' ')}
     var html = list.map(li).join('')
