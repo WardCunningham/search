@@ -150,6 +150,7 @@ get %r{^/([a-z]+\.txt)$} do |file|
 end
 
 get '/tally/plugins.txt' do
+  content_type 'text/plain'
   `cat sites/*/plugins.txt | sort | uniq -c | sort -nr`
 end
 
