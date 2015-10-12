@@ -149,7 +149,7 @@ get %r{^/([a-z]+\.txt)$} do |file|
   send_file file
 end
 
-get '/tally/plugins' do
+get '/tally/plugins.txt' do
   `cat sites/*/plugins.txt | sort | uniq -c | sort -nr`
 end
 
