@@ -150,7 +150,7 @@ get %r{^/([a-z]+\.txt)$} do |file|
 end
 
 get '/tally/plugins' do
-  `cat */plugins.txt | sort | uniq -c | sort -nr`
+  `cat sites/*/plugins.txt | sort | uniq -c | sort -nr`
 end
 
 get %r{^/view/} do
