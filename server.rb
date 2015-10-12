@@ -144,6 +144,11 @@ get %r{^/([a-z0-9-]+)\.json$} do |slug|
   send_file "pages/#{slug}"
 end
 
+get %r{^/([a-z]+\.txt)$} do |file|
+  headers 'Access-Control-Allow-Origin' => '*'
+  send_file file
+end
+
 get %r{^/view/} do
   redirect '/'
 end
