@@ -149,6 +149,10 @@ get %r{^/([a-z]+\.txt)$} do |file|
   send_file file
 end
 
+get '/tally/plugins' do
+  `cat */plugins.txt | sort | uniq -c | sort -nr`
+end
+
 get %r{^/view/} do
   redirect '/'
 end
