@@ -103,7 +103,11 @@ get '/search' do
   content_type 'text/json'
   find = params['find']||'words'
   match = params['match']||'and'
-  query = params['query'].downcase.scan /\w+/
+  if ['items','plugins'].include? find
+    query = params['query'].scan /\w+/
+  else
+    query = params['query'].downcase.scan /\w+/
+  end
   begin
     html = case params['within']||'sites'
       when 'sites'
@@ -124,7 +128,11 @@ post '/match', :provides => :json do
   headers 'Access-Control-Allow-Origin' => '*'
   find = params['find'] || 'words'
   match = params['match'] || 'and'
-  query = params['query'].downcase.scan /\w+/
+  if ['items','plugins'].include? find
+    query = params['query'].scan /\w+/
+  else
+    query = params['query'].downcase.scan /\w+/
+  end
   result = references pages(find, query, sites(find, query, match), match)
   halt 200, {:params => params, :result => result}.to_json
 end
