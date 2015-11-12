@@ -14,6 +14,7 @@ find sites -name words.txt -newer words.txt | \
 ruby rollup.rb
 tar czf public/sites.tgz sites *.txt
 
+find activity -mtime +7 -exec rm {} \;
 ruby found.rb
 ruby activity.rb
 
