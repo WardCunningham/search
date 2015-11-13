@@ -137,11 +137,6 @@ post '/match', :provides => :json do
   halt 200, {:params => params, :result => result}.to_json
 end
 
-get '/recent-activity.json' do
-  headers 'Access-Control-Allow-Origin' => '*'
-  send_file 'activity/recent-activity.json'
-end
-
 get '/system/sitemap.json' do
   headers 'Access-Control-Allow-Origin' => '*'
   send_file 'activity/sitemap.json'
