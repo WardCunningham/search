@@ -14,4 +14,4 @@ exit 0 unless make.length > 0
 make.each {|site, count| Dir.mkdir "sites/#{site}"}
 
 make = make.keys.join "\n"
-File.open("activity/New-#{time}",'w') {|file| file.puts make}
+File.open("activity/#{time}",'a') {|file| file.puts make}
