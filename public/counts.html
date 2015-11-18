@@ -1,0 +1,33 @@
+<head>
+   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<center>
+	<p>run time</p><div id="run_time" style="width:800px;height:250px;"></div>
+	<p>scan sites</p><div id="scan_sites" style="width:800px;height:250px;"></div>
+	<p>scan pages</p><div id="scan_pages" style="width:800px;height:250px;"></div>
+	<p>index sites</p><div id="index_sites" style="width:800px;height:250px;"></div>
+	<p>index words</p><div id="index_words" style="width:800px;height:250px;"></div>
+	<p>index items</p><div id="index_items" style="width:800px;height:250px;"></div>
+	<p>index links</p><div id="index_links" style="width:800px;height:250px;"></div>
+<footer>
+	Sitemap Scrape Statistics<br>
+	<a href=http://ward.asia.wiki.org/sitemap-scrape-statistics.html>wiki</a> • 
+	<a href=https://plot.ly/api/>plotly</a>
+<script>
+	var d3 = Plotly.d3
+	d3.text('../counts.txt', function(text) {
+		var lines = text.trim().split(/\n/)
+		var data = lines.map(function (line) {return JSON.parse(line)})
+
+		function x() {return data.map(function (d) {return d.index.counts/4.0})}
+		function plot(e,f) { Plotly.plot( e, [{ x:x(), y:data.map(f) }], {margin: { t: 0 } } )}
+
+		plot(run_time, function (d) {return d.date%(60*60)/60.0})
+		plot(scan_sites, function (d) {return d.scan.sites})
+		plot(scan_pages, function (d) {return d.scan.pages})
+		plot(index_sites, function (d) {return d.index.sites})
+		plot(index_words, function (d) {return d.index.words})
+		plot(index_items, function (d) {return d.index.items})
+		plot(index_links, function (d) {return d.index.links})
+	})
+</script>
