@@ -9,6 +9,8 @@
 	<p>index words</p><div id="index_words" style="width:800px;height:250px;"></div>
 	<p>index items</p><div id="index_items" style="width:800px;height:250px;"></div>
 	<p>index links</p><div id="index_links" style="width:800px;height:250px;"></div>
+	<p>growth items</p><div id="growth_items" style="width:800px;height:250px;"></div>
+	<p>growth links</p><div id="growth_links" style="width:800px;height:250px;"></div>
 <footer>
 	Sitemap Scrape Statistics<br>
 	<a href=http://ward.asia.wiki.org/sitemap-scrape-statistics.html>wiki</a> • 
@@ -29,5 +31,7 @@
 		plot(index_words, function (d) {return d.index.words})
 		plot(index_items, function (d) {return d.index.items})
 		plot(index_links, function (d) {return d.index.links})
+		plot(growth_items, function (d,i,a) {return i ? d.index.items - a[i-1].index.items : 0})
+		plot(growth_links, function (d,i,a) {return i ? d.index.links - a[i-1].index.links : 0})
 	})
 </script>
