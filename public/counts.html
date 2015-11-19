@@ -1,6 +1,5 @@
-<head>
-   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-</head>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
 <center>
 	<p>run time</p><div id="run_time" style="width:800px;height:250px;"></div>
 	<p>scan sites</p><div id="scan_sites" style="width:800px;height:250px;"></div>
@@ -11,13 +10,10 @@
 	<p>index links</p><div id="index_links" style="width:800px;height:250px;"></div>
 	<p>growth items</p><div id="growth_items" style="width:800px;height:250px;"></div>
 	<p>growth links</p><div id="growth_links" style="width:800px;height:250px;"></div>
-<footer>
-	Sitemap Scrape Statistics<br>
-	<a href=http://ward.asia.wiki.org/sitemap-scrape-statistics.html>wiki</a> • 
-	<a href=https://plot.ly/api/>plotly</a>
+
 <script>
-	var d3 = Plotly.d3
-	d3.text('../counts.txt', function(text) {
+
+	function display (text) {
 		var lines = text.trim().split(/\n/)
 		var data = lines.map(function (line) {return JSON.parse(line)})
 
@@ -33,5 +29,13 @@
 		plot(index_links, function (d) {return d.index.links})
 		plot(growth_items, function (d,i,a) {return i ? d.index.items - a[i-1].index.items : 0})
 		plot(growth_links, function (d,i,a) {return i ? d.index.links - a[i-1].index.links : 0})
-	})
+	}
+
+	Plotly.d3.text('counts.txt', display)
+
 </script>
+
+<footer>
+	Sitemap Scrape Statistics<br>
+	<a href=http://ward.asia.wiki.org/sitemap-scrape-statistics.html>wiki</a> |
+	<a href=https://plot.ly/api/>plotly</a>
