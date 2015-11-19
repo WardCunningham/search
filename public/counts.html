@@ -1,15 +1,17 @@
+
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<style> div.plot {width:800px;height:400px;} </style>
 
 <center>
-	<p>run time</p><div id="run_time" style="width:800px;height:250px;"></div>
-	<p>scan sites</p><div id="scan_sites" style="width:800px;height:250px;"></div>
-	<p>scan pages</p><div id="scan_pages" style="width:800px;height:250px;"></div>
-	<p>index sites</p><div id="index_sites" style="width:800px;height:250px;"></div>
-	<p>index words</p><div id="index_words" style="width:800px;height:250px;"></div>
-	<p>index items</p><div id="index_items" style="width:800px;height:250px;"></div>
-	<p>index links</p><div id="index_links" style="width:800px;height:250px;"></div>
-	<p>growth items</p><div id="growth_items" style="width:800px;height:250px;"></div>
-	<p>growth links</p><div id="growth_links" style="width:800px;height:250px;"></div>
+	<div id="run_time" class="plot"></div>
+	<div id="scan_sites" class="plot"></div>
+	<div id="scan_pages" class="plot"></div>
+	<div id="index_sites" class="plot"></div>
+	<div id="index_words" class="plot"></div>
+	<div id="index_items" class="plot"></div>
+	<div id="index_links" class="plot"></div>
+	<div id="growth_items" class="plot"></div>
+	<div id="growth_links" class="plot"></div>
 
 <script>
 
@@ -18,7 +20,7 @@
 		var data = lines.map(function (line) {return JSON.parse(line)})
 
 		function x() {return data.map(function (d) {return new Date(d.date*1000)})}
-		function plot(e,f) { Plotly.plot( e, [{ x:x(), y:data.map(f) }], {margin: { t: 0 } } )}
+		function plot(e,f) { Plotly.plot( e, [{ x:x(), y:data.map(f) }], {title: e.id.replace('_',' ') } )}
 
 		plot(run_time, function (d) {return d.date%(60*60)/60.0})
 		plot(scan_sites, function (d) {return d.scan.sites})
