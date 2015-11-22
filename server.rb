@@ -159,7 +159,7 @@ end
 
 get '/logs' do
   content_type 'text/html'
-  `ls -tr logs`.gsub /([^\n]+)/, '<a href="/logs/\1.txt">\1</a><br>'
+  `ls -t logs`.gsub /([^\n]+)/, '<a href="/logs/\1.txt">\1</a><br>'
 end
 
 get '/logs/:log' do |log|
