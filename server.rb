@@ -157,6 +157,16 @@ get '/tally/plugins.txt' do
   `cat sites/*/plugins.txt | sort | uniq -c | sort -nr`
 end
 
+get '/logs' do
+  content_type 'text/html'
+  `ls -tr logs`.gsub /([^\n]+)/, '<a href="/logs/\1">\1</a><br>'
+end
+
+get '/logs/:log' do |log|
+  content_type 'text/plain'
+  send_file "logs/#{log}"
+end
+
 get %r{^/view/} do
   redirect '/'
 end

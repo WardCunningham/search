@@ -16,7 +16,7 @@ def sites
       sitemap = JSON.parse `curl -s -m 10 http://#{site}/system/sitemap.json`
       yield site, sitemap
     rescue => e
-      puts "can't do sitemap for #{site}, #{e}"
+      puts "can't do sitemap for #{site}, #{e.to_s[0..120].gsub(/\s+/,' ')}"
     end
   end
 end

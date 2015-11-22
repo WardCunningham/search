@@ -4,6 +4,7 @@
 mkdir activity logs sites 2>/dev/null
 
 
+find logs -mtime +7 -exec rm {} \;
 ruby scrape.rb > logs/`date -u +%a-%H00`
 
 
