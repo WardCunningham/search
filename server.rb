@@ -159,12 +159,12 @@ end
 
 get '/logs' do
   content_type 'text/html'
-  `ls -tr logs`.gsub /([^\n]+)/, '<a href="/logs/\1">\1</a><br>'
+  `ls -tr logs`.gsub /([^\n]+)/, '<a href="/logs/\1.txt">\1</a><br>'
 end
 
 get '/logs/:log' do |log|
   content_type 'text/plain'
-  `cat logs/#{log}`
+  `cat logs/#{log.gsub(/\.txt$/,'')}`
 end
 
 get %r{^/view/} do
