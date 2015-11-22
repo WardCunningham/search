@@ -164,7 +164,7 @@ end
 
 get '/logs/:log' do |log|
   content_type 'text/plain'
-  send_file "logs/#{log}"
+  send_file "logs/#{log}", :disposition => :inline
 end
 
 get %r{^/view/} do
