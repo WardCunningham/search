@@ -163,7 +163,7 @@ get '/logs' do
 end
 
 get '/logs/:log' do |log|
-  send_file "logs/#{log}", :type => 'text/plain;charset=utf-8'
+  send_file "logs/#{log}", :type => :txt
 end
 
 get %r{^/view/} do
