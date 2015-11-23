@@ -16,7 +16,7 @@ def sites
       sitemap = JSON.parse `curl -s -m 10 http://#{site}/system/sitemap.json`
       yield site, sitemap
     rescue => e
-      puts "can't do sitemap for #{site}, #{e.to_s[0..120].gsub(/\s+/,' ')}"
+      puts "#{site}, sitemap: #{e.to_s[0..120].gsub(/\s+/,' ')}"
     end
   end
 end
@@ -119,7 +119,7 @@ def update site, pageinfo
 
 
   rescue => e
-    puts "can't do update for #{pageinfo['slug']}, #{e}"
+    puts "\t#{pageinfo['slug']}, update: #{e}"
   end
 end
 
@@ -136,7 +136,7 @@ end
 
 sites do |site, sitemap|
   since = scraped site
-  puts "#{site}, #{sitemap.length} pages, since #{ago since}"
+  puts "#{site}, #{sitemap.length} pages"
   sitemap.each do |pageinfo|
     date = pageinfo['date'] || 1
     update site, pageinfo if date > since
