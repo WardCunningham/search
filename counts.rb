@@ -7,7 +7,7 @@ recent = `ls -t logs | head -n 1`.chomp
 log = File.read "logs/#{recent}"
 
 sites = pages = 0
-log.scan(/, (\d+) pages, /) do |count|
+log.scan(/, (\d+) pages\b/) do |count|
 	sites += 1
 	pages += count[0].to_i
 end
