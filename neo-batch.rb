@@ -54,7 +54,15 @@ def dosite domain
     @rels << [here, there, 'HAS']
   end
 end
-	
+
+def dofederation
+  Dir.entries("sites").each do |domain|
+    next if domain[0] == '.'
+    dosite domain
+  end
+end
+
+# dofederation
 
 dosite 'ward.asia.wiki.org'
 dosite 'forage.ward.fed.wiki.org'
