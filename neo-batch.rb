@@ -34,6 +34,13 @@ def dopage domain, slug
   @nodes << [here, slug, 'Page']
   there = dotitle slug
   @rels << [here, there, 'IS']
+  links = "sites/#{domain}/pages/#{slug}/links.txt"
+  if File.exist?(links)
+    File.readlines(links).each do |link|
+      there = dotitle link.chomp
+      @rels << [here, there, 'LINK']
+    end
+  end
   here
 end
 
