@@ -46,9 +46,11 @@ end
 
 
 def dosite domain
+  pages = "sites/#{domain}/pages"
+  return unless File.exist?(pages)
   here = id 'Site', domain
   @nodes << [here, domain, 'Site']
-  Dir.entries("sites/#{domain}/pages").each do |slug|
+  Dir.entries(pages).each do |slug|
     next if slug[0] == '.'
     there = dopage domain, slug
     @rels << [here, there, 'HAS']
