@@ -78,10 +78,10 @@ def dofederation
   end
 end
 
-# dofederation
+dofederation
 
-dosite 'ward.asia.wiki.org'
-dosite 'forage.ward.fed.wiki.org'
+# dosite 'ward.asia.wiki.org'
+# dosite 'forage.ward.fed.wiki.org'
 
 @nodes.close
 @rels.close
