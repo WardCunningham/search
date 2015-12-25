@@ -5,6 +5,7 @@ require 'csv'
 
 @id = 0
 @aloc = {}
+@missing = {}
 
 @nodes = CSV.open("public/nodes.csv", "wb")
 @nodes << [':ID','title',':LABEL']
@@ -44,7 +45,9 @@ def dopage domain, slug
   sites = "sites/#{domain}/pages/#{slug}/sites.txt"
   if File.exist?(sites)
     File.readlines(sites).each do |site|
-      there = id 'Site', site.chomp
+      there = id 'Site', site.chomp do |id|
+        @missing[site.chomp] = id
+      end
       @rels << [here, there, 'KNOWS']
     end
   end
@@ -68,6 +71,9 @@ def dofederation
   Dir.entries("sites").each do |domain|
     next if domain[0] == '.'
     dosite domain
+  end
+  @missing.each do |domain,id|
+    @nodes << [id, domain, 'Site']
   end
 end
 
