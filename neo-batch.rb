@@ -41,6 +41,13 @@ def dopage domain, slug
       @rels << [here, there, 'LINK']
     end
   end
+  sites = "sites/#{domain}/pages/#{slug}/sites.txt"
+  if File.exist?(sites)
+    File.readlines(sites).each do |site|
+      there = id 'Site', site.chomp
+      @rels << [here, there, 'KNOWS']
+    end
+  end
   here
 end
 
