@@ -65,6 +65,7 @@ def dosite domain
     there = dopage domain, slug
     @rels << [here, there, 'HAS']
   end
+  @missing.delete domain
 end
 
 def dofederation
