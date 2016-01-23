@@ -9,6 +9,7 @@ scp public/{nodes,rels}.csv $server:$path
 build="
 date
 cd $path
+rm -rf new.db
 neo4j-import --into new.db --nodes nodes.csv --relationships rels.csv
 chmod -R a+w new.db
 mv wiki.db old.db
