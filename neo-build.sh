@@ -4,7 +4,7 @@
 server='root@bay.wiki.org'
 path='/var/lib/neo4j/data'
 
-scp public/{nodes,rels}.csv $server:$path
+scp -q public/{nodes,rels}.csv $server:$path
 
 build="
 date
