@@ -23,7 +23,7 @@
 		function x() {return data.map(function (d) {return new Date(d.date*1000)})}
 		function plot(e,f) { Plotly.plot( e, [{ x:x(), y:data.map(f) }], {title: e.id.replace('_',' ') } )}
 
-		plot(run_time, function (d) {return d.date%(60*60)/60.0})
+		plot(run_time, function (d) {return d.date%(6*60*60)/(6*60.0)})
 		plot(scan_sites, function (d) {return d.scan.sites})
 		plot(scan_pages, function (d) {return d.scan.pages})
 		plot(index_sites, function (d) {return d.index.sites})
