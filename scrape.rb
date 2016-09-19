@@ -13,7 +13,7 @@ def sites
   Dir.glob 'sites/*' do |each|
     path, site = each.split '/'
     begin
-      sitemap = JSON.parse `curl -s -m 10 http://#{site}/system/sitemap.json`
+      sitemap = JSON.parse `curl -s -m 5 http://#{site}/system/sitemap.json`
       yield site, sitemap
     rescue => e
       puts "#{site}, sitemap: #{e.to_s[0..120].gsub(/\s+/,' ')}"
