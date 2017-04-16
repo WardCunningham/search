@@ -157,6 +157,11 @@ get '/tally/plugins.txt' do
   `cat sites/*/plugins.txt | sort | uniq -c | sort -nr`
 end
 
+get '/logs/online' do
+  content_type 'text/plain'
+  `perl online.pl`
+end
+
 get '/logs' do
   content_type 'text/html'
   `ls -t logs`.gsub /([^\n]+)/, '<a href="/logs/\1.txt">\1</a><br>'
