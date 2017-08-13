@@ -1,7 +1,7 @@
 # look for new sites and add them to the search
-# usage: cd sites; ruby found.rb
+# usage: cd sites; ruby found.rb $NOW
 
-time = `date -u +%a-%H00`.chomp
+time = ARGV[0] || `date -u +%a-%H00`.chomp
 have = `ls sites`
 want = File.read('sites.txt')
 
