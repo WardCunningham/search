@@ -2,15 +2,15 @@
 # usage: 0 */6 * * * (cd FedWiki/search; LANG="en_US.UTF-8" sh cron.sh)
 
 mkdir activity logs sites 2>/dev/null
-
+NOW=`date -u +%a-%H00`
 
 find logs -mtime +7 -exec rm {} \;
-ruby scrape.rb > logs/`date -u +%a-%H00`
+ruby scrape.rb > logs/$NOW
 
 
 find sites -name words.txt -newer words.txt | \
 	cut -d / -f 2 | \
-	sort | uniq > activity/`date -u +%a-%H00`
+	sort | uniq > activity/$NOW
 
 ruby rollup.rb
 tar czf public/sites.tgz sites *.txt
