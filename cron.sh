@@ -16,7 +16,7 @@ ruby rollup.rb
 tar czf public/sites.tgz sites *.txt
 
 find activity -mtime +7 -exec rm {} \;
-ruby found.rb
+ruby found.rb $NOW
 ruby activity.rb
 
 ruby site-web.rb > public/site-web.json
