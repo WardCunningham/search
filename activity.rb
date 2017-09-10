@@ -34,7 +34,7 @@ add({:type => 'roster', :text => roster.join("\n\n")})
 File.open 'pages/recent-activity', 'w' do |file|
   file.puts JSON.pretty_generate({:title => 'Recent Activity', :story => @story})
 end
-@sitemap << {:title => 'Recent Activity', :synopsis => synopsis, :slug => 'recent-activity', :date => Time.now.to_i*1000}
+@sitemap << {:title => 'Recent Activity', :synopsis => synopsis, :slug => 'recent-activity', :date => File.mtime('activity.rb').to_i*1000}
 
 # Visible Federation
 
@@ -45,7 +45,7 @@ add({:type => 'roster', :text => `ruby roster.rb`})
 File.open 'pages/visible-federation', 'w' do |file|
   file.puts JSON.pretty_generate({:title => 'Visible Federation', :story => @story})
 end
-@sitemap << {:title => 'Visible Federation', :synopsis => @story[0][:text], :slug => 'visible-federation', :date => Time.now.to_i*1000}
+@sitemap << {:title => 'Visible Federation', :synopsis => @story[0][:text], :slug => 'visible-federation', :date => File.mtime('roster.rb').to_i*1000}
 
 # system/sitemap.json
 
