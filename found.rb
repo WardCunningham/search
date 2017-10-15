@@ -2,7 +2,7 @@
 # usage: cd sites; ruby found.rb $NOW
 
 time = ARGV[0] || `date -u +%a-%H00`.chomp
-have = `ls sites`
+have = `ls sites retired`
 want = File.read('sites.txt')
 
 diff = Hash.new(0)
