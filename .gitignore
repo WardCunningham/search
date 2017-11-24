@@ -1,5 +1,14 @@
 sites
+retired
 activity
 logs
 *.txt
 public/sites.tgz
+public/site-web.*
+public/slug-web.*
+public/nodes.csv
+public/rels.csv
+public/neo-build.log
+pages/recent-activity
+pages/visible-federation
+trouble
