@@ -10,6 +10,7 @@ ruby scrape.rb > logs/$NOW
 
 find sites -name words.txt -newer words.txt | \
 	cut -d / -f 2 | \
+	perl -pe 's/^www\.//' | \
 	sort | uniq > activity/$NOW
 
 ruby rollup.rb
