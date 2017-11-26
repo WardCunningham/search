@@ -14,7 +14,7 @@ find sites -name words.txt -newer words.txt | \
 	sort | uniq > activity/$NOW
 
 ruby rollup.rb
-tar czf public/sites.tgz sites *.txt
+tar czf public/sites.tgz sites *.txt retired
 
 find activity -mtime +7 -exec rm {} \;
 ruby found.rb $NOW
