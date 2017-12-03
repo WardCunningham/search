@@ -2,6 +2,7 @@ sites
 retired
 activity
 logs
+status
 *.txt
 public/sites.tgz
 public/site-web.*

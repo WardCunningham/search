@@ -137,6 +137,11 @@ post '/match', :provides => :json do
   halt 200, {:params => params, :result => result}.to_json
 end
 
+get '/favicon.png' do
+  headers 'Access-Control-Allow-Origin' => '*'
+  send_file 'favicon.png'
+end
+
 get '/system/sitemap.json' do
   headers 'Access-Control-Allow-Origin' => '*'
   send_file 'activity/sitemap.json'
