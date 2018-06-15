@@ -13,7 +13,7 @@ def sites
   Dir.glob 'sites/*' do |each|
     path, site = each.split '/'
     begin
-      sitemap = JSON.parse `curl -s -m 5 http://#{site}/system/sitemap.json`
+      sitemap = JSON.parse `curl -s -m 5 -L http://#{site}/system/sitemap.json`
       yield site, sitemap
     rescue => e
       puts "#{site}, sitemap: #{e.to_s[0..120].gsub(/\s+/,' ')}"
@@ -38,7 +38,7 @@ def update site, pageinfo
   puts "\t#{pageinfo['title']}, #{ago pageinfo['date']}"
   begin
     slug = pageinfo['slug']
-    page = JSON.parse `curl -s http://#{site}/#{slug}.json`
+    page = JSON.parse `curl -s -L http://#{site}/#{slug}.json`
     story = page['story'] || []
     journal = page['journal'] || []
     puts "\t\tstory #{story.length}, journal #{journal.length}"
