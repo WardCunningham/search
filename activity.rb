@@ -14,9 +14,11 @@ end
 def roster
   result = []
   Dir['activity/*00'].sort_by{ |f| File.mtime(f) }.reverse.each do |filename|
-puts filename
-    result << filename.split('/')[1]
-    result << File.read(filename)
+    what = File.read(filename)
+    if what.match /\w/
+      result << filename.split('/')[1]
+      result << what
+    end
   end
   result
 end
