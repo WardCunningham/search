@@ -33,7 +33,7 @@
       }
 
       function link(text) {
-        return `<a href=http://search.fed.wiki.org:3030/#/find=links&within=sites&match=and&query=${text} target=_blank>${asTitle(text)}</a>`
+        return `<a href=http://search.fed.wiki.org:3030/title.html?${text} target=titlebrowser>${asTitle(text)}</a>`
       }
 
       function get() {
