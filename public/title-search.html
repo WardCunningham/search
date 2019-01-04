@@ -1,0 +1,60 @@
+<html>
+
+<!-- 
+  Incremental Federation Title Search
+  Inspired by FindPage, Original Wiki Remodeled
+  https://github.com/WardCunningham/remodeling/blob/80150222af95dbd44f8aa7dc00eb2e6bafe507fc/static/index.html#L162-L184
+-->
+
+  <body>
+    <center>
+    <div style="width:400px; padding:10px; background-color:#ddd;">
+      <h3>Federation Title Search</h3>
+      <input style="width:300px;" type=text id=search onInput='get()' onKeyPress='got()'>
+      <br>
+      <div id=searchresult></div>
+    </div>
+
+    <script>
+      names = []
+      fetch('http://search.fed.wiki.org:3030/slugs.txt')
+        .then((response) => response.text())
+        .then((text) => names = text.split(/\r?\n/))
+
+      function asSlug(title) {
+        return title.replace(/\s/g, '-').replace(/[^A-Za-z0-9-]/g, '').toLowerCase()
+      }
+
+      function asTitle(slug) {
+        return slug
+          .split(/-+/)
+          .map((word) => word.length < 2 ? word : word[0].toUpperCase() + word.substr(1))
+          .join(' ')
+      }
+
+      function link(text) {
+        return `<a href=http://search.fed.wiki.org:3030/#/find=links&within=sites&match=and&query=${text} target=_blank>${asTitle(text)}</a>`
+      }
+
+      function get() {
+        var want = asSlug(search.value)
+        if (want.length > 1) {
+          var found = names.filter(function (e) { return e.includes(want) })
+          if (found.length) {
+            return window.searchresult.innerHTML = found.slice(0,500).map(link).join('<br>')
+          }
+        }
+        window.searchresult.innerHTML = ''
+      }
+
+      function got(e) {
+        if (!e) e = window.event;
+        if ((e.keyCode || e.which) == '13') {
+          search.value = ''
+          window.searchresult.innerHTML = ''
+        }
+      }
+    </script>
+  </body>
+
+</html>
