@@ -14,6 +14,17 @@ find sites -name words.txt -newer words.txt | \
 	sort | uniq > activity/$NOW
 
 ruby rollup.rb
+ls sites | while read site; do ls sites/$site/pages; done | sort | uniq > slugs.txt
+ls sites | \
+  while read site; do
+    if [ `ls sites/$site/pages | wc -l` != "0" ] ; then
+       ls sites/$site/pages > sites/$site/slugs.txt
+       ls sites/$site/pages | \
+         while read slug; do
+           printf "%s\n" "$slug" > sites/$site/pages/$slug/slugs.txt
+         done
+    fi
+  done
 tar czf public/sites.tgz sites *.txt retired
 
 find activity -mtime +7 -exec rm {} \;
