@@ -1,5 +1,7 @@
 <html>
-
+<head>
+  <link id='favicon' href='/favicon.png' rel='icon' type='image/png'>
+</head>
 <!-- 
   Incremental Federation Title Search
   Inspired by FindPage, Original Wiki Remodeled
@@ -33,7 +35,7 @@
       }
 
       function link(text) {
-        return `<a href=http://search.fed.wiki.org:3030/title.html?${text} target=titlebrowser>${asTitle(text)}</a>`
+        return `<a href=http://search.fed.wiki.org:3030/#/find=slugs&within=pages&match=and&query=${text} target=_blank>${asTitle(text)}</a>`
       }
 
       function get() {

@@ -1,4 +1,9 @@
-<script src="slug-web.js"></script>
+<html>
+<head>
+  <link id='favicon' href='/favicon.png' rel='icon' type='image/png'>
+  <script src="slug-web.js"></script>
+</head>
+<body>
 
 <style>
   body {text-align: center}
@@ -57,7 +62,7 @@ See counts of pages ÷ titles nearby.
     if (e.target.localName == 'li') {
       var target = e.target.innerHTML.replace(/ /g,'-')
       if (e.shiftKey) {
-        location = '/#/find=links&within=pages&match=and&query=' + target
+        location = '/#/find=slugs&within=pages&match=and&query=' + target
       } else {
         location = 'title.html?' + target
       }
@@ -65,3 +70,5 @@ See counts of pages ÷ titles nearby.
   }
 
 </script>
+</body>
+</html>

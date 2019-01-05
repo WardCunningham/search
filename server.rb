@@ -64,6 +64,16 @@ helpers do
     result.join "\n"
   end
 
+  def split find, query
+    if ['items','plugins'].include? find
+      query.scan /\w+/
+    elsif ['slugs'].include? find
+      query.scan /[\w-]+/
+    else
+      query.downcase.scan /\w+/
+    end
+  end
+
 end
 
 get '/' do
@@ -79,6 +89,7 @@ get '/' do
       <td><input type="radio" name="find" data-eg="dorkbot" value="words" checked>words</input>
       <td><input type="radio" name="find" data-eg="how-to-wiki" value="links">links</input>
       <td><input type="radio" name="find" data-eg="ward.fed.wiki.org" value="sites">sites</input>
+      <td><input type="radio" name="find" data-eg="chorus-of-voices" value="slugs">slugs</input>
       <td><input type="radio" name="find" data-eg="dbed99c5d3c702b1" value="items">items</input>
       <td><input type="radio" name="find" data-eg="video" value="plugins">plugins</input>
     <tr><td>match:
@@ -103,11 +114,7 @@ get '/search' do
   content_type 'text/json'
   find = params['find']||'words'
   match = params['match']||'and'
-  if ['items','plugins'].include? find
-    query = params['query'].scan /\w+/
-  else
-    query = params['query'].downcase.scan /\w+/
-  end
+  query = split find, params['query']
   begin
     html = case params['within']||'sites'
       when 'sites'
@@ -128,11 +135,7 @@ post '/match', :provides => :json do
   headers 'Access-Control-Allow-Origin' => '*'
   find = params['find'] || 'words'
   match = params['match'] || 'and'
-  if ['items','plugins'].include? find
-    query = params['query'].scan /\w+/
-  else
-    query = params['query'].downcase.scan /\w+/
-  end
+  query = split find, params['query']
   result = references pages(find, query, sites(find, query, match), match)
   halt 200, {:params => params, :result => result}.to_json
 end
