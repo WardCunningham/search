@@ -8,6 +8,7 @@
 	<div id="scan_sites" class="plot"></div>
 	<div id="scan_pages" class="plot"></div>
 	<div id="index_sites" class="plot"></div>
+        <div id="index_slugs" class="plot"></div>
 	<div id="index_words" class="plot"></div>
 	<div id="index_items" class="plot"></div>
 	<div id="index_links" class="plot"></div>
@@ -27,6 +28,7 @@
 		plot(scan_sites, function (d) {return d.scan.sites})
 		plot(scan_pages, function (d) {return d.scan.pages})
 		plot(index_sites, function (d) {return d.index.sites})
+                plot(index_slugs, function (d) {return d.index.slugs})
 		plot(index_words, function (d) {return d.index.words})
 		plot(index_items, function (d) {return d.index.items})
 		plot(index_links, function (d) {return d.index.links})
