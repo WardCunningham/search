@@ -150,12 +150,12 @@ get '/system/sitemap.json' do
   send_file 'activity/sitemap.json'
 end
 
-get %r{^/([a-z0-9-]+)\.json$} do |slug|
+get %r{/([a-z0-9-]+)\.json} do |slug|
   headers 'Access-Control-Allow-Origin' => '*'
   send_file "pages/#{slug}"
 end
 
-get %r{^/([a-z]+\.txt)$} do |file|
+get %r{/([a-z]+\.txt)} do |file|
   headers 'Access-Control-Allow-Origin' => '*'
   send_file file
 end
@@ -172,14 +172,22 @@ end
 
 get '/logs' do
   content_type 'text/html'
+  headers 'Access-Control-Allow-Origin' => '*'
   `ls -t logs`.gsub /([^\n]+)/, '<a href="/logs/\1.txt">\1</a><br>'
 end
 
 get '/logs/:log' do |log|
   content_type 'text/plain'
+  headers 'Access-Control-Allow-Origin' => '*'
   `cat logs/#{log.gsub(/\.txt$/,'')}`
 end
 
-get %r{^/view/} do
+get %r{/view/} do
   redirect '/'
+end
+
+get '/traffic/:days' do |days|
+  content_type 'text/plain'
+  headers 'Access-Control-Allow-Origin' => '*'
+  `cd ~/FedWiki/assets/pages/spark-records; sh traffic.sh #{days||''}`
 end
