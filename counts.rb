@@ -19,6 +19,6 @@ File.open('counts.txt','a') {|file| file.puts counts.to_json}
 puts "We scanned #{sites} sites hosting #{pages} pages."
 
 puts "http://3d.local:6789/scrape"
-puts `curl -XPOST -H 'Auth:3546736' -H 'Content-type:text/json' http://3d.local:6789/scrape -d '#{counts.to_json}'`
+puts `curl -X POST -H 'Auth:3546736' -H 'Content-type:text/json' http://3d.local:6789/scrape -d '#{counts.to_json}'`
 puts "https://rest.livecode.world/scrape"
-puts `curl -XPOST -H 'Auth:3546736' -H 'Content-type:text/json' https://rest.livecode.world/scrape -d '#{counts.to_json}'`
+puts `curl -X POST -H 'Auth:3546736' -H 'Content-type:text/json' https://rest.livecode.world/scrape -d '#{counts.to_json}'`
