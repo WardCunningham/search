@@ -189,5 +189,11 @@ end
 get '/traffic/:days' do |days|
   content_type 'text/plain'
   headers 'Access-Control-Allow-Origin' => '*'
-  `cd ~/FedWiki/assets/pages/spark-records; sh traffic.sh #{days||''}`
+  `cd ~/FedWiki/assets/pages/spark-records; sh traffic.sh #{days||'2'}`
+end
+
+get '/wanted/:days/:top' do |days,top|
+  content_type 'text/plain'
+  headers 'Access-Control-Allow-Origin' => '*'
+  `cd ~/FedWiki/assets/pages/spark-records; sh wanted.sh #{days||'2'} #{top||'10'}`
 end
