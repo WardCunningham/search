@@ -1,5 +1,5 @@
 // Retrieve all changes for last week from scrape logs
-// usage: deno run --allow-net fed-changes.json
+// usage: deno run --allow-net fed-changes.js
 
 const sleep = msec => new Promise(res => setTimeout(res,msec))
 const asSlug = (title) => title.replace(/\s/g, '-').replace(/[^A-Za-z0-9-]/g, '').toLowerCase()
