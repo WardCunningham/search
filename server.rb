@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'json'
+require 'date'
 
 set :bind, '0.0.0.0'
 
@@ -196,4 +197,14 @@ get '/wanted/:days/:top' do |days,top|
   content_type 'text/plain'
   headers 'Access-Control-Allow-Origin' => '*'
   `cd ~/FedWiki/assets/pages/spark-records; sh wanted.sh #{days||'2'} #{top||'10'}`
+end
+
+get '/track' do
+  `ls public/track-data`
+end
+
+post '/track' do
+    payload = request.body.read
+    filename = "public/track-data/#{Date.today}"
+    File.open(filename, "a"){|f| f.puts(payload)}
 end
