@@ -4,6 +4,10 @@ require 'date'
 
 set :bind, '0.0.0.0'
 
+before do
+  headers 'Access-Control-Allow-Origin' => '*'
+end
+
 helpers do
 
   def has text, words, op='and'
@@ -200,8 +204,17 @@ get '/wanted/:days/:top' do |days,top|
 end
 
 get '/track' do
+  content_type 'text/plain'
+  headers 'Access-Control-Allow-Origin' => '*'
   `ls public/track-data`
 end
+
+get '/track/:day' do |day|
+  content_type 'text/plain'
+  headers 'Access-Control-Allow-Origin' => '*'
+  `cat public/track-data/#{day}`
+end
+
 
 post '/track' do
     payload = request.body.read
