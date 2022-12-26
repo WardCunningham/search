@@ -47,6 +47,7 @@ def update site, pageinfo
       words = []
       story.each do |item|
         next unless text = item['text']
+        text.gsub! /[a-zA-Z0-9\+\/]{50,}/,''
         text.gsub! /<(.|\n)*?>/, '' if item['type'] == 'html'
         text.gsub! /\[((http|https|ftp):.*?) (.*?)\]/, '\3'
         text.scan /[A-Za-z]+/ do |word|
@@ -139,6 +140,8 @@ sites do |site, sitemap|
   puts "#{site}, #{sitemap.length} pages"
   sitemap.each do |pageinfo|
     date = pageinfo['date'] || 1
+    # next if pageinfo['slug'] != 'gtexplainerexamples'
+    # update site, pageinfo
     update site, pageinfo if date > since
   end
 end
