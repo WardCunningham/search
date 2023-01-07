@@ -221,3 +221,10 @@ post '/track' do
     filename = "public/track-data/#{Date.today}"
     File.open(filename, "a"){|f| f.puts(payload)}
 end
+
+post '/bust' do
+  payload = request.body.read
+  if payload == ENV['BUST']
+    `sh bust.sh`
+  end
+end
