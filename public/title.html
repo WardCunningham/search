@@ -23,12 +23,15 @@ See counts of pages ÷ titles nearby.
 
 <script>
 
-  var center = location.search.replace(/^\?/,'').split(/,/)
+  var query = location.search.replace(/^\?/,'') || 'title-network-browser'
+  var center = query.split(/,/)
   column('me', center)
   column('son', those = follow(center,outlinks))
   column('gson', follow(those,outlinks))
   column('dad', those = follow(center,inlinks))
   column('gdad', follow(those,inlinks))
+  var url = `http://search.fed.wiki.org:3030/#/find=slugs&within=sites&match=or&query=${center[0]}`
+  window.me.querySelector('li').innerHTML += ` ... <a href="${url}">more</a>`
 
   function follow (titles, links) {
     function linked (list, slug) {return list.concat(links(slug))}
@@ -54,7 +57,7 @@ See counts of pages ÷ titles nearby.
     var html = list.reduce(forks,0) + ' &divide; ' + list.length
     eval(id + 'h.innerHTML = html')
     function li (text) {return '<li>' + text.replace(/-/g,' ')}
-    var html = list.map(li).join('')
+    var html = list.slice(0,1000).map(li).join('')
     eval(id + '.innerHTML = html')
   }
 
