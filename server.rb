@@ -191,6 +191,12 @@ get %r{/view/} do
   redirect '/'
 end
 
+get '/spots/:days' do |days|
+  content_type 'text/plain'
+  headers 'Access-Control-Allow-Origin' => '*'
+  `cd ~/FedWiki/assets/pages/spark-records; sh spots.sh #{days||'2'}`
+end
+
 get '/traffic/:days' do |days|
   content_type 'text/plain'
   headers 'Access-Control-Allow-Origin' => '*'
@@ -227,4 +233,8 @@ post '/bust' do
   if payload == ENV['BUST']
     `sh bust.sh`
   end
+end
+
+get /\/light\/(on|off|red|green|blue|white)/ do |c|
+  `hue lights 13 #{c} 2>&1`
 end
