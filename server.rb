@@ -145,6 +145,14 @@ post '/match', :provides => :json do
   halt 200, {:params => params, :result => result}.to_json
 end
 
+get %{^/roster---([a-z0-9-]+)\.json$} do |slug|
+  headers 'Access-Control-Allow-Origin' => '*'
+  {
+    title:"Roster - #{slug}",
+    story:[ {type:roster, text:sites('slugs','and',slug).join("\n")} ]}
+  }
+end
+
 get '/favicon.png' do
   headers 'Access-Control-Allow-Origin' => '*'
   send_file 'favicon.png'
