@@ -135,6 +135,15 @@ get '/search' do
   end
 end
 
+get '/sites' do
+  headers 'Access-Control-Allow-Origin' => '*'
+  content_type 'text/json'
+  find = params['find'] || 'slugs'
+  match = params['match'] || 'and'
+  query = split find, params['query']
+  sites(find, query, match).to_json
+end
+
 post '/match', :provides => :json do
   # http://stackoverflow.com/questions/17870680/jquery-json-post-to-a-sinatra-route-not-working-correctly
   headers 'Access-Control-Allow-Origin' => '*'
