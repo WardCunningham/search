@@ -2,6 +2,7 @@
 <head>
   <link id='favicon' href='/favicon.png' rel='icon' type='image/png'>
   <script src="slug-web.js"></script>
+  <meta charset="UTF-8">
 </head>
 <body>
 
@@ -11,6 +12,7 @@
   td {vertical-align: top; width: 20%; background-color: #eee; padding: 10px; }
   li {cursor: pointer;}
   li:hover {background-color: yellow;}
+  a {text-decoration: none;}
 </style>
 
 <h1>Federated Wiki Title Network</h1>
@@ -25,13 +27,21 @@ See counts of pages ÷ titles nearby.
 
   var query = location.search.replace(/^\?/,'') || 'title-network-browser'
   var center = query.split(/,/)
+  var url = `http://search.fed.wiki.org:3030/sites?query=${center[0]}`
   column('me', center)
+  fetch(url).then(sites)
   column('son', those = follow(center,outlinks))
   column('gson', follow(those,outlinks))
   column('dad', those = follow(center,inlinks))
   column('gdad', follow(those,inlinks))
-  var url = `http://search.fed.wiki.org:3030/#/find=slugs&within=sites&match=or&query=${center[0]}`
-  window.me.querySelector('li').innerHTML += ` ... <a href="${url}">more</a>`
+
+  async function sites (res) {
+    var list = await res.json()
+    var html = list.sort().slice(0,100)
+      .map(site => `<li><a href="http://${site}/${center[0]}.html" target=_blank>${site}</a></li>`)
+      .join("\n")
+    window.me.innerHTML += `<p>${html}</p>`
+  }
 
   function follow (titles, links) {
     function linked (list, slug) {return list.concat(links(slug))}
