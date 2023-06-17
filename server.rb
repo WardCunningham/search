@@ -12,7 +12,7 @@ helpers do
 
   def has text, words, op='and'
     words.each do |word|
-      if text.match /\b#{word}\b/
+      if text.match /(^| )#{word}($| )/
         return true if op == 'or'
       else
         return false if op == 'and'
