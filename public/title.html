@@ -38,8 +38,10 @@ See counts of pages ÷ titles nearby.
   async function sites (res) {
     var list = await res.json()
     var html = list.sort().slice(0,100)
-      .map(site => `<li><a href="http://${site}/${center[0]}.html" target=_blank>${site}</a></li>`)
-      .join("\n")
+      .map(site => `
+        <img src="http://${site}/favicon.png" width=12>
+        <a href="http://${site}/${center[0]}.html" target=_blank>${site}</a>
+      `).join("<br>")
     window.me.innerHTML += `<p>${html}</p>`
   }
 
