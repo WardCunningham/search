@@ -184,6 +184,12 @@ get '/logs/online' do
   `perl online.pl`
 end
 
+get '/logs/retired' do
+  content_type 'text/plain'
+  headers 'Access-Control-Allow-Origin' => '*'
+  `ls -tr retired`
+end
+
 get '/logs' do
   content_type 'text/html'
   headers 'Access-Control-Allow-Origin' => '*'
