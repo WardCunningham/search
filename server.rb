@@ -179,6 +179,12 @@ get '/tally/plugins.txt' do
   `cat sites/*/plugins.txt | sort | uniq -c | sort -nr`
 end
 
+get '/owner/:owner' do |owner|
+  content_type 'text/plain'
+  headers 'Access-Control-Allow-Origin' => '*'
+  `perl owner.pl #{owner}`
+end
+
 get '/logs/online' do
   content_type 'text/plain'
   `perl online.pl`
