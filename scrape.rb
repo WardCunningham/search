@@ -13,10 +13,19 @@ def sites
   Dir.glob 'sites/*' do |each|
     path, site = each.split '/'
     begin
-      sitemap = JSON.parse `curl -s -m 8 -L http://#{site}/system/sitemap.json`
+      codes = {
+        6 => "unknown host",
+        28 => "request timeout"
+      }
+      text = `curl -s -m 8 -L http://#{site}/system/sitemap.json`
+      raise "curl #{codes[$?.exitstatus]||$?}" if $?!=0
+      raise "empty response" if text.length == 0
+      raise "looks like html" if text[0] == '<'
+      raise "not expected json" if text[0] != '['
+      sitemap = JSON.parse text
       yield site, sitemap
     rescue => e
-      puts "#{site}, sitemap: #{e.to_s[0..120].gsub(/\s+/,' ')}"
+      puts "#{site}, sitemap: #{e.to_s[0..40].gsub(/\s+/,' ')}"
     end
   end
 end
