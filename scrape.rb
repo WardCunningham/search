@@ -20,12 +20,15 @@ def sites
       text = `curl -s -m 8 -L http://#{site}/system/sitemap.json`
       raise "curl #{codes[$?.exitstatus]||$?}" if $?!=0
       raise "empty response" if text.length == 0
-      raise "looks like html" if text[0] == '<'
+      if text[0] == '<'
+        raise $~.captures[0] if text.match(/<title>(.+?)<\/title>/)
+        raise "looks like html"
+      end
       raise "not expected json" if text[0] != '['
       sitemap = JSON.parse text
       yield site, sitemap
     rescue => e
-      puts "#{site}, sitemap: #{e.to_s[0..40].gsub(/\s+/,' ')}"
+      puts "#{site}, sitemap: #{e.to_s[0..50].gsub(/\s+/,' ')}"
     end
   end
 end
