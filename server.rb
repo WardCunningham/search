@@ -154,6 +154,12 @@ post '/match', :provides => :json do
   halt 200, {:params => params, :result => result}.to_json
 end
 
+get '/xref' do
+  headers 'Access-Control-Allow-Origin' => '*'
+  content_type 'text/plain'
+  `ruby xref.rb`
+end
+
 get '/favicon.png' do
   headers 'Access-Control-Allow-Origin' => '*'
   send_file 'favicon.png'
