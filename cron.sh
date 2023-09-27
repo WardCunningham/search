@@ -4,21 +4,21 @@
 mkdir -p activity logs sites
 NOW=`date -u +%a-%H00`
 
-# Index ► Shell:cron.sh ► write Pages:words.txt ► write Pages:sites.txt
-# Status ► Shell:cron.sh ► writes Logs:Now-0000
+# Index ► Shell:cron ► write Pages:words.txt ► write Pages:sites.txt
+# Status ► Shell:cron ► writes Logs:Now-0000
 find logs -mtime +7 -exec rm {} \;
 ruby scrape.rb > logs/$NOW
 
-# Status ► Shell:cron.sh ► writes Activity:Now-0000
+# Status ► Shell:cron ► writes Activity:Now-0000
 find sites -name words.txt -newer words.txt | \
 	cut -d / -f 2 | \
 	perl -pe 's/^www\.//' | \
 	sort | uniq > activity/$NOW
 
-# Index ► Shell:cron.sh ► run Ruby:rollup
+# Index ► Shell:cron ► run Ruby:rollup
 ruby rollup.rb
 
-# Index ► Shell:cron.sh ► write Search:slugs.txt ► write Sites:slugs.txt
+# Index ► Shell:cron ► write Search:slugs.txt ► write Sites:slugs.txt
 ls sites | while read site; do ls sites/$site/pages; done | sort | uniq > slugs.txt
 ls sites | \
   while read site; do
@@ -31,10 +31,10 @@ ls sites | \
     fi
   done
 
-# Status ► Shell:cron.sh ► writes Public:sites.tgz
+# Status ► Shell:cron ► writes Public:sites.tgz
 tar czf public/sites.tgz sites *.txt retired
 
-# Status ► Shell:cron.sh ► runs Ruby:found ► runs Ruby:activity
+# Status ► Shell:cron ► runs Ruby:found ► runs Ruby:activity
 find activity -mtime +7 -exec rm {} \;
 ruby found.rb $NOW
 ruby activity.rb
