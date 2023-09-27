@@ -39,11 +39,11 @@ find activity -mtime +7 -exec rm {} \;
 ruby found.rb $NOW
 ruby activity.rb
 
-# Index ► runs Ruby:site-web ► write Public:site-web.json
+# Index ► Shell:cron ► runs Ruby:site-web ► write Public:site-web.json
 ruby site-web.rb > public/site-web.json
 (perl -e 'print "window.sites="'; cat public/site-web.json) > public/site-web.js
 
-# Index ► runs Ruby:slug-web ► write Public:slug-web.json
+# Index ► Shell:cron ► runs Ruby:slug-web ► write Public:slug-web.json
 ruby slug-web.rb > public/slug-web.json
 (perl -e 'print "window.slugs="'; cat public/slug-web.json) > public/slug-web.js
 
