@@ -72,8 +72,10 @@ helpers do
   def split find, query
     if ['plugins'].include? find
       query.scan /\w+/
-    elsif ['items','slugs'].include? find
+    elsif ['items','slugs','links'].include? find
       query.scan /[\w-]+/
+    elsif ['sites'].include? find
+      query.scan /[\w\.-]+/
     else
       query.downcase.scan /\w+/
     end
