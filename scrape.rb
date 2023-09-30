@@ -9,6 +9,8 @@ def ago date
   "#{Time.now().to_i/60/60/24 - date.to_i/1000/60/60/24} days ago"
 end
 
+# Index ► Sites:dir ► read Ruby:scrape
+# Index ► Wiki:sitemap ► fetch Ruby:scrape
 def sites
   Dir.glob 'sites/*' do |each|
     path, site = each.split '/'
@@ -33,6 +35,7 @@ def sites
   end
 end
 
+# Index ► Ruby:scrape ► write Pages:words.txt ► write Pages:sites.txt
 def scrape site, slug, aspect
   result = yield
   return if result.empty?

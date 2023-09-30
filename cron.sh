@@ -4,7 +4,7 @@
 mkdir -p activity logs sites
 NOW=`date -u +%a-%H00`
 
-# Index ► Shell:cron ► write Pages:words.txt ► write Pages:sites.txt
+# Index ► Shell:cron ► run Ruby:scrape
 # Status ► Shell:cron ► writes Logs:Now-0000
 find logs -mtime +7 -exec rm {} \;
 ruby scrape.rb > logs/$NOW

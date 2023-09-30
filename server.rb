@@ -2,6 +2,10 @@ require 'sinatra'
 require 'json'
 require 'date'
 
+# Query ► Ruby:server ► serve Public:files
+# Query ► Ruby:server ► serve API:Search
+# Query ► Ruby:server ► Serve API:Index
+
 set :bind, '0.0.0.0'
 
 before do
@@ -146,6 +150,7 @@ get '/sites' do
   sites(find, query, match).to_json
 end
 
+# Query ► API:Search ► read Pages:words.txt ► read Sites:words.txt
 post '/match', :provides => :json do
   # http://stackoverflow.com/questions/17870680/jquery-json-post-to-a-sinatra-route-not-working-correctly
   headers 'Access-Control-Allow-Origin' => '*'

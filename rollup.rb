@@ -1,5 +1,10 @@
 # rollup per-page lists to per-site and per-scrape lists
 
+# Index ► Pages:words.txt ► read Ruby:rollup
+# Index ► Pages:sites.txt ► read Ruby:rollup
+# Index ► Ruby:rollup ► write Sites:words.txt ► write Search:words.txt
+# Index ► Ruby:rollup ► write Sites:sites.txt ► write Search:sites.txt
+
 def rollup path, part, file
 	hash = {}
 	Dir.glob("#{path}/#{part}/#{file}") do |filename|
