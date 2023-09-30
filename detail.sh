@@ -2,6 +2,10 @@
 # sh details.sh site
 
 ( echo
+  echo DNS Lookup
+  host $1
+
+  echo
   echo Possible Scrape Dates
   ls -l sites/$1/scraped
   ls -l retired/$1/scraped
