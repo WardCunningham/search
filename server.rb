@@ -209,6 +209,11 @@ get '/logs/retired' do
   `ls -tr retired`
 end
 
+get '/logs/detail/:site' do |site|
+  content_type 'text/plain'
+  `sh detail.sh #{site}`
+end
+
 get '/logs' do
   content_type 'text/html'
   headers 'Access-Control-Allow-Origin' => '*'
