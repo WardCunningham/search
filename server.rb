@@ -209,9 +209,12 @@ get '/logs/retired' do
   `ls -tr retired`
 end
 
-get '/logs/detail/:site' do |site|
-  content_type 'text/plain'
-  `sh detail.sh #{site}`
+get '/logs/detail-sites/:site' do |site|
+  `sh detail-sites.sh #{site}`
+end
+
+get '/logs/detail-retired/:site' do |site|
+  `sh detail-retired.sh #{site}`
 end
 
 get '/logs' do
