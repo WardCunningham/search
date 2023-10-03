@@ -19,7 +19,7 @@ def sites
         6 => "unknown host",
         28 => "request timeout"
       }
-      text = `curl -s -m 8 -L http://#{site}/system/sitemap.json`
+      text = `curl -s -m 12 -L http://#{site}/system/sitemap.json`
       raise "curl #{codes[$?.exitstatus]||$?}" if $?!=0
       raise "empty response" if text.length == 0
       if text[0] == '<'
