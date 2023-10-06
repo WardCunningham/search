@@ -1,0 +1,20 @@
+cron.sh 6 Index ► Shell:cron ► run Ruby:scrape
+cron.sh 7 Status ► Shell:cron ► writes Logs:Now-0000
+cron.sh 11 Status ► Shell:cron ► writes Activity:Now-0000
+cron.sh 17 Index ► Shell:cron ► run Ruby:rollup
+cron.sh 20 Index ► Shell:cron ► write Search:slugs.txt ► write Sites:slugs.txt
+cron.sh 33 Status ► Shell:cron ► writes Public:sites.tgz
+cron.sh 36 Status ► Shell:cron ► runs Ruby:found ► runs Ruby:activity
+cron.sh 41 Index ► Shell:cron ► runs Ruby:site-web ► write Public:site-web.json
+cron.sh 45 Index ► Shell:cron ► runs Ruby:slug-web ► write Public:slug-web.json
+scrape.rb 11 Index ► Sites:dir ► read Ruby:scrape
+scrape.rb 12 Index ► Wiki:sitemap ► fetch Ruby:scrape
+scrape.rb 37 Index ► Ruby:scrape ► write Pages:words.txt ► write Pages:sites.txt
+rollup.rb 2 Index ► Pages:words.txt ► read Ruby:rollup
+rollup.rb 3 Index ► Pages:sites.txt ► read Ruby:rollup
+rollup.rb 4 Index ► Ruby:rollup ► write Sites:words.txt ► write Search:words.txt
+rollup.rb 5 Index ► Ruby:rollup ► write Sites:sites.txt ► write Search:sites.txt
+server.rb 4 Query ► Ruby:server ► serve Public:files
+server.rb 5 Query ► Ruby:server ► serve API:Search
+server.rb 6 Query ► Ruby:server ► Serve API:Index
+server.rb 152 Query ► API:Search ► read Pages:words.txt ► read Sites:words.txt
