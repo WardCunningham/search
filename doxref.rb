@@ -76,8 +76,8 @@ lines.each {|line|
 # scrape.rb 11
 # read from Sites:dir to Ruby:scrape
 
-graphs.each {|sys,graph|
-  File.open("Xref#{sys}.graph.json", 'w') { |file|
-    file.write(graph.to_json)
+File.open("README.graph.jsonl", 'w') { |file|
+  graphs.each {|sys,graph|
+    file.write("#{{name:sys,graph:graph}.to_json}\n")
   }
 }
