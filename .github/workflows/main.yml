@@ -1,0 +1,27 @@
+name: Build System Graph as README.graph.jsonl
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1.111.0
+        with:
+          ruby-version: 3.1.2
+      - name: Run a multi-line script
+        run: |
+          env
+          ruby doxref.rb
+
+          git config --global user.email "ward@c2.com"
+          git config --global user.name "Ward Cunningham"
+          git status
+          git diff
+          git add README.graph.jsonl
+          git commit -m 'Automatic Graph Update'
+          git push origin master
