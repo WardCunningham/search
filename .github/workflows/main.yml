@@ -24,4 +24,4 @@ jobs:
           git diff
           git add README.graph.jsonl
           git commit -m 'Automatic Graph Update'
-          git push origin master
+          git push origin ${GITHUB_REF_NAME}
