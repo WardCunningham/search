@@ -150,13 +150,20 @@ def scraped site
   since
 end
 
+scraped = []
 sites do |site, sitemap|
   since = scraped site
+  newest = 0
   puts "#{site}, #{sitemap.length} pages"
   sitemap.each do |pageinfo|
     date = pageinfo['date'] || 1
+    newest = date if date > newest
     # next if pageinfo['slug'] != 'gtexplainerexamples'
     # update site, pageinfo
     update site, pageinfo if date > since
   end
+  scraped << {site:site, pages:sitemap.length, date:newest}
+end
+File.open('public/scraped.json', 'w') do |file|
+  file.puts scraped.to_json
 end
