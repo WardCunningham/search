@@ -13,6 +13,8 @@ jobs:
         uses: ruby/setup-ruby@v1.111.0
         with:
           ruby-version: 3.1.2
+      - name: Setup Graphviz
+        uses: ts-graphviz/setup-graphviz@v1
       - name: Run a multi-line script
         run: |
           env
