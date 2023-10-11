@@ -17,4 +17,4 @@ rollup.rb 5 Index ► Ruby:rollup ► write Sites:sites.txt ► write Search:sit
 server.rb 4 Query ► Ruby:server ► serve Public:files
 server.rb 5 Query ► Ruby:server ► serve API:Search
 server.rb 6 Query ► Ruby:server ► Serve API:Index
-server.rb 152 Query ► API:Search ► read Pages:words.txt ► read Sites:words.txt
+server.rb 152 Foobar ► API:Search ► read Pages:words.txt ► read Sites:words.txt
