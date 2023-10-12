@@ -7,7 +7,7 @@ digraph {
 5 [label="Sites\nwords.txt"]
 0 -> 1 [label="serve"]
 0 -> 2 [label="serve"]
-0 -> 3 [label="Serve"]
+0 -> 3 [label="serve"]
 2 -> 4 [label="read"]
 2 -> 5 [label="read"]
 }
