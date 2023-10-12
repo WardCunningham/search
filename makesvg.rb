@@ -3,6 +3,7 @@
 
 require 'json'
 
+puts "-- drawings --"
 while line = gets
   obj = JSON.parse(line)
   sys = obj['name']
