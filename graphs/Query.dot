@@ -1,0 +1,13 @@
+digraph {
+0 [label="Ruby\nserver"]
+1 [label="Public\nfiles"]
+2 [label="API\nSearch"]
+3 [label="API\nIndex"]
+4 [label="Pages\nwords.txt"]
+5 [label="Sites\nwords.txt"]
+0 -> 1 [label="serve"]
+0 -> 2 [label="serve"]
+0 -> 3 [label="Serve"]
+2 -> 4 [label="read"]
+2 -> 5 [label="read"]
+}

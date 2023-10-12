@@ -1,0 +1,13 @@
+digraph {
+0 [label="Shell\ncron"]
+1 [label="Logs\nNow-0000"]
+2 [label="Activity\nNow-0000"]
+3 [label="Public\nsites.tgz"]
+4 [label="Ruby\nfound"]
+5 [label="Ruby\nactivity"]
+0 -> 1 [label="writes"]
+0 -> 2 [label="writes"]
+0 -> 3 [label="writes"]
+0 -> 4 [label="runs"]
+0 -> 5 [label="runs"]
+}

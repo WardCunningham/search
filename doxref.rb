@@ -1,32 +1,24 @@
-# test xref to graph conversion
+# find and convert graph annotations
 
 require 'json'
+require 'set'
 
-# cron.sh 45 Index ► Shell:cron ► runs Ruby:slug-web ► write Public:slug-web.json
-# scrape.rb 11 Index ► Sites:dir ► read Ruby:scrape
-
-lines = File
-  .read('xref.txt')
-  .split(/\n/)
-  .map{ |line|
-    line.split(/\s+/)
-  }
-  .map{ |file, num, sys, *codes|
-    {
-      file: file,
-      num: num,
-      sys: sys,
-      codes: codes
-        .join(" ")
-        .split(/ *► */)
-        .drop(1)
-    }
-  }
-puts lines
-
-# {:file=>"cron.sh", :num=>"45", :sys=>"Index", :code=>["Shell:cron", "runs Ruby:slug-web", "write Public:slug-web.json"]}
-# {:file=>"scrape.rb", :num=>"11", :sys=>"Index", :code=>["Sites:dir", "read Ruby:scrape"]}
-
+puts "-- files --"
+lines = []
+Dir.glob ['*.sh','*.rb'] do |file|
+  have = Set.new()
+  script = File.read(file).split(/\n/)
+  script.each_with_index do |line, num|
+    next unless line.match(/^#/)
+    if line.include? "►"
+      com, sys, *rest = line .split(/\s+/)
+      codes = rest.join(" ").split(/ *► */).drop(1)
+      lines << {file:file, line:num, sys:sys, codes:codes}
+      have << sys
+    end
+  end
+  puts "#{file} does #{have.to_a.join(", ")}" if have.size > 0
+end
 
 def node(sys,graph,tuple)
   type,name = tuple.split(/:/)
@@ -41,7 +33,6 @@ def node(sys,graph,tuple)
 end
 
 def rel(graph,type,here,there)
-  puts "#{type} from #{tuple(graph,here)} to #{tuple(graph,there) }"
   graph[:rels].push({type:type,from:here,to:there,props:{}})
   rid = graph[:rels].length-1
   graph[:nodes][here][:out].push(rid)
@@ -55,7 +46,6 @@ end
 
 graphs = Hash.new { {nodes:[],rels:[]} }
 lines.each {|line|
-  puts "\n#{line[:sys]} in #{line[:file]} #{line[:num]}"
   graph = graphs[line[:sys]]
   here = nil
   line[:codes].each { |code|
@@ -70,14 +60,10 @@ lines.each {|line|
   graphs[line[:sys]] = graph
 }
 
-# cron.sh 45
-# runs from Shell:cron to Ruby:slug-web
-# write from Shell:cron to Public:slug-web.json
-# scrape.rb 11
-# read from Sites:dir to Ruby:scrape
-
+puts "-- systems --"
 File.open("README.graph.jsonl", 'w') { |file|
   graphs.each {|sys,graph|
+    puts "#{sys} has #{graph[:nodes].size} nodes, #{graph[:rels].size} relations"
     file.write("#{{name:sys,graph:graph}.to_json}\n")
   }
 }
