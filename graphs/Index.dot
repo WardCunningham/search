@@ -30,8 +30,8 @@ digraph {
 2 -> 12 [label="write"]
 2 -> 13 [label="write"]
 2 -> 14 [label="write"]
-15 -> 1 [label="read"]
-16 -> 1 [label="fetch"]
+1 -> 15 [label="read"]
+1 -> 16 [label="fetch"]
 1 -> 9 [label="write"]
 1 -> 10 [label="write"]
 }
