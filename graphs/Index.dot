@@ -22,8 +22,8 @@ digraph {
 2 -> 8 [label="write"]
 2 -> 9 [label="write"]
 2 -> 10 [label="write"]
-11 -> 1 [label="read"]
-12 -> 1 [label="fetch"]
+1 -> 11 [label="read"]
+1 -> 12 [label="fetch"]
 1 -> 5 [label="write"]
 1 -> 6 [label="write"]
 }
