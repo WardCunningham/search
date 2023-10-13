@@ -150,7 +150,7 @@ def scraped site
   since
 end
 
-# Repair ► Ruby:scrape ► writes Public:scraped.json
+# Debug ► Ruby:scrape ► writes Public:scraped.json
 scraped = []
 sites do |site, sitemap|
   since = scraped site

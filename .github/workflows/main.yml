@@ -22,5 +22,7 @@ jobs:
           echo -- checkin --
           git config --global user.email "ward@c2.com"
           git config --global user.name "Ward Cunningham"
-          git commit -am 'Automatic Graph Update'
+          git add README.graph.jsonl
+          git add graphs/*.svg
+          git commit -m '-- graph action --'
           git push origin ${GITHUB_REF_NAME}
