@@ -5,7 +5,7 @@ mkdir -p activity logs sites
 NOW=`date -u +%a-%H00`
 
 # Index ► Shell:cron ► run Ruby:scrape
-# Status ► Shell:cron ► writes Logs:Now-0000
+# Repair ► Shell:cron ► writes Logs:Now-0000
 find logs -mtime +7 -exec rm {} \;
 ruby scrape.rb > logs/$NOW
 
@@ -31,7 +31,7 @@ ls sites | \
     fi
   done
 
-# Status ► Shell:cron ► writes Public:sites.tgz
+# Debug ► Shell:cron ► writes Public:sites.tgz
 tar czf public/sites.tgz sites *.txt retired
 
 # Status ► Shell:cron ► runs Ruby:found ► runs Ruby:activity
@@ -39,11 +39,11 @@ find activity -mtime +7 -exec rm {} \;
 ruby found.rb $NOW
 ruby activity.rb
 
-# Index ► Shell:cron ► runs Ruby:site-web ► write Public:site-web.json
+# Status ► Shell:cron ► runs Ruby:site-web ► write Public:site-web.json
 ruby site-web.rb > public/site-web.json
 (perl -e 'print "window.sites="'; cat public/site-web.json) > public/site-web.js
 
-# Index ► Shell:cron ► runs Ruby:slug-web ► write Public:slug-web.json
+# Status ► Shell:cron ► runs Ruby:slug-web ► write Public:slug-web.json
 ruby slug-web.rb > public/slug-web.json
 (perl -e 'print "window.slugs="'; cat public/slug-web.json) > public/slug-web.js
 
