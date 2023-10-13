@@ -9,8 +9,8 @@ def ago date
   "#{Time.now().to_i/60/60/24 - date.to_i/1000/60/60/24} days ago"
 end
 
-# Index ► Sites:dir ► read Ruby:scrape
-# Index ► Wiki:sitemap ► fetch Ruby:scrape
+# Index ► Ruby:scrape ► read Sites:dir 
+# Index ► Ruby:scrape ► fetch Wiki:sitemap
 def sites
   Dir.glob 'sites/*' do |each|
     path, site = each.split '/'
@@ -150,6 +150,7 @@ def scraped site
   since
 end
 
+# Repair ► Ruby:scrape ► writes Public:scraped.json
 scraped = []
 sites do |site, sitemap|
   since = scraped site
