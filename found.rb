@@ -3,7 +3,7 @@
 
 time = ARGV[0] || `date -u +%a-%H00`.chomp
 
-# Index ► Ruby:found ► read Sites.dir ► read Retired.dir
+# Index ► Ruby:found ► read Sites:dir ► read Retired:dir
 have = `ls sites retired`
 want = File.read('sites.txt')
 
@@ -13,7 +13,7 @@ want.split(/\n/).each {|site| diff[site] -= 1}
 make = diff.select {|site, count| count == -1 and not site.match /\blocalhost\b|\.local\b|\blocaltest.me\b|\/|^192.168|^127.0/}
 exit 0 unless make.length > 0
 
-# Index ► Ruby:found ► make Sites.dir
+# Index ► Ruby:found ► make Sites:dir
 make.each {|site, count| Dir.mkdir "sites/#{site}"}
 
 # Debug ► Ruby:found ► write Activity:Now-0000

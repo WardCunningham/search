@@ -15,7 +15,12 @@ while line = gets
     graph['nodes'].each_with_index {|n,i|
       file.puts "#{i} [label=\"#{n['type']}\\n#{n['props']['name']}\"]"}
     graph['rels'].each {|r|
-      file.puts "#{r['from']} -> #{r['to']} [label=\"#{r['type']}\"]"}
+      if(r['type']=='read')
+        file.puts "#{r['to']} -> #{r['from']} [label=\"#{r['type']}\" dir=back]"
+      else
+        file.puts "#{r['from']} -> #{r['to']} [label=\"#{r['type']}\"]"
+      end
+    }
     file.puts "}"
   }
   `dot -Tsvg graphs/#{sys}.dot > graphs/#{sys}.svg`
