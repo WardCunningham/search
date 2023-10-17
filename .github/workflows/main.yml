@@ -24,7 +24,10 @@ jobs:
           git config --global user.name "Ward Cunningham"
           git add README.graph.jsonl
           git add graphs/*.svg
-          if ! git diff --cached --exit-code; then
-            git commit -m '-- graph action --'
-            git push origin ${GITHUB_REF_NAME}
+          if git diff --cached --exit-code
+            then
+              echo no graph changes
+            else
+              git commit -m '-- graph action --'
+              git push origin ${GITHUB_REF_NAME}
           fi
