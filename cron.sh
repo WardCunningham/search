@@ -5,11 +5,11 @@ mkdir -p activity logs sites
 NOW=`date -u +%a-%H00`
 
 # Index ► Shell:cron ► run Ruby:scrape
-# Debug ► Shell:cron ► writes Logs:Now-0000
+# Debug ► Shell:cron ► write Logs:Now-0000
 find logs -mtime +7 -exec rm {} \;
 ruby scrape.rb > logs/$NOW
 
-# Status ► Shell:cron ► writes Activity:Now-0000
+# Status ► Shell:cron ► write Activity:Now-0000
 find sites -name words.txt -newer words.txt | \
 	cut -d / -f 2 | \
 	perl -pe 's/^www\.//' | \
@@ -31,7 +31,7 @@ ls sites | \
     fi
   done
 
-# Debug ► Shell:cron ► writes Public:sites.tgz
+# Debug ► Shell:cron ► write Public:sites.tgz
 tar czf public/sites.tgz sites *.txt retired
 
 # Status ► Shell:cron ► remove Activity:dir

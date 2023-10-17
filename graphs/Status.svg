@@ -26,9 +26,9 @@
 <!-- 0&#45;&gt;1 -->
 <g id="edge1" class="edge">
 <title>0&#45;&gt;1</title>
-<path fill="none" stroke="black" d="M296.32,-193.26C259.81,-189 193.3,-179.21 139.5,-160 119.72,-152.94 99.02,-142.27 82.02,-132.51"/>
-<polygon fill="black" stroke="black" points="83.38,-129.25 72.98,-127.21 79.84,-135.29 83.38,-129.25"/>
-<text text-anchor="middle" x="162.5" y="-148.8" font-family="Times,serif" font-size="14.00">writes</text>
+<path fill="none" stroke="black" d="M296.39,-192.67C261.33,-187.86 198.68,-177.57 147.5,-160 125.93,-152.59 103.09,-141.63 84.41,-131.77"/>
+<polygon fill="black" stroke="black" points="86.07,-128.69 75.6,-127.04 82.75,-134.85 86.07,-128.69"/>
+<text text-anchor="middle" x="166.5" y="-148.8" font-family="Times,serif" font-size="14.00">write</text>
 </g>
 <!-- 2 -->
 <g id="node3" class="node">
@@ -126,7 +126,7 @@
 <title>3&#45;&gt;8</title>
 <path fill="none" stroke="black" d="M231.5,-88.97C231.5,-77.19 231.5,-61.56 231.5,-48.16"/>
 <polygon fill="black" stroke="black" points="235,-48 231.5,-38 228,-48 235,-48"/>
-<text text-anchor="middle" x="254.5" y="-59.8" font-family="Times,serif" font-size="14.00">writes</text>
+<text text-anchor="middle" x="250.5" y="-59.8" font-family="Times,serif" font-size="14.00">write</text>
 </g>
 </g>
 </svg>
