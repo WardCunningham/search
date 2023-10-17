@@ -34,9 +34,11 @@ ls sites | \
 # Debug ► Shell:cron ► writes Public:sites.tgz
 tar czf public/sites.tgz sites *.txt retired
 
-# Index ► Shell:cron ► run Ruby:found ► runs Ruby:activity
+# Status ► Shell:cron ► remove Activity:dir
 find activity -mtime +7 -exec rm {} \;
+# Index ► Shell:cron ► run Ruby:found
 ruby found.rb $NOW
+# Status ► Shell:cron ► runs Ruby:activity
 ruby activity.rb
 
 # Status ► Shell:cron ► run Ruby:site-web ► write Public:site-web.json
