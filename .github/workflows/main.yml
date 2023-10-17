@@ -24,7 +24,7 @@ jobs:
           git config --global user.name "Ward Cunningham"
           git add README.graph.jsonl
           git add graphs/*.svg
-          if git diff --cached --exit-code
+          if git diff --cached --exit-code >/dev/null
             then
               echo no graph changes
             else
