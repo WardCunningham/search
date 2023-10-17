@@ -11,7 +11,7 @@ while line = gets
   puts "#{sys} has #{graph['nodes'].size} nodes, #{graph['rels'].size} relations"
 
   File.open("graphs/#{sys}.dot", 'w') { |file|
-    file.puts "digraph {"
+    file.puts "digraph { node [shape=box style=filled fillcolor=palegreen]"
     graph['nodes'].each_with_index {|n,i|
       file.puts "#{i} [label=\"#{n['type']}\\n#{n['props']['name']}\"]"}
     graph['rels'].each {|r|
