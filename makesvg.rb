@@ -6,6 +6,7 @@ require 'json'
 puts "-- drawings --"
 
 scripts = ["Ruby","Shell","Perl"]
+inputs = ["read", "get"]
 while line = gets
   obj = JSON.parse(line)
   sys = obj['name']
@@ -20,7 +21,7 @@ while line = gets
     graph['rels'].each {|r|
       src = "https://github.com/WardCunningham/search/blob/master/#{r['props']['file']}"
       props = "label=\"#{r['type']}\" URL=\"#{src}#L#{r['props']['line']}\""
-      if(r['type']=='read')
+      if inputs.include?r['type']
         file.puts "#{r['to']} -> #{r['from']} [#{props} dir=back]"
       else
         file.puts "#{r['from']} -> #{r['to']} [#{props}]"
