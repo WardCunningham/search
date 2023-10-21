@@ -12,37 +12,49 @@
 <!-- 0 -->
 <g id="node1" class="node">
 <title>0</title>
-<polygon fill="palegreen" stroke="black" points="313.5,-572 259.5,-572 259.5,-534 313.5,-534 313.5,-572"/>
+<polygon fill="lightblue" stroke="black" points="313.5,-572 259.5,-572 259.5,-534 313.5,-534 313.5,-572"/>
 <text text-anchor="middle" x="286.5" y="-556.8" font-family="Times,serif" font-size="14.00">Shell</text>
 <text text-anchor="middle" x="286.5" y="-541.8" font-family="Times,serif" font-size="14.00">cron</text>
 </g>
 <!-- 1 -->
 <g id="node2" class="node">
 <title>1</title>
-<polygon fill="palegreen" stroke="black" points="386.5,-305 322.5,-305 322.5,-267 386.5,-267 386.5,-305"/>
+<polygon fill="lightblue" stroke="black" points="386.5,-305 322.5,-305 322.5,-267 386.5,-267 386.5,-305"/>
 <text text-anchor="middle" x="354.5" y="-289.8" font-family="Times,serif" font-size="14.00">Ruby</text>
 <text text-anchor="middle" x="354.5" y="-274.8" font-family="Times,serif" font-size="14.00">scrape</text>
 </g>
 <!-- 0&#45;&gt;1 -->
 <g id="edge1" class="edge">
 <title>0&#45;&gt;1</title>
+<g id="a_edge1"><a xlink:href="https://github.com/WardCunningham/search/blob/master/cron.sh#L7" xlink:title="run">
 <path fill="none" stroke="black" d="M313.2,-533.72C319.01,-528.6 324.58,-522.61 328.5,-516 366.31,-452.29 363.03,-360.94 358.32,-315.27"/>
 <polygon fill="black" stroke="black" points="361.78,-314.74 357.17,-305.2 354.82,-315.53 361.78,-314.74"/>
+</a>
+</g>
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/WardCunningham/search/blob/master/cron.sh#L7" xlink:title="run">
 <text text-anchor="middle" x="371" y="-415.8" font-family="Times,serif" font-size="14.00">run</text>
+</a>
+</g>
 </g>
 <!-- 2 -->
 <g id="node3" class="node">
 <title>2</title>
-<polygon fill="palegreen" stroke="black" points="224,-127 165,-127 165,-89 224,-89 224,-127"/>
+<polygon fill="lightblue" stroke="black" points="224,-127 165,-127 165,-89 224,-89 224,-127"/>
 <text text-anchor="middle" x="194.5" y="-111.8" font-family="Times,serif" font-size="14.00">Ruby</text>
 <text text-anchor="middle" x="194.5" y="-96.8" font-family="Times,serif" font-size="14.00">rollup</text>
 </g>
 <!-- 0&#45;&gt;2 -->
 <g id="edge2" class="edge">
 <title>0&#45;&gt;2</title>
+<g id="a_edge2"><a xlink:href="https://github.com/WardCunningham/search/blob/master/cron.sh#L18" xlink:title="run">
 <path fill="none" stroke="black" d="M259.25,-549.9C212.39,-544.65 121.5,-526.53 121.5,-465 121.5,-465 121.5,-465 121.5,-196 121.5,-170.87 139.6,-149.19 157.78,-133.76"/>
 <polygon fill="black" stroke="black" points="160.45,-136.1 166.07,-127.12 156.07,-130.64 160.45,-136.1"/>
+</a>
+</g>
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/WardCunningham/search/blob/master/cron.sh#L18" xlink:title="run">
 <text text-anchor="middle" x="134" y="-326.8" font-family="Times,serif" font-size="14.00">run</text>
+</a>
+</g>
 </g>
 <!-- 3 -->
 <g id="node4" class="node">
@@ -54,9 +66,15 @@
 <!-- 0&#45;&gt;3 -->
 <g id="edge3" class="edge">
 <title>0&#45;&gt;3</title>
+<g id="a_edge3"><a xlink:href="https://github.com/WardCunningham/search/blob/master/cron.sh#L21" xlink:title="write">
 <path fill="none" stroke="black" d="M264.99,-533.85C258.37,-528.18 251.09,-521.88 244.5,-516 235.18,-507.69 225.12,-498.45 216.19,-490.14"/>
 <polygon fill="black" stroke="black" points="218.37,-487.39 208.68,-483.12 213.6,-492.51 218.37,-487.39"/>
+</a>
+</g>
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/WardCunningham/search/blob/master/cron.sh#L21" xlink:title="write">
 <text text-anchor="middle" x="263.5" y="-504.8" font-family="Times,serif" font-size="14.00">write</text>
+</a>
+</g>
 </g>
 <!-- 4 -->
 <g id="node5" class="node">
@@ -68,23 +86,35 @@
 <!-- 0&#45;&gt;4 -->
 <g id="edge4" class="edge">
 <title>0&#45;&gt;4</title>
+<g id="a_edge4"><a xlink:href="https://github.com/WardCunningham/search/blob/master/cron.sh#L21" xlink:title="write">
 <path fill="none" stroke="black" d="M286.5,-533.97C286.5,-522.19 286.5,-506.56 286.5,-493.16"/>
 <polygon fill="black" stroke="black" points="290,-493 286.5,-483 283,-493 290,-493"/>
+</a>
+</g>
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/WardCunningham/search/blob/master/cron.sh#L21" xlink:title="write">
 <text text-anchor="middle" x="305.5" y="-504.8" font-family="Times,serif" font-size="14.00">write</text>
+</a>
+</g>
 </g>
 <!-- 5 -->
 <g id="node6" class="node">
 <title>5</title>
-<polygon fill="palegreen" stroke="black" points="452,-483 395,-483 395,-445 452,-445 452,-483"/>
+<polygon fill="lightblue" stroke="black" points="452,-483 395,-483 395,-445 452,-445 452,-483"/>
 <text text-anchor="middle" x="423.5" y="-467.8" font-family="Times,serif" font-size="14.00">Ruby</text>
 <text text-anchor="middle" x="423.5" y="-452.8" font-family="Times,serif" font-size="14.00">found</text>
 </g>
 <!-- 0&#45;&gt;5 -->
 <g id="edge5" class="edge">
 <title>0&#45;&gt;5</title>
+<g id="a_edge5"><a xlink:href="https://github.com/WardCunningham/search/blob/master/cron.sh#L39" xlink:title="run">
 <path fill="none" stroke="black" d="M313.85,-541.86C329.55,-535.48 349.3,-526.48 365.5,-516 377.05,-508.53 388.65,-498.85 398.42,-489.94"/>
 <polygon fill="black" stroke="black" points="400.91,-492.41 405.81,-483.02 396.12,-487.3 400.91,-492.41"/>
+</a>
+</g>
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/WardCunningham/search/blob/master/cron.sh#L39" xlink:title="run">
 <text text-anchor="middle" x="396" y="-504.8" font-family="Times,serif" font-size="14.00">run</text>
+</a>
+</g>
 </g>
 <!-- 8 -->
 <g id="node9" class="node">
@@ -96,9 +126,15 @@
 <!-- 1&#45;&gt;8 -->
 <g id="edge17" class="edge">
 <title>1&#45;&gt;8</title>
+<g id="a_edge17"><a xlink:href="https://github.com/WardCunningham/search/blob/master/scrape.rb#L38" xlink:title="write">
 <path fill="none" stroke="black" d="M360.92,-266.97C365.16,-255.08 370.8,-239.25 375.61,-225.76"/>
 <polygon fill="black" stroke="black" points="379.03,-226.6 379.09,-216 372.43,-224.25 379.03,-226.6"/>
+</a>
+</g>
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/WardCunningham/search/blob/master/scrape.rb#L38" xlink:title="write">
 <text text-anchor="middle" x="390.5" y="-237.8" font-family="Times,serif" font-size="14.00">write</text>
+</a>
+</g>
 </g>
 <!-- 9 -->
 <g id="node10" class="node">
@@ -110,9 +146,15 @@
 <!-- 1&#45;&gt;9 -->
 <g id="edge18" class="edge">
 <title>1&#45;&gt;9</title>
+<g id="a_edge18"><a xlink:href="https://github.com/WardCunningham/search/blob/master/scrape.rb#L38" xlink:title="write">
 <path fill="none" stroke="black" d="M322.41,-272.09C307.31,-265.68 289.2,-257.49 273.5,-249 258.42,-240.85 242.42,-230.8 228.79,-221.79"/>
 <polygon fill="black" stroke="black" points="230.47,-218.7 220.21,-216.05 226.58,-224.52 230.47,-218.7"/>
+</a>
+</g>
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/WardCunningham/search/blob/master/scrape.rb#L38" xlink:title="write">
 <text text-anchor="middle" x="292.5" y="-237.8" font-family="Times,serif" font-size="14.00">write</text>
+</a>
+</g>
 </g>
 <!-- 14 -->
 <g id="node15" class="node">
@@ -124,9 +166,15 @@
 <!-- 1&#45;&gt;14 -->
 <g id="edge16" class="edge">
 <title>1&#45;&gt;14</title>
+<g id="a_edge16"><a xlink:href="https://github.com/WardCunningham/search/blob/master/scrape.rb#L13" xlink:title="fetch">
 <path fill="none" stroke="black" d="M340.23,-266.71C335.82,-261.04 330.95,-254.77 326.5,-249 320.4,-241.09 313.79,-232.47 307.78,-224.61"/>
 <polygon fill="black" stroke="black" points="310.4,-222.26 301.54,-216.44 304.83,-226.51 310.4,-222.26"/>
+</a>
+</g>
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/WardCunningham/search/blob/master/scrape.rb#L13" xlink:title="fetch">
 <text text-anchor="middle" x="345" y="-237.8" font-family="Times,serif" font-size="14.00">fetch</text>
+</a>
+</g>
 </g>
 <!-- 10 -->
 <g id="node11" class="node">
@@ -138,9 +186,15 @@
 <!-- 2&#45;&gt;10 -->
 <g id="edge11" class="edge">
 <title>2&#45;&gt;10</title>
+<g id="a_edge11"><a xlink:href="https://github.com/WardCunningham/search/blob/master/rollup.rb#L5" xlink:title="write">
 <path fill="none" stroke="black" d="M164.71,-92.03C152.46,-85.73 138.19,-78.2 125.5,-71 110.27,-62.36 93.79,-52.37 79.55,-43.53"/>
 <polygon fill="black" stroke="black" points="81.35,-40.53 71.01,-38.2 77.64,-46.47 81.35,-40.53"/>
+</a>
+</g>
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/WardCunningham/search/blob/master/rollup.rb#L5" xlink:title="write">
 <text text-anchor="middle" x="144.5" y="-59.8" font-family="Times,serif" font-size="14.00">write</text>
+</a>
+</g>
 </g>
 <!-- 11 -->
 <g id="node12" class="node">
@@ -152,9 +206,15 @@
 <!-- 2&#45;&gt;11 -->
 <g id="edge12" class="edge">
 <title>2&#45;&gt;11</title>
+<g id="a_edge12"><a xlink:href="https://github.com/WardCunningham/search/blob/master/rollup.rb#L5" xlink:title="write">
 <path fill="none" stroke="black" d="M184.35,-88.97C177.51,-76.84 168.38,-60.63 160.69,-46.97"/>
 <polygon fill="black" stroke="black" points="163.6,-45 155.64,-38 157.5,-48.43 163.6,-45"/>
+</a>
+</g>
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/WardCunningham/search/blob/master/rollup.rb#L5" xlink:title="write">
 <text text-anchor="middle" x="192.5" y="-59.8" font-family="Times,serif" font-size="14.00">write</text>
+</a>
+</g>
 </g>
 <!-- 12 -->
 <g id="node13" class="node">
@@ -166,9 +226,15 @@
 <!-- 2&#45;&gt;12 -->
 <g id="edge13" class="edge">
 <title>2&#45;&gt;12</title>
+<g id="a_edge13"><a xlink:href="https://github.com/WardCunningham/search/blob/master/rollup.rb#L6" xlink:title="write">
 <path fill="none" stroke="black" d="M205.28,-88.74C208.59,-83.07 212.22,-76.79 215.5,-71 219.89,-63.25 224.57,-54.79 228.83,-47.03"/>
 <polygon fill="black" stroke="black" points="232.04,-48.45 233.77,-38 225.9,-45.1 232.04,-48.45"/>
+</a>
+</g>
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/WardCunningham/search/blob/master/rollup.rb#L6" xlink:title="write">
 <text text-anchor="middle" x="242.5" y="-59.8" font-family="Times,serif" font-size="14.00">write</text>
+</a>
+</g>
 </g>
 <!-- 13 -->
 <g id="node14" class="node">
@@ -180,9 +246,15 @@
 <!-- 2&#45;&gt;13 -->
 <g id="edge14" class="edge">
 <title>2&#45;&gt;13</title>
+<g id="a_edge14"><a xlink:href="https://github.com/WardCunningham/search/blob/master/rollup.rb#L6" xlink:title="write">
 <path fill="none" stroke="black" d="M224.07,-93.27C237.03,-86.93 252.27,-79.04 265.5,-71 278.75,-62.94 292.74,-53.19 304.76,-44.38"/>
 <polygon fill="black" stroke="black" points="307.19,-46.94 313.13,-38.17 303.02,-41.32 307.19,-46.94"/>
+</a>
+</g>
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/WardCunningham/search/blob/master/rollup.rb#L6" xlink:title="write">
 <text text-anchor="middle" x="306.5" y="-59.8" font-family="Times,serif" font-size="14.00">write</text>
+</a>
+</g>
 </g>
 <!-- 6 -->
 <g id="node7" class="node">
@@ -194,23 +266,41 @@
 <!-- 5&#45;&gt;6 -->
 <g id="edge8" class="edge">
 <title>5&#45;&gt;6</title>
+<g id="a_edge8"><a xlink:href="https://github.com/WardCunningham/search/blob/master/found.rb#L16" xlink:title="make">
 <path fill="none" stroke="black" d="M435,-444.93C439.79,-435.12 443.42,-422.82 439.5,-412 438.3,-408.69 436.65,-405.46 434.73,-402.4"/>
 <polygon fill="black" stroke="black" points="437.49,-400.24 428.78,-394.21 431.83,-404.36 437.49,-400.24"/>
+</a>
+</g>
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/WardCunningham/search/blob/master/found.rb#L16" xlink:title="make">
 <text text-anchor="middle" x="460" y="-415.8" font-family="Times,serif" font-size="14.00">make</text>
+</a>
+</g>
 </g>
 <!-- 6&#45;&gt;1 -->
 <g id="edge15" class="edge">
 <title>6&#45;&gt;1</title>
+<g id="a_edge15"><a xlink:href="https://github.com/WardCunningham/search/blob/master/scrape.rb#L12" xlink:title="read">
 <path fill="none" stroke="black" d="M392.68,-347.4C383.99,-333.65 373.62,-317.25 365.88,-305"/>
 <polygon fill="black" stroke="black" points="389.8,-349.39 398.1,-355.97 395.72,-345.65 389.8,-349.39"/>
+</a>
+</g>
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/WardCunningham/search/blob/master/scrape.rb#L12" xlink:title="read">
 <text text-anchor="middle" x="401" y="-326.8" font-family="Times,serif" font-size="14.00">read</text>
+</a>
+</g>
 </g>
 <!-- 6&#45;&gt;5 -->
 <g id="edge6" class="edge">
 <title>6&#45;&gt;5</title>
+<g id="a_edge6"><a xlink:href="https://github.com/WardCunningham/search/blob/master/found.rb#L6" xlink:title="read">
 <path fill="none" stroke="black" d="M405.05,-404.21C404.63,-411.69 404.86,-419.71 406.5,-427 407.86,-433.07 410.37,-439.32 413.04,-444.88"/>
 <polygon fill="black" stroke="black" points="408.55,-404.42 406.01,-394.14 401.58,-403.76 408.55,-404.42"/>
+</a>
+</g>
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/WardCunningham/search/blob/master/found.rb#L6" xlink:title="read">
 <text text-anchor="middle" x="423" y="-415.8" font-family="Times,serif" font-size="14.00">read</text>
+</a>
+</g>
 </g>
 <!-- 7 -->
 <g id="node8" class="node">
@@ -222,23 +312,41 @@
 <!-- 7&#45;&gt;5 -->
 <g id="edge7" class="edge">
 <title>7&#45;&gt;5</title>
+<g id="a_edge7"><a xlink:href="https://github.com/WardCunningham/search/blob/master/found.rb#L6" xlink:title="read">
 <path fill="none" stroke="black" d="M431.61,-523.82C429.76,-510.41 427.61,-494.78 425.98,-483"/>
 <polygon fill="black" stroke="black" points="428.18,-524.55 433.01,-533.97 435.11,-523.59 428.18,-524.55"/>
+</a>
+</g>
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/WardCunningham/search/blob/master/found.rb#L6" xlink:title="read">
 <text text-anchor="middle" x="446" y="-504.8" font-family="Times,serif" font-size="14.00">read</text>
+</a>
+</g>
 </g>
 <!-- 8&#45;&gt;2 -->
 <g id="edge9" class="edge">
 <title>8&#45;&gt;2</title>
+<g id="a_edge9"><a xlink:href="https://github.com/WardCunningham/search/blob/master/rollup.rb#L3" xlink:title="read">
 <path fill="none" stroke="black" d="M336.68,-173.76C301.1,-157.56 254.06,-136.13 224.04,-122.45"/>
 <polygon fill="black" stroke="black" points="335.37,-177.01 345.92,-177.97 338.28,-170.64 335.37,-177.01"/>
+</a>
+</g>
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/WardCunningham/search/blob/master/rollup.rb#L3" xlink:title="read">
 <text text-anchor="middle" x="317" y="-148.8" font-family="Times,serif" font-size="14.00">read</text>
+</a>
+</g>
 </g>
 <!-- 9&#45;&gt;2 -->
 <g id="edge10" class="edge">
 <title>9&#45;&gt;2</title>
+<g id="a_edge10"><a xlink:href="https://github.com/WardCunningham/search/blob/master/rollup.rb#L4" xlink:title="read">
 <path fill="none" stroke="black" d="M194.5,-167.82C194.5,-154.41 194.5,-138.78 194.5,-127"/>
 <polygon fill="black" stroke="black" points="191,-167.97 194.5,-177.97 198,-167.97 191,-167.97"/>
+</a>
+</g>
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/WardCunningham/search/blob/master/rollup.rb#L4" xlink:title="read">
 <text text-anchor="middle" x="211" y="-148.8" font-family="Times,serif" font-size="14.00">read</text>
+</a>
+</g>
 </g>
 </g>
 </svg>
