@@ -8,12 +8,12 @@ lines = []
 Dir.glob ['*.sh','*.rb'] do |file|
   have = Set.new()
   script = File.read(file).split(/\n/)
-  script.each_with_index do |line, num|
+  script.each_with_index do |line, index|
     next unless line.match(/^#/)
     if line.include? "►"
       com, sys, *rest = line .split(/\s+/)
       codes = rest.join(" ").split(/ *► */).drop(1)
-      lines << {file:file, line:num, sys:sys, codes:codes}
+      lines << {file:file, num:index+1, sys:sys, codes:codes}
       have << sys
     end
   end
@@ -32,8 +32,8 @@ def node(sys,graph,tuple)
   end
 end
 
-def rel(graph,type,here,there)
-  graph[:rels].push({type:type,from:here,to:there,props:{}})
+def rel(graph,type,here,there,props={})
+  graph[:rels].push({type:type,from:here,to:there,props:props})
   rid = graph[:rels].length-1
   graph[:nodes][here][:out].push(rid)
   graph[:nodes][there][:in].push(rid)
@@ -47,14 +47,16 @@ end
 graphs = Hash.new { {nodes:[],rels:[]} }
 lines.each {|line|
   graph = graphs[line[:sys]]
+  props = {file:line[:file], line:line[:num]}
+
   here = nil
   line[:codes].each { |code|
     first, rest = code.split(/ /)
     if (first.include?(':'))
       here = node(line[:sys],graph,first)
-    else
+    else  
       there = node(line[:sys],graph,rest)
-      rel(graph,first,here,there)
+      rel(graph,first,here,there,props)
     end
   }
   graphs[line[:sys]] = graph

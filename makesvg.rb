@@ -4,6 +4,8 @@
 require 'json'
 
 puts "-- drawings --"
+
+scripts = ["Ruby","Shell","Perl"]
 while line = gets
   obj = JSON.parse(line)
   sys = obj['name']
@@ -13,12 +15,15 @@ while line = gets
   File.open("graphs/#{sys}.dot", 'w') { |file|
     file.puts "digraph { node [shape=box style=filled fillcolor=palegreen]"
     graph['nodes'].each_with_index {|n,i|
-      file.puts "#{i} [label=\"#{n['type']}\\n#{n['props']['name']}\"]"}
+      color = if scripts.include?n['type'] then 'fillcolor=lightblue' else '' end
+      file.puts "#{i} [label=\"#{n['type']}\\n#{n['props']['name']}\" #{color}]"}
     graph['rels'].each {|r|
+      src = "https://github.com/WardCunningham/search/blob/master/#{r['props']['file']}"
+      props = "label=\"#{r['type']}\" URL=\"#{src}#L#{r['props']['line']}\""
       if(r['type']=='read')
-        file.puts "#{r['to']} -> #{r['from']} [label=\"#{r['type']}\" dir=back]"
+        file.puts "#{r['to']} -> #{r['from']} [#{props} dir=back]"
       else
-        file.puts "#{r['from']} -> #{r['to']} [label=\"#{r['type']}\"]"
+        file.puts "#{r['from']} -> #{r['to']} [#{props}]"
       end
     }
     file.puts "}"
