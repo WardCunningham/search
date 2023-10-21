@@ -10,7 +10,7 @@ def ago date
 end
 
 # Index ► Ruby:scrape ► read Sites:dir 
-# Index ► Ruby:scrape ► fetch Wiki:sitemap
+# Index ► Ruby:scrape ► get Wiki:sitemap
 def sites
   Dir.glob 'sites/*' do |each|
     path, site = each.split '/'
