@@ -10,7 +10,6 @@ def ago date
 end
 
 # Index ► Ruby:scrape ► read Sites:dir 
-# Index ► Ruby:scrape ► get Wiki:sitemap
 def sites
   Dir.glob 'sites/*' do |each|
     path, site = each.split '/'
@@ -19,6 +18,7 @@ def sites
         6 => "unknown host",
         28 => "request timeout"
       }
+      # Index ► Ruby:scrape ► get Wiki:sitemap
       text = `curl -s -m 12 -L http://#{site}/system/sitemap.json`
       raise "curl #{codes[$?.exitstatus]||$?}" if $?!=0
       raise "empty response" if text.length == 0
