@@ -9,7 +9,7 @@ Dir.glob ['*.sh','*.rb'] do |file|
   have = Set.new()
   script = File.read(file).split(/\n/)
   script.each_with_index do |line, index|
-    next unless line.match(/^\w*#/)
+    next unless line.match(/^\s*#/)
     if line.include? "►"
       com, sys, *rest = line .split(/\s+/)
       codes = rest.join(" ").split(/ *► */).drop(1)
