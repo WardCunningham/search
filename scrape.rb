@@ -50,7 +50,7 @@ def scrape site, slug, aspect
 end
 
 def update site, pageinfo
-  puts "\t#{pageinfo['title']}, #{ago pageinfo['date']}"
+  puts "\t#{pageinfo['title'].gsub(/\n/,'-')}, #{ago pageinfo['date']}"
   begin
     slug = pageinfo['slug']
     page = JSON.parse `curl -s -L http://#{site}/#{slug}.json`
