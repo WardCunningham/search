@@ -9,9 +9,8 @@ def ago date
   "#{Time.now().to_i/60/60/24 - date.to_i/1000/60/60/24} days ago"
 end
 
-# Index ► Sites:dir ► read Ruby:scrape
-# Index ► Wiki:sitemap ► fetch Ruby:scrape
 def sites
+# Index ► Ruby:scrape ► read Sites:dir 
   Dir.glob 'sites/*' do |each|
     path, site = each.split '/'
     begin
@@ -19,6 +18,7 @@ def sites
         6 => "unknown host",
         28 => "request timeout"
       }
+# Index ► Ruby:scrape ► get Wiki:sitemap
       text = `curl -s -m 12 -L http://#{site}/system/sitemap.json`
       raise "curl #{codes[$?.exitstatus]||$?}" if $?!=0
       raise "empty response" if text.length == 0
@@ -35,12 +35,12 @@ def sites
   end
 end
 
-# Index ► Ruby:scrape ► write Pages:words.txt ► write Pages:sites.txt
 def scrape site, slug, aspect
   result = yield
   return if result.empty?
   dirname = "sites/#{site}/pages/#{slug}"
   FileUtils.mkdir_p dirname unless File.directory? dirname
+# Index ► Ruby:scrape ► write Pages:words.txt ► write Pages:sites.txt
   File.open "#{dirname}/#{aspect}.txt", 'w' do |file|
     result.each do |word|
       file.puts word
@@ -150,13 +150,21 @@ def scraped site
   since
 end
 
+scraped = []
 sites do |site, sitemap|
   since = scraped site
+  newest = 0
   puts "#{site}, #{sitemap.length} pages"
   sitemap.each do |pageinfo|
     date = pageinfo['date'] || 1
+    newest = date if date > newest
     # next if pageinfo['slug'] != 'gtexplainerexamples'
     # update site, pageinfo
     update site, pageinfo if date > since
   end
+  scraped << {site:site, pages:sitemap.length, date:newest}
+end
+# Debug ► Ruby:scrape ► writes Public:scraped.json
+File.open('public/scraped.json', 'w') do |file|
+  file.puts scraped.to_json
 end

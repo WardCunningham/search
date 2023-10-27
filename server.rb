@@ -4,7 +4,7 @@ require 'date'
 
 # Query ► Ruby:server ► serve Public:files
 # Query ► Ruby:server ► serve API:Search
-# Query ► Ruby:server ► Serve API:Index
+# Query ► Ruby:server ► serve API:Index
 
 set :bind, '0.0.0.0'
 

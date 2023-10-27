@@ -44,6 +44,7 @@ end
 add({:type => 'paragraph', :text => 'Here we report all sites found, organized by domain name, excluding sites with less than ten pages.' })
 add({:type => 'roster', :text => `ruby roster.rb`})
 
+# Status ► Ruby:activity ► write Pages:visible-federation
 File.open 'pages/visible-federation', 'w' do |file|
   file.puts JSON.pretty_generate({:title => 'Visible Federation', :story => @story})
 end

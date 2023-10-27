@@ -1,8 +1,10 @@
+.DS_Store
 sites
 retired
 activity
 logs
 status
+graphs/*.dot
 *.txt
 public/sites.tgz
 public/site-web.*

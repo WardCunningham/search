@@ -1,0 +1,33 @@
+name: Build System Graph as README.graph.jsonl
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1.111.0
+        with:
+          ruby-version: 3.1.2
+      - name: Setup Graphviz
+        uses: ts-graphviz/setup-graphviz@v1
+      - name: Run a multi-line script
+        run: |
+          ruby doxref.rb
+          cat README.graph.jsonl | ruby makesvg.rb
+          echo -- checkin --
+          git config --global user.email "ward@c2.com"
+          git config --global user.name "Ward Cunningham"
+          git add README.graph.jsonl
+          git add graphs/*.svg
+          if git diff --cached --exit-code >/dev/null
+            then
+              echo no graph changes
+            else
+              git commit -m '-- graph action --'
+              git push origin ${GITHUB_REF_NAME}
+          fi

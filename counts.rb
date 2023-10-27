@@ -3,6 +3,7 @@
 
 require 'json'
 
+# Debug ► Ruby:counts ► read Logs:Now-0000
 recent = `ls -t logs | head -n 1`.chomp
 log = File.read "logs/#{recent}"
 
@@ -12,6 +13,7 @@ log.scan(/, (\d+) pages\b/) do |count|
 	pages += count[0].to_i
 end
 
+# Debug ► Ruby:counts ► write Search:counts.txt
 counts = {date: Time.now.to_i, scan: {sites: sites, pages: pages}, index: {}}
 `wc -l *.txt`.scan(/(\d+) (\w+)\.txt/) {|v,k| counts[:index][k] = v.to_i}
 File.open('counts.txt','a') {|file| file.puts counts.to_json}
