@@ -280,3 +280,8 @@ end
 get /\/light\/(on|off|red|green|blue|white)/ do |c|
   `hue lights 13 #{c} 2>&1`
 end
+
+get '/spots-ota/:activity' do |activity|
+  query = "select substr(time,11,3), count(*) from spots where msg like \"CQ VOTA %\" group by substr(time,11,3);"
+  `cd sqlite; sqlite3 spots '#{query}'`
+end
