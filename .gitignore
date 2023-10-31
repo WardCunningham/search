@@ -15,3 +15,4 @@ public/neo-build.log
 pages/recent-activity
 pages/visible-federation
 trouble
+sqlite/geonames-*
