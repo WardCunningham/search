@@ -6,7 +6,15 @@
     have = File.read(file).split(/\n/)
     have.each { |site|
       if want.include? site
-        puts "have #{path[1]} want #{site}"
+        Dir.glob ["sites/#{path[1]}/pages/*/sites.txt"] do |file2|
+          path2 = file2.split(/\//)
+          have2 = File.read(file2).split(/\n/)
+          have2.each { |site2|
+            if want.include? site2
+              puts "have #{path[1]}/#{path2[3]} want #{site2}"
+            end
+          }
+        end
       end
     }
   end
