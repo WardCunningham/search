@@ -969,6 +969,16 @@ function download(string, file, mime='text/json') {
 
 croquet.view = new BeamView(croquet.model)
 
+if(params.read) {
+  const text = await fetch(params.read).then(res => res.text())
+  text.trim().split(/\n/).forEach(async line => {
+    const {name,graph} = JSON.parse(line)
+    croquet.view.newPoems([{name,graph:inst(graph)}])
+    await delay(60)
+  })
+}
+
+
 </script>
 </body>
 </html>
