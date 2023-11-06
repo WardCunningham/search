@@ -15,16 +15,14 @@
     display: grid;
     grid-template-areas:
       "beam   target"
-      "create target"
-      "chat   target";
-    grid-template-columns: 1fr 3fr;
-    grid-template-rows: 4fr 1fr 1fr;
+      "create target";
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 3fr 1fr;
   }
   #beam   {grid-area:beam; background-color:palegreen;}
   #create {grid-area:create; background-color:bisque;}
   #target {grid-area:target; overflow:scroll;}
-  #chat   {grid-area:chat; background-color:lightblue;}
-  #beam, #create, #chat {
+  #beam, #create {
     margin:4px;
     padding:8px;
     overflow-y: scroll;
@@ -37,21 +35,11 @@
     <div id="beamlist" onchange="dochoose(event)"></div>
   </div>
   <div id="target" ondrop="drop(event)" ondragover="over(event)" ondragenter="over(event)">
-    <div style="padding:16px; font-size:x-large;">Learn more about<br>
-      <a href=http://hsc.fed.wiki/view/hypertext-super-collaborator target=_blank>
-        Browsing Module Relationships</a>
-    </div>
   </div>
-  <div id="create" ondrop="drop(event)" ondragover="over(event)" ondragenter="over(event)"></div>
-  <div id="chat">
-    <div id="textOut"></div>
-    <div style="display: flex;">
-      <input id="textIn" type="text" style="flex:1" autocomplete="off" onkeydown="event.keyCode == 13 && sendButton.onclick()"/>
-      <input id="sendButton" type="button" style="margin-left:6" value = "➤" />
-    </div>
-    <div style="display: flex;">
-      <span id="members"  style="flex:1"></span>
-      <input id="loginButton" type="button" style="margin-left:6" value = "☺" />
+  <div id="create" ondrop="drop(event)" ondragover="over(event)" ondragenter="over(event)">
+    <div style="padding:16px; font-size:large;">Learn more about<br>
+      <a href=http://search.dojo.fed.wiki/solo-super-collaborator.html target=_blank>
+        Browsing Relations</a>
     </div>
   </div>
   <div id=floater style="position:absolute; border:1px solid; background-color:white; overflow-wrap:break-word; padding:4px; width:200px; height:200px;" data-cid="" hidden>
@@ -740,8 +728,8 @@ class BeamView {
     croquet.view = this
     this.recall = []
     this.nextdownload = null
-    textIn.addEventListener('keydown', (event) => {if(event.keyCode==38) {textIn.value = this.recall.pop()||''}})
-    sendButton.onclick = () => {this.send(textIn.value); textIn.value = "";};
+    // textIn.addEventListener('keydown', (event) => {if(event.keyCode==38) {textIn.value = this.recall.pop()||''}})
+    // sendButton.onclick = () => {this.send(textIn.value); textIn.value = "";};
     // this.subscribe("history", "refresh", this.refreshHistory);
     // this.subscribe("viewInfo", "refresh", this.refreshViewInfo);
     // this.subscribe("beam", "refresh", this.refreshBeam);
@@ -750,121 +738,121 @@ class BeamView {
     this.refreshBeam()
     beam.addEventListener('keydown',this.narrowBeam)
     beam.addEventListener('keyup',this.narrowBeam)
-    loginButton.addEventListener('click', event => this.newFace(this,event))
+    // loginButton.addEventListener('click', event => this.newFace(this,event))
 
-    if (model.participants === 1 &&
-      !model.history.find(item => item.viewId === this.viewId)) {
-      this.publish("input", "reset", "for new user");
-    }
-    const m = document.cookie.match(/\bface=(\d+)\b/)
-    if (m) this.publish('input','newName',{viewId:this.viewId, nickname:emoji[+m[1]]})
+    // if (model.participants === 1 &&
+    //   !model.history.find(item => item.viewId === this.viewId)) {
+    //   this.publish("input", "reset", "for new user");
+    // }
+    // const m = document.cookie.match(/\bface=(\d+)\b/)
+    // if (m) this.publish('input','newName',{viewId:this.viewId, nickname:emoji[+m[1]]})
   }
 
-  send(text) {
-    if (text.startsWith('/')) this.recall.push(text)
-    if (text === "/reset") {
-      this.publish("input", "reset", "at user request");
-    } else
-    if (text === "/remove") {
-      const indices = [...window.beamlist.querySelectorAll('input[type=checkbox]:checked')]
-        .map(e => +e.value)
-      window.target.innerHTML = ''
-      this.publish("input", "remove", indices)
-    } else
-    if (text.match(/^\/remove (\d+)$/)) {
-      const last = this.beam().length-1
-      const count = Math.min(+text.match(/^\/remove (\d+)$/)[1],last+1)
-      const first = last-(count-1)
-      const indices = [...Array(last+1).keys()].slice(first)
-      console.log({count,last,first,indices})
-      window.target.innerHTML = ''
-      this.publish("input", "remove", indices)
-    } else
-    if (text === "/download") {
-      if (this.nextdownload) {
-        download(...this.nextdownload)
-      } else {
-        const poems = [...window.beamlist.querySelectorAll('input[type=checkbox]:checked')]
-          .map(e => this.beam()[+e.value])
-        const poem = composite(poems)
-        const filename = poems
-          .map(poem => poem.name.replace(/[^a-zA-Z0-9]/g,''))
-          .filter(uniq).sort().join('-') + '.graph.json'
-        download(poem.graph.stringify(null,2),filename,'application/json')
-      }
-    } else
-    if (text === "/cypher") {
-      const poems = [...window.beamlist.querySelectorAll('input[type=checkbox]:checked')]
-        .map(e => this.beam()[+e.value])
-      const poem = composite(poems)
-      const cypher = becypher(poem.graph)
-      const filename = poems
-        .map(poem => poem.name.replace(/[^a-zA-Z0-9]/g,''))
-        .filter(uniq).sort().join('-') + '.cypher'
-      download(cypher,filename,'application/x-cypher')
-    } else
-    if (text === "/export") {
-      const stream = this.beam().map(item => JSON.stringify(item)).join("\n")
-      const date = new Date().toISOString().split('T')[0]
-      download(stream,`${date}Z.jsonl`,'application/json')
-    } else
-    if (text === "/schema") {
-      const poems = [...window.beamlist.querySelectorAll('input[type=checkbox]:checked')]
-        .map(e => this.beam()[+e.value])
-      const nodes = []
-      const rels = []
-      const newnid = n => {
-        let nid = nodes.findIndex(node => node.type === n.type)
-        if (nid == -1) {
-          nid = nodes.length
-          nodes.push({type:n.type,in:[],out:[],props:{}})
-        }
-        for (const key of Object.keys(n.props)) {nodes[nid].props[key]=''}
-        return nid
-      }
-      const newrid = (r,from,to) => {
-        let rid = rels.findIndex(rel => rel.type === r.type)
-        if (rid == -1) {
-          rid = rels.length
-          rels.push({type:r.type,from,to,props:{}})
-        }
-        for (const key of Object.keys(r.props)) {rels[rid].props[key]=''}
-        return rid
-      }
-      for (const poem of poems) {
-        for (const rel of poem.graph.rels) {
-          const f = newnid(poem.graph.nodes[rel.from])
-          const t = newnid(poem.graph.nodes[rel.to])
-          const r = newrid(rel,f,t)
-          nodes[f].out.push(r)
-          nodes[t].in.push(r)
-        }
-      }
-      this.nextdownload = [new Graph(nodes,rels).stringify(null,2),'target.schema.json', 'application/json']
-      const tip = props => Object.entries(props).map(e => `${e[0]}: ${e[1]}`).join("\n")
-      const dotn = nodes
-        .map(node => `"${node.type}" [tooltip="${tip(node.props)}"]`)
-      const dotr = rels
-        .map(rel => `"${nodes[rel.from].type}" -> "${nodes[rel.to].type}" [label="${rel.type}" labeltooltip="${tip(rel.props)}"]`)
-      const dot = ['node [shape=box style=filled fillcolor=palegreen]',...dotn, ...dotr]
-      hpccWasm.graphviz.layout(`digraph {${dot.join("\n")}}`, "svg", "dot").then(svg => {
-        target.innerHTML = svg;
-      })
-    } else
-    if (text.startsWith("/match")) {
-      const tree = cypher.parse(text.slice(1))
-      if(!tree[0][0]) {
-        return setTimeout(() => {window.textIn.value = `/${cypher.left}`},100)
-      }
-      const code = cypher.gen(0,tree[0][0],{})
-      const inputs = [...window.beam.querySelectorAll('input[type=checkbox]')]
-      this.model.beam.forEach((poem,i) => {
-        inputs[i].checked = !!(cypher.apply(poem.graph,code).length)
-      })
-      window.dochoose({})
-    }
-    this.publish("input", "newPost", {viewId: this.viewId, nick:'system', chat:text});
-  }
+  // send(text) {
+  //   if (text.startsWith('/')) this.recall.push(text)
+  //   if (text === "/reset") {
+  //     this.publish("input", "reset", "at user request");
+  //   } else
+  //   if (text === "/remove") {
+  //     const indices = [...window.beamlist.querySelectorAll('input[type=checkbox]:checked')]
+  //       .map(e => +e.value)
+  //     window.target.innerHTML = ''
+  //     this.publish("input", "remove", indices)
+  //   } else
+  //   if (text.match(/^\/remove (\d+)$/)) {
+  //     const last = this.beam().length-1
+  //     const count = Math.min(+text.match(/^\/remove (\d+)$/)[1],last+1)
+  //     const first = last-(count-1)
+  //     const indices = [...Array(last+1).keys()].slice(first)
+  //     console.log({count,last,first,indices})
+  //     window.target.innerHTML = ''
+  //     this.publish("input", "remove", indices)
+  //   } else
+  //   if (text === "/download") {
+  //     if (this.nextdownload) {
+  //       download(...this.nextdownload)
+  //     } else {
+  //       const poems = [...window.beamlist.querySelectorAll('input[type=checkbox]:checked')]
+  //         .map(e => this.beam()[+e.value])
+  //       const poem = composite(poems)
+  //       const filename = poems
+  //         .map(poem => poem.name.replace(/[^a-zA-Z0-9]/g,''))
+  //         .filter(uniq).sort().join('-') + '.graph.json'
+  //       download(poem.graph.stringify(null,2),filename,'application/json')
+  //     }
+  //   } else
+  //   if (text === "/cypher") {
+  //     const poems = [...window.beamlist.querySelectorAll('input[type=checkbox]:checked')]
+  //       .map(e => this.beam()[+e.value])
+  //     const poem = composite(poems)
+  //     const cypher = becypher(poem.graph)
+  //     const filename = poems
+  //       .map(poem => poem.name.replace(/[^a-zA-Z0-9]/g,''))
+  //       .filter(uniq).sort().join('-') + '.cypher'
+  //     download(cypher,filename,'application/x-cypher')
+  //   } else
+  //   if (text === "/export") {
+  //     const stream = this.beam().map(item => JSON.stringify(item)).join("\n")
+  //     const date = new Date().toISOString().split('T')[0]
+  //     download(stream,`${date}Z.jsonl`,'application/json')
+  //   } else
+  //   if (text === "/schema") {
+  //     const poems = [...window.beamlist.querySelectorAll('input[type=checkbox]:checked')]
+  //       .map(e => this.beam()[+e.value])
+  //     const nodes = []
+  //     const rels = []
+  //     const newnid = n => {
+  //       let nid = nodes.findIndex(node => node.type === n.type)
+  //       if (nid == -1) {
+  //         nid = nodes.length
+  //         nodes.push({type:n.type,in:[],out:[],props:{}})
+  //       }
+  //       for (const key of Object.keys(n.props)) {nodes[nid].props[key]=''}
+  //       return nid
+  //     }
+  //     const newrid = (r,from,to) => {
+  //       let rid = rels.findIndex(rel => rel.type === r.type)
+  //       if (rid == -1) {
+  //         rid = rels.length
+  //         rels.push({type:r.type,from,to,props:{}})
+  //       }
+  //       for (const key of Object.keys(r.props)) {rels[rid].props[key]=''}
+  //       return rid
+  //     }
+  //     for (const poem of poems) {
+  //       for (const rel of poem.graph.rels) {
+  //         const f = newnid(poem.graph.nodes[rel.from])
+  //         const t = newnid(poem.graph.nodes[rel.to])
+  //         const r = newrid(rel,f,t)
+  //         nodes[f].out.push(r)
+  //         nodes[t].in.push(r)
+  //       }
+  //     }
+  //     this.nextdownload = [new Graph(nodes,rels).stringify(null,2),'target.schema.json', 'application/json']
+  //     const tip = props => Object.entries(props).map(e => `${e[0]}: ${e[1]}`).join("\n")
+  //     const dotn = nodes
+  //       .map(node => `"${node.type}" [tooltip="${tip(node.props)}"]`)
+  //     const dotr = rels
+  //       .map(rel => `"${nodes[rel.from].type}" -> "${nodes[rel.to].type}" [label="${rel.type}" labeltooltip="${tip(rel.props)}"]`)
+  //     const dot = ['node [shape=box style=filled fillcolor=palegreen]',...dotn, ...dotr]
+  //     hpccWasm.graphviz.layout(`digraph {${dot.join("\n")}}`, "svg", "dot").then(svg => {
+  //       target.innerHTML = svg;
+  //     })
+  //   } else
+  //   if (text.startsWith("/match")) {
+  //     const tree = cypher.parse(text.slice(1))
+  //     if(!tree[0][0]) {
+  //       return setTimeout(() => {window.textIn.value = `/${cypher.left}`},100)
+  //     }
+  //     const code = cypher.gen(0,tree[0][0],{})
+  //     const inputs = [...window.beam.querySelectorAll('input[type=checkbox]')]
+  //     this.model.beam.forEach((poem,i) => {
+  //       inputs[i].checked = !!(cypher.apply(poem.graph,code).length)
+  //     })
+  //     window.dochoose({})
+  //   }
+  //   this.publish("input", "newPost", {viewId: this.viewId, nick:'system', chat:text});
+  // }
 
   newPoems(poems) {
     poems.forEach(poem => poem.date = Date.now())
@@ -877,14 +865,14 @@ class BeamView {
   }
 
   refreshViewInfo() {
-    console.log('users', this.model.participants, 'at', new Date().toLocaleTimeString())
-    members.innerText = [...this.model.views.values()].join(" ")
+    // console.log('users', this.model.participants, 'at', new Date().toLocaleTimeString())
+    // members.innerText = [...this.model.views.values()].join(" ")
   }
 
   refreshHistory() {
-    textOut.innerHTML = this.model.history
-      .map(item => `${item.nick}: ${item.chat}`).join("<br>");
-    textOut.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
+    // textOut.innerHTML = this.model.history
+    //   .map(item => `${item.nick}: ${item.chat}`).join("<br>");
+    // textOut.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
   }
 
   refreshBeam() {
