@@ -42,7 +42,7 @@
         Browsing Relations</a>
     </div>
   </div>
-  <div id=floater style="position:absolute; border:1px solid; background-color:white; overflow-wrap:break-word; padding:4px; width:200px; height:200px;" data-cid="" hidden>
+<!--   <div id=floater style="position:absolute; border:1px solid; background-color:white; overflow-wrap:break-word; padding:4px; width:200px; height:200px;" data-cid="" hidden>
     <svg viewBox="0 0 100 100">
       <polyline
         id="grid"
@@ -57,7 +57,7 @@
         stroke-linejoin="round"/>
     </svg>
     <div id=controls></div>
-  </div>
+  </div> -->
 </main>
 
 <!-- <script src="https://unpkg.com/@croquet/croquet"></script> -->
@@ -172,14 +172,14 @@
   }
 
   let drawing = false
-  let siminterval = null
+  // let siminterval = null
   let panSVG = null
   const panZoom = {}
   async function display(chosen) {
     if(!drawing){
       drawing = true
-      if (siminterval) clearInterval(siminterval)
-      floater.hidden = true
+      // if (siminterval) clearInterval(siminterval)
+      // floater.hidden = true
       const complex = composite(chosen)
       try {
         if (document.querySelector('#target svg')) {
@@ -238,10 +238,10 @@
           console.log(pick.index, pick.name, cid, nid, name(n))
           window.props = complex.graph.nodes[cid].props
           window.save = () => croquet.view.updatePoem(pick.index,pick.graph,"*")
-          floater.style.left = event.clientX+5
-          floater.style.top = event.clientY+5
-          growing.setAttribute('points','100,100')
-          floater.dataset.cid = cid
+          // floater.style.left = event.clientX+5
+          // floater.style.top = event.clientY+5
+          // growing.setAttribute('points','100,100')
+          // floater.dataset.cid = cid
           const slide = () => `<input type=range min=0 max=100 value=50 style="width: 100%">`
           const nslide = (n,p) => n.props.hasOwnProperty(p) ? `${n.props.name} ${p}: <span>${n.props[p]}</span>${slide()}` : ''
           const rslide = (r,rate) => r.props.hasOwnProperty(rate) ? `${r.type} ${rate}: <span>${r.props[rate]}</span>${slide()}` : ''
@@ -250,45 +250,45 @@
             ${n.in.map(rid => {const r = g.rels[rid]; return rslide(r,'orate')}).join('')}
             ${n.out.map(rid => {const r = g.rels[rid]; return rslide(r,'irate')}).join('')}
           `
-          floater.hidden=false
+          // floater.hidden=false
         })
         // nodes[cid].addEventListener('mouseleave',event => {
         //   floater.hidden=true
         // })
       }
-      const tick = (nid,value) => {
-        if(+(floater.dataset.cid) == +nid) {
-          let points = growing.getAttribute('points')
-          let samples = points.split(' ')
-            .map(pair => {
-              let [x,y] = pair.split(',')
-              return [x-1,y].join(',')
-            })
-          if (samples.length >= 100) samples.shift()
-          samples.push([100,100-Math.max(0,Math.min(100,value))].join(','))
-          growing.setAttribute('points', samples.join(' '))
+      // const tick = (nid,value) => {
+      //   if(+(floater.dataset.cid) == +nid) {
+      //     let points = growing.getAttribute('points')
+      //     let samples = points.split(' ')
+      //       .map(pair => {
+      //         let [x,y] = pair.split(',')
+      //         return [x-1,y].join(',')
+      //       })
+      //     if (samples.length >= 100) samples.shift()
+      //     samples.push([100,100-Math.max(0,Math.min(100,value))].join(','))
+      //     growing.setAttribute('points', samples.join(' '))
 
-        }
-      }
+      //   }
+      // }
 
       // siminterval = sim.start(nodes,complex.graph,tick);
-      [...target.querySelectorAll('a')]
-        .filter(n=>n.textContent.match(/☑|☐/))
-        .map(n => {
-          n.addEventListener('click',event => {
-            event.preventDefault()
-            event.stopPropagation()
-            const texts = n.querySelectorAll('text')
-            texts.forEach(text => {
-              if (text.textContent.match(/☐/))
-                text.textContent = text.textContent.replace('☐','☑')
-              else
-                text.textContent = text.textContent.replace('☑','☐')
-            })
-            clearInterval(siminterval)
-            siminterval = sim.start(nodes,complex.graph,tick)
-          })
-        })
+      // [...target.querySelectorAll('a')]
+      //   .filter(n=>n.textContent.match(/☑|☐/))
+      //   .map(n => {
+      //     n.addEventListener('click',event => {
+      //       event.preventDefault()
+      //       event.stopPropagation()
+      //       const texts = n.querySelectorAll('text')
+      //       texts.forEach(text => {
+      //         if (text.textContent.match(/☐/))
+      //           text.textContent = text.textContent.replace('☐','☑')
+      //         else
+      //           text.textContent = text.textContent.replace('☑','☐')
+      //       })
+      //       clearInterval(siminterval)
+      //       siminterval = sim.start(nodes,complex.graph,tick)
+      //     })
+      //   })
     } else {
       console.log('display: skipping', chosen)
     }
