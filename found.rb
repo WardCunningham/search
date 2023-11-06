@@ -3,7 +3,7 @@
 
 time = ARGV[0] || `date -u +%a-%H00`.chomp
 
-# Index ► Ruby:found ► read Sites:dir ► read Retired:dir
+# Index ► Ruby:found ► read Sites:sites.txt ► read Retired:dir
 have = `ls sites retired`
 want = File.read('sites.txt')
 
