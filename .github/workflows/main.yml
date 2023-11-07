@@ -17,10 +17,12 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y graphviz
-      - name: Run a multi-line script
+      - name: Make Diagrams from Annotations
         run: |
           ruby doxref.rb
           cat README.graph.jsonl | ruby makesvg.rb
+      - name: Checkin Changed Graphs
+        run: |
           echo -- checkin --
           git config --global user.email "ward@c2.com"
           git config --global user.name "Ward Cunningham"
