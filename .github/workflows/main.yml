@@ -20,7 +20,7 @@ jobs:
       - name: Make Graphs from Annotations
         run: ruby doxref.rb
       - name: Make Diagrams from Graphs
-        run: cat README.graph.jsonl | ruby makesvg.rb
+        run: cat README*.graph.jsonl | ruby makesvg.rb
       - name: Checkin Graphs and Diagrams
         run: |
           git config --global user.email "ward@c2.com"
