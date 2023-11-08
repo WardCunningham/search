@@ -25,7 +25,7 @@ jobs:
         run: |
           git config --global user.email "ward@c2.com"
           git config --global user.name "Ward Cunningham"
-          git add README.graph.jsonl
+          git add README*.graph.jsonl
           git add graphs/*.svg
           if git diff --cached --exit-code >/dev/null
             then
