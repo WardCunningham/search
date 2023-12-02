@@ -75,7 +75,6 @@
   // import * as sim from './sim.js'
 
   const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
-  const params = Object.fromEntries(new URLSearchParams(location.search).entries())
 
   const creating = {
     index: -1,
@@ -957,8 +956,7 @@ function download(string, file, mime='text/json') {
 
 croquet.view = new BeamView(croquet.model)
 
-if(params.read) {
-  const text = await fetch(params.read).then(res => res.text())
+function addLines (text) {
   text.trim().split(/\n/).forEach(async line => {
     const {name,graph} = JSON.parse(line)
     croquet.view.newPoems([{name,graph:inst(graph)}])
@@ -966,6 +964,19 @@ if(params.read) {
   })
 }
 
+const params = new URLSearchParams(location.search)
+for(const [param,string] of params) {
+  switch (param) {
+    case 'read':
+      addLines(await fetch(string).then(res => res.text()))
+      break
+    case 'add':
+      addLines(atob(string))
+      break
+    default:
+      console.log("Can't handle param named", param)/URLSearchParams
+  }
+}
 
 </script>
 </body>
