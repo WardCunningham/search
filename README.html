@@ -964,6 +964,15 @@ function addLines (text) {
   })
 }
 
+function addGraphs (graphs) {
+  graphs.forEach(async graphx => {
+    // const {name,graph} = graphx
+    console.log({graphx})
+    croquet.view.newPoems(graphx.map(({name,graph}) => ({name,graph:inst(graph)})))
+    await delay(60)
+  })
+}
+
 const params = new URLSearchParams(location.search)
 for(const [param,string] of params) {
   switch (param) {
@@ -972,6 +981,13 @@ for(const [param,string] of params) {
       break
     case 'add':
       addLines(atob(string))
+      break
+    case 'scan':
+      const page = await fetch(string).then(res => res.json())
+      console.log({string,page})
+      const graphs = page.story.find(item => item.graphs).graphs
+      console.log({graphs})
+      addGraphs(graphs)
       break
     default:
       console.log("Can't handle param named", param)/URLSearchParams
