@@ -984,10 +984,28 @@ for(const [param,string] of params) {
       break
     case 'scan':
       const page = await fetch(string).then(res => res.json())
-      console.log({string,page})
       const graphs = page.story.find(item => item.graphs).graphs
-      console.log({graphs})
       addGraphs(graphs)
+      break
+    case 'assets':
+      const page2 = await fetch(string).then(res => res.json())
+      const items = page2.story.filter(item => item.type == 'assets')
+      const assets = await Promise.all(items.map(item =>{
+        const host = string.split('/').slice(0,-1).join('/')
+        const folder = item.text.split("\n")[0]
+        const url = `${host}/plugin/assets/list?assets=${folder}`
+        return fetch(url)
+          .then(req => req.json())
+          .then(list => list.files
+            .filter(file => file.endsWith('.graph.json'))
+            .map(file => `${host}/assets/${folder}/${file}`))
+      }))
+      const files = assets.flat()
+      const graphs2 = await Promise.all(files.map(asset =>
+        fetch(asset)
+          .then(req => req.json())
+          .then(graph => ({name:graph.nodes[0].props.name,graph}))))
+      addGraphs([graphs2])
       break
     default:
       console.log("Can't handle param named", param)/URLSearchParams
