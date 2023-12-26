@@ -40,7 +40,7 @@
     <div style="padding:16px; font-size:large;">Learn more about<br>
       <a href=http://search.dojo.fed.wiki/solo-super-collaborator.html target=_blank>
         Browsing Relations</a>
-    </div>
+      <p><button onclick=dogroup(event)>group</button></p>
   </div>
 <!--   <div id=floater style="position:absolute; border:1px solid; background-color:white; overflow-wrap:break-word; padding:4px; width:200px; height:200px;" data-cid="" hidden>
     <svg viewBox="0 0 100 100">
@@ -533,6 +533,7 @@ function dotify(complex) {
     .map(node => node.props.emphasis)
     ?.reverse()[0] || {}
   console.log('dotify',emphasis)
+  window.graph = graph
 
   const nodes = graph.nodes.map((node,id) => {
     const icon = node.props.url ? " 🔗" : node.props.tick ? " ☐" : ""
@@ -1010,6 +1011,37 @@ for(const [param,string] of params) {
     default:
       console.log("Can't handle param named", param)/URLSearchParams
   }
+}
+
+window.dogroup = event => {
+  const s=window.target.getBoundingClientRect();
+  const nids = [...window.target.getElementsByClassName('node')]
+    .filter(node=>{
+      const r=node.getBoundingClientRect();
+      return r.x>s.x && r.x+r.width<s.x+s.width &&
+         r.y>s.y && r.y+r.height<s.y+s.height})
+    .map(node=>+node.querySelector('title').textContent)
+  console.log('nids',...nids)
+  const rids = window.graph.rels
+    .map((rel,i) => nids.includes(rel.from) && nids.includes(rel.to) ? i : null)
+    .filter(rid => rid !== null)
+  console.log('rids',...rids)
+  const nodes = nids.map(nid => {
+    const node = window.graph.nodes[nid]
+    node.in = node.in.map(rid => rids.indexOf(rid)).filter(rid => rid >= 0)
+    node.out = node.out.map(rid => rids.indexOf(rid)).filter(rid => rid >= 0)
+    return node
+  })
+  const rels = rids.map(rid => {
+    const rel = window.graph.rels[rid]
+    rel.from = nids.indexOf(rel.from)
+    rel.to = nids.indexOf(rel.to)
+    return rel
+  })
+  const graph = new Graph(nodes,rels)
+  const name = new Date().toLocaleTimeString()
+  console.log(name,graph)
+  croquet.view.newPoems([{name,graph}])
 }
 
 </script>
