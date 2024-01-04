@@ -14,12 +14,15 @@ jobs:
         with:
           ruby-version: 3.1.2
       - name: Setup Graphviz
-        uses: ts-graphviz/setup-graphviz@v1
-      - name: Run a multi-line script
         run: |
-          ruby doxref.rb
-          cat README.graph.jsonl | ruby makesvg.rb
-          echo -- checkin --
+          sudo apt-get update
+          sudo apt-get install -y graphviz
+      - name: Make Graphs from Annotations
+        run: ruby doxref.rb
+      - name: Make Diagrams from Graphs
+        run: cat README.graph.jsonl | ruby makesvg.rb
+      - name: Checkin Graphs and Diagrams
+        run: |
           git config --global user.email "ward@c2.com"
           git config --global user.name "Ward Cunningham"
           git add README.graph.jsonl

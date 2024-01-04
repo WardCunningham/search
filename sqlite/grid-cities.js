@@ -11,12 +11,16 @@ console.log(cities.slice(0,4))
 const fields = {}
 const squares = {}
 for (const [city,pop,geo] of cities) {
+  const {name,state} = city
+  if(!state) continue
+  if(!state)console.log({city,pop,geo})
+  const row = () => `${name}, ${state.split(',')[0]}, ${Object.values(geo).join(", ")}`
   const alpha = (deg,max) => 'ABCDEFGHIJKLMNOPQR'[Math.floor(18*(deg+max)/(2*max))]||'?'
   const numeric = (deg,span) => '0123456789'[Math.floor(deg%span/span*10)]||`?`
   const field = `${alpha(geo.lon,180)}${alpha(geo.lat,90)}`
-  if(!(field in fields)) fields[field] = `${Object.values(city).join(", ")}`
+  if(!(field in fields)) fields[field] = row()
   const square = `${field}${numeric(geo.lon+180,20)}${numeric(geo.lat+90,10)}`
-  if(!(square in squares)) squares[square] = `${Object.values(city).join(", ")}`
+  if(!(square in squares)) squares[square] = row()
 }
 
 await save(fields, `fields-${region}.json`)
