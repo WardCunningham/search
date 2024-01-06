@@ -245,6 +245,11 @@ get '/traffic/:days' do |days|
   `cd ~/FedWiki/assets/pages/spark-records; sh traffic.sh #{days||'2'}`
 end
 
+get '/spark/log' do
+  content_type 'text/plain'
+  `tail ../assets/pages/spark-records/spark.log`
+end
+
 get '/wanted/:days/:top' do |days,top|
   content_type 'text/plain'
   headers 'Access-Control-Allow-Origin' => '*'
