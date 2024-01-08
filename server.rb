@@ -198,6 +198,15 @@ get '/owner/:owner' do |owner|
   `perl owner.pl #{owner}`
 end
 
+get '/links/site-web.json' do
+  `cat public/site-web.json`
+end
+
+get '/links/:from/:to' do |from,to|
+  content_type 'text/plain'
+  `cd sites/#{from}; grep '^#{to}$' pages/*/sites.txt | cut -d / -f 2`
+end
+
 get '/logs/online' do
   content_type 'text/plain'
   `perl online.pl`
