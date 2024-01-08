@@ -1,4 +1,5 @@
 require 'json'
+require 'date'
 
 @links = {}
 @pages = {}
@@ -8,7 +9,10 @@ def read
   Dir.new('sites').each do |site|
     next if site.match /^\./
     next unless Dir.exists?("sites/#{site}/pages")
-    @pages[site] = Dir["sites/#{site}/pages/*"].size
+    next if (Date.today - File.mtime("sites/#{site}/pages").to_date).to_i > 365
+    size = Dir["sites/#{site}/pages/*"].size
+    next if size < 10
+    @pages[site] = size
     next unless File.exist?("sites/#{site}/sites.txt")
     @links[site] = File.readlines("sites/#{site}/sites.txt").map(&:chomp)
   end

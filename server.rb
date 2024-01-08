@@ -198,6 +198,15 @@ get '/owner/:owner' do |owner|
   `perl owner.pl #{owner}`
 end
 
+get '/links/site-web.json' do
+  `cat public/site-web.json`
+end
+
+get '/links/:from/:to' do |from,to|
+  content_type 'text/plain'
+  `cd sites/#{from}; grep '^#{to}$' pages/*/sites.txt | cut -d / -f 2`
+end
+
 get '/logs/online' do
   content_type 'text/plain'
   `perl online.pl`
@@ -245,6 +254,11 @@ get '/traffic/:days' do |days|
   `cd ~/FedWiki/assets/pages/spark-records; sh traffic.sh #{days||'2'}`
 end
 
+get '/spark/log' do
+  content_type 'text/plain'
+  `tail ../assets/pages/spark-records/spark.log`
+end
+
 get '/wanted/:days/:top' do |days,top|
   content_type 'text/plain'
   headers 'Access-Control-Allow-Origin' => '*'
@@ -282,6 +296,6 @@ get /\/light\/(on|off|red|green|blue|white)/ do |c|
 end
 
 get '/spots-ota/:activity' do |activity|
-  query = "select substr(time,11,3), count(*) from spots where msg like \"CQ VOTA %\" group by substr(time,11,3);"
-  `cd sqlite; sqlite3 spots '#{query}'`
+  content_type 'text/plain'
+  `cd sqlite; sh ota.sh '#{activity}'`
 end
