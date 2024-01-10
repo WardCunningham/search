@@ -49,9 +49,7 @@ path.arc {
     </style>
   </head>
   <body>
-    <h2 id=wikisite>
-    </h2>
-    <div style="position:absolute;top:0;font-size:18px;">tension: <input style="position:relative;top:3px;" type="range" min="0" max="100" value="75"></div>
+    <div style="position:absolute;top:0;font-size:18px;">tension: <input style="position:relative;top:3px;" type="range" min="0" max="100" value="75"><p id=wikisite></p></div>
     <script type="text/javascript" src="d3/d3.js"></script>
     <script type="text/javascript" src="d3/d3.layout.js"></script>
     <script type="text/javascript" src="packages.js"></script>
@@ -173,7 +171,7 @@ function mouseup() {
 }
 
 function mouseover(d) {
-  wikisite.innerHTML = `<font size=18><b>${d.name}</b></font>`
+  wikisite.innerHTML = `<b>${d.name}</b>`
   svg.selectAll("path.link.target-" + d.key)
       .classed("target", true)
       .each(updateNodes("source", true));
