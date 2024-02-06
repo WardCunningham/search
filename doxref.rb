@@ -5,11 +5,16 @@ require 'set'
 
 puts "-- files --"
 lines = []
-Dir.glob ['*.sh','*.rb'] do |file|
+Dir.glob ['*.sh','*.rb','*.html'] do |file|
+  if file.end_with?('.html')
+    comment = /^\/\//
+  else
+    comment = /^#/
+  end
   have = Set.new()
   script = File.read(file).split(/\n/)
   script.each_with_index do |line, index|
-    next unless line.match(/^#/)
+    next unless line.match(comment)
     if line.include? "►"
       com, sys, *rest = line .split(/\s+/)
       codes = rest.join(" ").split(/ *► */).drop(1)
