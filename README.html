@@ -44,40 +44,15 @@
         <button onclick=dogroup(event)>group</button>
         <button onclick=dodownload(event)>download</button></p>
   </div>
-<!--   <div id=floater style="position:absolute; border:1px solid; background-color:white; overflow-wrap:break-word; padding:4px; width:200px; height:200px;" data-cid="" hidden>
-    <svg viewBox="0 0 100 100">
-      <polyline
-        id="grid"
-        points="0,0 0,100 100,100 100,0 0,0"
-        stroke="#ccc" fill="none"/>
-      <polyline
-        id="growing"
-        points="100,100"
-        fill="none"
-        stroke="brown"
-        stroke-width=".5"
-        stroke-linejoin="round"/>
-    </svg>
-    <div id=controls></div>
-  </div> -->
 </main>
 
-<!-- <script src="https://unpkg.com/@croquet/croquet"></script> -->
 <script type=module>
 
   const croquet = {}
 
-  // import {Graph} from './graph.js'
-  // import {drop,dropl,dropu} from './drop.js'
-  // import {composite} from './composite.js'
-  // import {dotify} from './dotify.js'
-  // import {hoverbold} from './hoverbold.js'
-  // import * as injector from './create.js'
-  // import {BeamModel, BeamView, croquet} from './beam.js'
-  // import * as sim from './sim.js'
-
   const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
+// Croquet ► Module:creating ► start View:beam
   const creating = {
     index: -1,
     start: (graph) => {
@@ -92,12 +67,12 @@
       creating.index = -1
     }
   }
-  // injector.create(window.create, creating)
 
   window.over = function (event) {
     event.preventDefault()
   }
 
+// Drop ► Window:drop ► add View:beam
   window.drop = async function (event) {
     event.preventDefault();
     switch (event.target.closest('div[ondrop]').id) {
@@ -132,15 +107,12 @@
     }
   }
 
-  // let event = new CustomEvent('target', {detail:{nodes,rels}})
-  // window.dispatchEvent(event)
   const inst = ({nodes,rels}) => {return new Graph(nodes, rels)}
   window.addEventListener('target',event => {
     const graph = inst(event.detail)
     croquet.view.nextdownload = [graph.stringify(null,2), 'target.graph.json', 'application/json']
     display([{name:'target',graph}])
   })
-
 
   window.dochoose = function (event) {
     croquet.view.nextdownload = null
@@ -179,8 +151,6 @@
   async function display(chosen) {
     if(!drawing){
       drawing = true
-      // if (siminterval) clearInterval(siminterval)
-      // floater.hidden = true
       const complex = composite(chosen)
       try {
         if (document.querySelector('#target svg')) {
@@ -219,94 +189,38 @@
         console.log('display error', err)
         drawing = false
       }
-      await delay(500);
-      const nodes = Object.fromEntries([...target.querySelectorAll('.node')]
-        .map(node => [node.querySelector('title').textContent,node]))
-      const neq = (a,b) => a.type == b.type && a.props.name == b.props.name
-      const name = node => `${node.type}:${node.props.name}`
-      for(const cid in nodes){
-        if(complex.graph.nodes[cid].type != 'Variable') break
-        nodes[cid].addEventListener('click',event => {
-          event.preventDefault()
-          event.stopPropagation()
-          const picks = chosen.filter(entry =>
-            entry.graph.nodes.find(node =>
-              neq(node, complex.graph.nodes[cid])))
-          const pick = picks[0]
-          const nid = pick.graph.nodes.findIndex(node => neq(node,complex.graph.nodes[cid]))
-          const g = complex.graph
-          const n = g.nodes[cid]
-          console.log(pick.index, pick.name, cid, nid, name(n))
-          window.props = complex.graph.nodes[cid].props
-          window.save = () => croquet.view.updatePoem(pick.index,pick.graph,"*")
-          // floater.style.left = event.clientX+5
-          // floater.style.top = event.clientY+5
-          // growing.setAttribute('points','100,100')
-          // floater.dataset.cid = cid
-          const slide = () => `<input type=range min=0 max=100 value=50 style="width: 100%">`
-          const nslide = (n,p) => n.props.hasOwnProperty(p) ? `${n.props.name} ${p}: <span>${n.props[p]}</span>${slide()}` : ''
-          const rslide = (r,rate) => r.props.hasOwnProperty(rate) ? `${r.type} ${rate}: <span>${r.props[rate]}</span>${slide()}` : ''
-          controls.innerHTML = `<p>
-            ${['wax','wane'].map(p => nslide(n,p)).join('')}
-            ${n.in.map(rid => {const r = g.rels[rid]; return rslide(r,'orate')}).join('')}
-            ${n.out.map(rid => {const r = g.rels[rid]; return rslide(r,'irate')}).join('')}
-          `
-          // floater.hidden=false
-        })
-        // nodes[cid].addEventListener('mouseleave',event => {
-        //   floater.hidden=true
-        // })
-      }
-      // const tick = (nid,value) => {
-      //   if(+(floater.dataset.cid) == +nid) {
-      //     let points = growing.getAttribute('points')
-      //     let samples = points.split(' ')
-      //       .map(pair => {
-      //         let [x,y] = pair.split(',')
-      //         return [x-1,y].join(',')
-      //       })
-      //     if (samples.length >= 100) samples.shift()
-      //     samples.push([100,100-Math.max(0,Math.min(100,value))].join(','))
-      //     growing.setAttribute('points', samples.join(' '))
-
-      //   }
-      // }
-
-      // siminterval = sim.start(nodes,complex.graph,tick);
-      // [...target.querySelectorAll('a')]
-      //   .filter(n=>n.textContent.match(/☑|☐/))
-      //   .map(n => {
-      //     n.addEventListener('click',event => {
-      //       event.preventDefault()
-      //       event.stopPropagation()
-      //       const texts = n.querySelectorAll('text')
-      //       texts.forEach(text => {
-      //         if (text.textContent.match(/☐/))
-      //           text.textContent = text.textContent.replace('☐','☑')
-      //         else
-      //           text.textContent = text.textContent.replace('☑','☐')
-      //       })
-      //       clearInterval(siminterval)
-      //       siminterval = sim.start(nodes,complex.graph,tick)
-      //     })
-      //   })
+      // await delay(500);
+      // const nodes = Object.fromEntries([...target.querySelectorAll('.node')]
+      //   .map(node => [node.querySelector('title').textContent,node]))
+      // const neq = (a,b) => a.type == b.type && a.props.name == b.props.name
+      // const name = node => `${node.type}:${node.props.name}`
+      // for(const cid in nodes){
+      //   if(complex.graph.nodes[cid].type != 'Variable') break
+      //   nodes[cid].addEventListener('click',event => {
+      //     event.preventDefault()
+      //     event.stopPropagation()
+      //     const picks = chosen.filter(entry =>
+      //       entry.graph.nodes.find(node =>
+      //         neq(node, complex.graph.nodes[cid])))
+      //     const pick = picks[0]
+      //     const nid = pick.graph.nodes.findIndex(node => neq(node,complex.graph.nodes[cid]))
+      //     const g = complex.graph
+      //     const n = g.nodes[cid]
+      //     console.log(pick.index, pick.name, cid, nid, name(n))
+      //     window.props = complex.graph.nodes[cid].props
+      //     window.save = () => croquet.view.updatePoem(pick.index,pick.graph,"*")
+      //     const slide = () => `<input type=range min=0 max=100 value=50 style="width: 100%">`
+      //     const nslide = (n,p) => n.props.hasOwnProperty(p) ? `${n.props.name} ${p}: <span>${n.props[p]}</span>${slide()}` : ''
+      //     const rslide = (r,rate) => r.props.hasOwnProperty(rate) ? `${r.type} ${rate}: <span>${r.props[rate]}</span>${slide()}` : ''
+      //     controls.innerHTML = `<p>
+      //       ${['wax','wane'].map(p => nslide(n,p)).join('')}
+      //       ${n.in.map(rid => {const r = g.rels[rid]; return rslide(r,'orate')}).join('')}
+      //       ${n.out.map(rid => {const r = g.rels[rid]; return rslide(r,'irate')}).join('')}
+      //     `
     } else {
       console.log('display: skipping', chosen)
     }
   }
-
-
-  // const session = await Croquet.Session.join({
-  //   apiKey: '1MNinyGopbyxFzgx3HupBoCAryFb6yNOIihx6Omx9',
-  //   appId: 'com.gmail.ward.cunningham.collaborator',
-  //   name: params.name || "unnamed",
-  //   password: "secret",
-  //   model: BeamModel,
-  //   view: BeamView
-  // })
-  // console.log(session)
-
-// Class Graph
 
 const uniq = (value, index, self) => self.indexOf(value) === index
 
@@ -356,11 +270,6 @@ class Graph {
     return Graph.load(obj)
   }
 
-  // static async import(path) {
-  //   let module = await import(path, {assert: {type: "json"}})
-  //   return Graph.load(module.default)
-  // }
-
   n(type=null, props={}) {
     let nids = Object.keys(this.nodes).map(key => +key)
     if (type) nids = nids.filter(nid => this.nodes[nid].type == type)
@@ -368,12 +277,6 @@ class Graph {
     return new Nodes(this, nids)
   }
 
-  /**
-   * Converts a graph to a JavaScript Object Notation (JSON) string using JSON.stringify.
-   @param - replacer A function that transforms the results.
-   @param - space Adds indentation, white space, and line break characters to the return-
-   * @returns {string} JSON string containing serialized graph
-  */
   stringify(...args) {
     const obj = { nodes: this.nodes, rels: this.rels }
     return JSON.stringify(obj, ...args)
@@ -490,7 +393,6 @@ function composite(concepts) {
         each.type == node.type &&
         each.props.name == node.props.name)
       if(match) {
-        // window.result.innerHTML += `Same <b>${match.type}</b> ${match.props.name}<br>`
         nids[id] = comp.nodes.findIndex(node => node === match)
         merged.nids.push(nids[id])
         mergeprops(match.props, node.props)
@@ -505,10 +407,6 @@ function composite(concepts) {
         each.to == nids[rel.to]
       )
       if(match) {
-        // window.result.innerHTML += `Same
-        //   <b>${comp.nodes[match.from].type}</b> ${comp.nodes[match.from].props.name}
-        //   <b>${match.type}</b> ▷
-        //   ${comp.nodes[match.to].type} ${comp.nodes[match.to].props.name}<br>`
         mergeprops(match.props, rel.props)
       } else {
         rel.props.source = source
@@ -620,14 +518,6 @@ class BeamModel {
     this.beam = []; //{name, graph}
     this.lastPostTime = null;
     this.inactivity_timeout_ms = 60 * 1000 * 20; // constant
-    // this.subscribe(this.sessionId, "view-join", this.viewJoin);
-    // this.subscribe(this.sessionId, "view-exit", this.viewExit);
-    // this.subscribe("input", "newName", this.newName);
-    // this.subscribe("input", "newPost", this.newPost);
-    // this.subscribe("input", "reset", this.resetHistory);
-    // this.subscribe("input", "remove", this.removePoems);
-    // this.subscribe("input", "newPoems", this.addToBeam);
-    // this.subscribe("input", "updatePoem", this.updatePoem);
     croquet.model = this
   }
 
@@ -730,131 +620,12 @@ class BeamView {
     croquet.view = this
     this.recall = []
     this.nextdownload = null
-    // textIn.addEventListener('keydown', (event) => {if(event.keyCode==38) {textIn.value = this.recall.pop()||''}})
-    // sendButton.onclick = () => {this.send(textIn.value); textIn.value = "";};
-    // this.subscribe("history", "refresh", this.refreshHistory);
-    // this.subscribe("viewInfo", "refresh", this.refreshViewInfo);
-    // this.subscribe("beam", "refresh", this.refreshBeam);
     this.refreshHistory();
     this.refreshViewInfo();
     this.refreshBeam()
     beam.addEventListener('keydown',this.narrowBeam)
     beam.addEventListener('keyup',this.narrowBeam)
-    // loginButton.addEventListener('click', event => this.newFace(this,event))
-
-    // if (model.participants === 1 &&
-    //   !model.history.find(item => item.viewId === this.viewId)) {
-    //   this.publish("input", "reset", "for new user");
-    // }
-    // const m = document.cookie.match(/\bface=(\d+)\b/)
-    // if (m) this.publish('input','newName',{viewId:this.viewId, nickname:emoji[+m[1]]})
   }
-
-  // send(text) {
-  //   if (text.startsWith('/')) this.recall.push(text)
-  //   if (text === "/reset") {
-  //     this.publish("input", "reset", "at user request");
-  //   } else
-  //   if (text === "/remove") {
-  //     const indices = [...window.beamlist.querySelectorAll('input[type=checkbox]:checked')]
-  //       .map(e => +e.value)
-  //     window.target.innerHTML = ''
-  //     this.publish("input", "remove", indices)
-  //   } else
-  //   if (text.match(/^\/remove (\d+)$/)) {
-  //     const last = this.beam().length-1
-  //     const count = Math.min(+text.match(/^\/remove (\d+)$/)[1],last+1)
-  //     const first = last-(count-1)
-  //     const indices = [...Array(last+1).keys()].slice(first)
-  //     console.log({count,last,first,indices})
-  //     window.target.innerHTML = ''
-  //     this.publish("input", "remove", indices)
-  //   } else
-  //   if (text === "/download") {
-  //     if (this.nextdownload) {
-  //       download(...this.nextdownload)
-  //     } else {
-  //       const poems = [...window.beamlist.querySelectorAll('input[type=checkbox]:checked')]
-  //         .map(e => this.beam()[+e.value])
-  //       const poem = composite(poems)
-  //       const filename = poems
-  //         .map(poem => poem.name.replace(/[^a-zA-Z0-9]/g,''))
-  //         .filter(uniq).sort().join('-') + '.graph.json'
-  //       download(poem.graph.stringify(null,2),filename,'application/json')
-  //     }
-  //   } else
-  //   if (text === "/cypher") {
-  //     const poems = [...window.beamlist.querySelectorAll('input[type=checkbox]:checked')]
-  //       .map(e => this.beam()[+e.value])
-  //     const poem = composite(poems)
-  //     const cypher = becypher(poem.graph)
-  //     const filename = poems
-  //       .map(poem => poem.name.replace(/[^a-zA-Z0-9]/g,''))
-  //       .filter(uniq).sort().join('-') + '.cypher'
-  //     download(cypher,filename,'application/x-cypher')
-  //   } else
-  //   if (text === "/export") {
-  //     const stream = this.beam().map(item => JSON.stringify(item)).join("\n")
-  //     const date = new Date().toISOString().split('T')[0]
-  //     download(stream,`${date}Z.jsonl`,'application/json')
-  //   } else
-  //   if (text === "/schema") {
-  //     const poems = [...window.beamlist.querySelectorAll('input[type=checkbox]:checked')]
-  //       .map(e => this.beam()[+e.value])
-  //     const nodes = []
-  //     const rels = []
-  //     const newnid = n => {
-  //       let nid = nodes.findIndex(node => node.type === n.type)
-  //       if (nid == -1) {
-  //         nid = nodes.length
-  //         nodes.push({type:n.type,in:[],out:[],props:{}})
-  //       }
-  //       for (const key of Object.keys(n.props)) {nodes[nid].props[key]=''}
-  //       return nid
-  //     }
-  //     const newrid = (r,from,to) => {
-  //       let rid = rels.findIndex(rel => rel.type === r.type)
-  //       if (rid == -1) {
-  //         rid = rels.length
-  //         rels.push({type:r.type,from,to,props:{}})
-  //       }
-  //       for (const key of Object.keys(r.props)) {rels[rid].props[key]=''}
-  //       return rid
-  //     }
-  //     for (const poem of poems) {
-  //       for (const rel of poem.graph.rels) {
-  //         const f = newnid(poem.graph.nodes[rel.from])
-  //         const t = newnid(poem.graph.nodes[rel.to])
-  //         const r = newrid(rel,f,t)
-  //         nodes[f].out.push(r)
-  //         nodes[t].in.push(r)
-  //       }
-  //     }
-  //     this.nextdownload = [new Graph(nodes,rels).stringify(null,2),'target.schema.json', 'application/json']
-  //     const tip = props => Object.entries(props).map(e => `${e[0]}: ${e[1]}`).join("\n")
-  //     const dotn = nodes
-  //       .map(node => `"${node.type}" [tooltip="${tip(node.props)}"]`)
-  //     const dotr = rels
-  //       .map(rel => `"${nodes[rel.from].type}" -> "${nodes[rel.to].type}" [label="${rel.type}" labeltooltip="${tip(rel.props)}"]`)
-  //     const dot = ['node [shape=box style=filled fillcolor=palegreen]',...dotn, ...dotr]
-  //     hpccWasm.graphviz.layout(`digraph {${dot.join("\n")}}`, "svg", "dot").then(svg => {
-  //       target.innerHTML = svg;
-  //     })
-  //   } else
-  //   if (text.startsWith("/match")) {
-  //     const tree = cypher.parse(text.slice(1))
-  //     if(!tree[0][0]) {
-  //       return setTimeout(() => {window.textIn.value = `/${cypher.left}`},100)
-  //     }
-  //     const code = cypher.gen(0,tree[0][0],{})
-  //     const inputs = [...window.beam.querySelectorAll('input[type=checkbox]')]
-  //     this.model.beam.forEach((poem,i) => {
-  //       inputs[i].checked = !!(cypher.apply(poem.graph,code).length)
-  //     })
-  //     window.dochoose({})
-  //   }
-  //   this.publish("input", "newPost", {viewId: this.viewId, nick:'system', chat:text});
-  // }
 
   newPoems(poems) {
     poems.forEach(poem => poem.date = Date.now())
