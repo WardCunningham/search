@@ -7,6 +7,8 @@ require 'date'
 # Query ► Ruby:server ► serve API:Index
 
 set :bind, '0.0.0.0'
+# https://stackoverflow.com/questions/10509774/sinatra-and-rack-protection-setting
+set :protection, :except => [:json_csrf]
 
 before do
   headers 'Access-Control-Allow-Origin' => '*'
@@ -298,4 +300,9 @@ end
 get '/spots-ota/:activity' do |activity|
   content_type 'text/plain'
   `cd sqlite; sh ota.sh '#{activity}'`
+end
+
+get '/gaps' do
+  content_type 'application/json'
+ `(cd ../assets/pages/esp8266-datalog; deno run --allow-net gaps.js)`
 end
