@@ -72,10 +72,10 @@
     event.preventDefault()
   }
 
-// Drop ► Window:drop ► add View:beam
   window.drop = async function (event) {
     event.preventDefault();
     switch (event.target.closest('div[ondrop]').id) {
+// Drop ► Window:drop ► add View:beam
       case "beam":
         const poems = [
           ...await dropl(event, '.jsonl'),
@@ -92,6 +92,7 @@
         injector.schema((await drop(event, '.schema.json'))[0].graph)
         injector.create(window.create, creating)
         break
+// Drop ► Window:drop ► add View:target
       case "target":
         const poemz = [
           ...await dropl(event, '.jsonl'),
@@ -114,6 +115,7 @@
     display([{name:'target',graph}])
   })
 
+// Click ► View:beam ► add View:target ► recomment View:beam
   window.dochoose = function (event) {
     croquet.view.nextdownload = null
     const checked = [...window.beam.querySelectorAll('input[type=checkbox]:checked')]
@@ -151,9 +153,11 @@
   async function display(chosen) {
     if(!drawing){
       drawing = true
+// Click ► View:beam ► compose Graph:chose
       const complex = composite(chosen)
       try {
         if (document.querySelector('#target svg')) {
+// Click ► Graph:compose ► Graph:dotify
           panZoom.pan = panSVG.getPan()
           panZoom.zoom = panSVG.getZoom()
           panZoom.size = {
@@ -164,6 +168,7 @@
         const dot = dotify(complex)
         window.dot = dot
         hpccWasm.graphviz.layout(window.dot, "svg", "dot").then(svg => {
+// Click ► Graph:ditify ► Target:svg
           target.innerHTML = svg;
           drawing = false
           hoverbold(target)
