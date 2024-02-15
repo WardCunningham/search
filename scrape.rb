@@ -63,7 +63,7 @@ def update site, pageinfo
       story.each do |item|
         next unless text = item['text']
         text.gsub! /[a-zA-Z0-9\+\/]{50,}/,''
-        text.gsub! /<(.|\n)*?>/, '' if item['type'] == 'html'
+        text.gsub! /<(.|\n)*?>/, ' ' if item['type'] == 'html'
         text.gsub! /\[((http|https|ftp):.*?) (.*?)\]/, '\3'
         text.scan /[A-Za-z]+/ do |word|
           word = word.downcase
