@@ -52,52 +52,35 @@
 
   const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
-// Croquet ► Module:creating ► start View:beam
-  const creating = {
-    index: -1,
-    start: (graph) => {
-      creating.index = croquet.view.beam().length
-      croquet.view.newPoems([{name:graph.nodes[0].type+'⋯',graph}])
-    },
-    update: (graph) => {
-      croquet.view.updatePoem(creating.index, graph, '⋯')
-    },
-    finish: (graph) => {
-      croquet.view.updatePoem(creating.index, graph, '')
-      creating.index = -1
-    }
-  }
-
   window.over = function (event) {
     event.preventDefault()
   }
 
   window.drop = async function (event) {
+// Drop ► Window:drop ► run Function:files
     event.preventDefault();
     switch (event.target.closest('div[ondrop]').id) {
-// Drop ► Window:drop ► add View:beam
+// Drop ► Window:drop ► get View:beam
       case "beam":
         const poems = [
           ...await dropl(event, '.jsonl'),
           ...await drop(event, '.graph.json'),
           ...await dropu(event)
         ]
+// Drop ► Window:drop ► run View:newPoems
         for (const poem of poems) {
           croquet.view.newPoems([poem])
           await delay(60)
           console.log('poem',poem)
         }
         break
-      case "create":
-        injector.schema((await drop(event, '.schema.json'))[0].graph)
-        injector.create(window.create, creating)
-        break
-// Drop ► Window:drop ► add View:target
+// Drop ► Window:drop ► get View:target
       case "target":
         const poemz = [
           ...await dropl(event, '.jsonl'),
           ...await drop(event, '.graph.json')
         ]
+// Drop ► Window:drop ► run Display:composite
         const json = composite(poemz).graph.stringify(null,2)
         croquet.view.nextdownload = [json, 'target.graph.json', 'application/json']
         display(poemz)
@@ -115,7 +98,8 @@
     display([{name:'target',graph}])
   })
 
-// Click ► View:beam ► add View:target ► recomment View:beam
+// Select ► View:beam ► add Beam:chosen
+// Select ► View:beam ► recommend View:beam
   window.dochoose = function (event) {
     croquet.view.nextdownload = null
     const checked = [...window.beam.querySelectorAll('input[type=checkbox]:checked')]
@@ -153,11 +137,11 @@
   async function display(chosen) {
     if(!drawing){
       drawing = true
-// Click ► View:beam ► compose Graph:chose
+// Compose ► Display:composite ► get Beam:chosen
       const complex = composite(chosen)
       try {
         if (document.querySelector('#target svg')) {
-// Click ► Graph:compose ► Graph:dotify
+// Format ► Display:composite  ► dotify Display:svg ► calls Graph:dotify
           panZoom.pan = panSVG.getPan()
           panZoom.zoom = panSVG.getZoom()
           panZoom.size = {
@@ -168,7 +152,7 @@
         const dot = dotify(complex)
         window.dot = dot
         hpccWasm.graphviz.layout(window.dot, "svg", "dot").then(svg => {
-// Click ► Graph:ditify ► Target:svg
+// Draw ► Graph:dotify ► set Target:svg
           target.innerHTML = svg;
           drawing = false
           hoverbold(target)
@@ -335,6 +319,8 @@ export async function dropu (event) {
 }
 
 function files(event) {
+// Drop ► Function:files ► get Window:dataTransfer
+
   if (event.dataTransfer.items) {
     return [...event.dataTransfer.items]
       .filter(item => item.kind === 'file')

@@ -67,7 +67,7 @@ lines.each {|line|
   graphs[line[:sys]] = graph
 }
 
-puts "-- systems --"
+puts "-- aspects --"
 File.open("README.graph.jsonl", 'w') { |file|
   graphs.each {|sys,graph|
     puts "#{sys} has #{graph[:nodes].size} nodes, #{graph[:rels].size} relations"
