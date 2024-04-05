@@ -23,8 +23,8 @@ async function allPlugins (doit) {
   }
 }
 
-await allPlugins((file,plugins) =>
-  console.log(file,plugins.join(", ")))
+await allPlugins((site,plugins) =>
+  console.log(site,plugins.join(", ")))
 Deno.exit()
 
 
