@@ -4,11 +4,11 @@
 
 import { DB } from "https://deno.land/x/sqlite@v3.7.0/mod.ts";
 
-async function allPlugins (doit) {
+async function allPlugins (kind,doit) {
   for await (const dir of Deno.readDir("../sites")) {
     if(!dir.isDirectory) continue
     try {
-      const file = await Deno.open(`../sites/${dir.name}/plugins.txt`, {read: true});
+      const file = await Deno.open(`../sites/${dir.name}/${kind}.txt`, {read: true});
       const fileInfo = await file.stat();
       if (fileInfo.isFile) {
         const buf = new Uint8Array(10000);
@@ -23,28 +23,41 @@ async function allPlugins (doit) {
   }
 }
 
-await allPlugins((site,plugins) =>
-  console.log(site,plugins.join(", ")))
-Deno.exit()
+// await allPlugins('plugins', (site,plugins) => {
+//   console.log(site)
+//   console.log(plugins.join(", "))
+//   console.log('------------')
+// })
+// await allPlugins('items', (site,items) => {
+//   console.log(site)
+//   console.log(items.join(", "))
+//   console.log('------------')
+// })
+// Deno.exit()
 
 
-  // Open a database to be held in a file
-  const db = new DB("plugins.db"); 
-  db.execute(`
+// Open a database to be held in a file
+const db = new DB("sites.db");
+db.execute(`
   CREATE TABLE IF NOT EXISTS sites (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    site TEXT
-    plugin TEXT
+    site TEXT,
+    plugin TEXT,
+    item TEXT
   )`);
 
-  // Insert data within a transaction
+// Insert data within a transaction
+const kind = 'plugin'
+await allPlugins(kind+'s', (site,data) => {
+  console.log(site)
   db.transaction(() => {
-    for (const name of ["Peter Parker", "Clark Kent", "Bruce Wayne"]) {
-      db.query("INSERT INTO people (name) VALUES (?)", [name]);
+    for (const each of data) {
+      db.query(`INSERT INTO sites (site,${kind}) VALUES (?,?)`, [site,each]);
     }
   });
+})
 
-  // Todo: Other CRUD operations here...
+// Todo: Other CRUD operations here...
 
-  // Close database to clean up resources
-  db.close()
+// Close database to clean up resources
+db.close()
