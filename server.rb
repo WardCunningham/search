@@ -61,6 +61,17 @@ helpers do
     result
   end
 
+  def selected output
+    puts output
+    result = Hash.new { |hash, key| hash[key] = [] }
+    output.split(/\n/).each do |line|
+      site, slug = line.split '|'
+      result[slug] << site
+    end
+    result
+  end
+
+
   def format references
     result = []
     references.each do |slug,sites|
@@ -133,7 +144,13 @@ get '/search' do
       when 'sites'
         search sites(find, query, match)
       when 'pages'
-        format references pages(find, query, sites(find, query, match), match)
+        if find=='plugins'
+          sql = "select site,slug from pages where plugin = \"#{query[0]}\" limit 100"
+          puts sql
+          format selected `sqlite3 public/pages.db '#{sql}'`
+        else
+          format references pages(find, query, sites(find, query, match), match)
+        end
       else
         "Don't yet know within: '#{params['within']}'"
     end
@@ -159,7 +176,13 @@ post '/match', :provides => :json do
   find = params['find'] || 'words'
   match = params['match'] || 'and'
   query = split find, params['query']
-  result = references pages(find, query, sites(find, query, match), match)
+  if find=='plugins' || find=='items'
+    find = find.gsub(/s$/,'')
+    sql = "select site,slug from pages where #{find} = \"#{query[0]}\" limit 100"
+    result = selected `sqlite3 public/pages.db '#{sql}'`
+  else
+    result = references pages(find, query, sites(find, query, match), match)
+  end
   halt 200, {:params => params, :result => result}.to_json
 end
 
