@@ -144,8 +144,15 @@ get '/search' do
       when 'sites'
         search sites(find, query, match)
       when 'pages'
-        if find=='plugins'
-          sql = "select site,slug from pages where plugin = \"#{query[0]}\" limit 100"
+        if find=='plugins' || find=='items'
+          find = find.gsub(/s$/,'')
+          if match == 'or'
+            cond = (query.map {|value| "#{find} = \"#{value}\"" }).join(" or ")
+            sql = "select site,slug from pages where #{cond} limit 100"
+          else
+            cond = query.map {|value| "select site,slug from pages where #{find} = \"#{value}\""}
+            sql = cond.join(" intersect ")
+          end
           puts sql
           format selected `sqlite3 public/pages.db '#{sql}'`
         else
@@ -178,7 +185,13 @@ post '/match', :provides => :json do
   query = split find, params['query']
   if find=='plugins' || find=='items'
     find = find.gsub(/s$/,'')
-    sql = "select site,slug from pages where #{find} = \"#{query[0]}\" limit 100"
+    if match == 'or'
+      cond = (query.map {|value| "#{find} = \"#{value}\"" }).join(" or ")
+      sql = "select site,slug from pages where #{cond} limit 100"
+    else
+      cond = query.map {|value| "select site,slug from pages where #{find} = \"#{value}\""}
+      sql = cond.join(" intersect ")
+    end
     result = selected `sqlite3 public/pages.db '#{sql}'`
   else
     result = references pages(find, query, sites(find, query, match), match)
