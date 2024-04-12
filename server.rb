@@ -148,7 +148,7 @@ get '/search' do
           find = find.gsub(/s$/,'')
           if match == 'or'
             cond = (query.map {|value| "#{find} = \"#{value}\"" }).join(" or ")
-            sql = "select site,slug from pages where #{cond} limit 100"
+            sql = "select distinct site,slug from pages where #{cond} limit 100"
           else
             cond = query.map {|value| "select site,slug from pages where #{find} = \"#{value}\""}
             sql = cond.join(" intersect ")
@@ -187,7 +187,7 @@ post '/match', :provides => :json do
     find = find.gsub(/s$/,'')
     if match == 'or'
       cond = (query.map {|value| "#{find} = \"#{value}\"" }).join(" or ")
-      sql = "select site,slug from pages where #{cond} limit 100"
+      sql = "select distinct site,slug from pages where #{cond} limit 100"
     else
       cond = query.map {|value| "select site,slug from pages where #{find} = \"#{value}\""}
       sql = cond.join(" intersect ")
