@@ -3,7 +3,10 @@
 // see https://deno-blog.com/Using_SQLite_with_Deno.2023-02-24
 
 import { DB } from "https://deno.land/x/sqlite@v3.7.0/mod.ts";
-const db = new DB("search-scratch.db");
+
+const dbfile = 'search.db'
+await Deno.remove(dbfile);
+const db = new DB(dbfile);
 const insert = {} // kind => prepared statement
 
 function create () {
@@ -27,7 +30,7 @@ function create () {
 }
 
 let count = 0
-const kind = 'plugin'
+// const kind = 'plugin'
 
 async function allSites () {
    for await (const dir of Deno.readDir("../sites")) {
@@ -38,7 +41,7 @@ async function allSites () {
     } catch(err) {
       if(err.code != "ENOENT") console.log('allSite', {err})
     }
-    if(count > 5) break
+    // if(count > 5) break
   }
   console.log('allSites done')
 }
@@ -48,7 +51,7 @@ async function allPages (site) {
     if(!dir.isDirectory) continue
     try {
       const slug = dir.name
-      eachPage(site,slug)
+      await eachPage(site,slug)
     } catch(err) {
       if(err.code != "ENOENT") console.log('allPages', {err})
     }
@@ -67,13 +70,13 @@ async function allKinds (site,slug,kind,doit) {
       file.close();
 }
 
-function eachPage(site,slug) {
+async function eachPage(site,slug) {
   const [[uid]] = db.query(`INSERT INTO pages (site,slug) VALUES (?,?) RETURNING id`, [site,slug]);
   for (const kind of ['plugin','item']) {
     if(!(kind in insert)) insert[kind] = db.prepareQuery(`INSERT INTO ${kind+'s'} (page,${kind}) VALUES (?,?)`)
-    allKinds(site,slug,kind,data => {
+    await allKinds(site,slug,kind,data => {
       db.transaction(() => {
-        console.log({slug,kind,length:data.length})
+        // console.log({slug,kind,length:data.length})
         for (const each of data) {
           insert[kind].execute([uid,each])
         }
