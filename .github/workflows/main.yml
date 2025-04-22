@@ -8,11 +8,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Ruby
-        uses: ruby/setup-ruby@v1.111.0
+        uses: ruby/setup-ruby@v1.233.0
         with:
-          ruby-version: 3.1.2
+          ruby-version: 3.2.8
       - name: Setup Graphviz
         run: |
           sudo apt-get update
