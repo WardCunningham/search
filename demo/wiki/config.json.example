@@ -1,0 +1,6 @@
+{
+  "url": "http://search.federatedwiki.org",
+  "security_type": "friends",
+  "cookieSecret": "<openssl rand -base64 48>",
+  "sessionDuration": 30
+}

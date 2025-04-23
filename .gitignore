@@ -16,3 +16,4 @@ pages/recent-activity
 pages/visible-federation
 trouble
 sqlite/geonames-*
+demo/wiki/config.json
