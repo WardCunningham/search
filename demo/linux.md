@@ -99,7 +99,7 @@ Add the `cron.sh` script to your user crontab.
 A systemd service unit is created with
 
 ```sh
-systemctl edit --user --force --full wiki-search-server
+systemctl edit --user --force --full wiki-search
 ```
 
 Fill it with:
@@ -126,7 +126,7 @@ Reload your daemon to use it.
 
 ```sh
 systemctl daemon-reload --user
-systemctl enable --user --now wiki-search-server
+systemctl enable --user --now wiki-search
 ```
 
 The search is now available at <http://search.federatedwiki.org:3030>.
