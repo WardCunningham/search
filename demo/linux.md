@@ -140,7 +140,15 @@ sudo loginctl enable-linger ubuntu
 For serving the query interface using the default HTTP port, use:
 
 ```
-sudo printf "http://query.search.federatedwiki.org {\n  reverse_proxy localhost:3030\n}\n" > /etc/caddy/Caddyfile
+sudo cat <<CADDYFILE > /etc/caddy/Caddyfile
+> {
+  email acme@search.federatedwiki.org
+}
+
+http://query.search.federatedwiki.org, https://query.search.federatedwiki.org {
+  reverse_proxy localhost:3030
+}
+CADDYFILE
 sudo systemctl restart caddy
 ```
 
