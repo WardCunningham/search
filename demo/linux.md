@@ -137,6 +137,8 @@ Persist the user service with enabling linger mode:
 sudo loginctl enable-linger ubuntu
 ```
 
+### Proxy
+
 For serving the query interface using the default HTTP port, use:
 
 ```
@@ -153,3 +155,93 @@ sudo systemctl restart caddy
 ```
 
 The query interface for the search is then also available at <http://query.search.federatedwiki.org>.
+
+### Wiki
+
+The search service comes with a minimal wiki. Go to `demo/wiki`.
+
+This needs an additional installation of
+
+- Node JS.
+
+You can grab one at <https://nvm.sh>.
+
+Copy the configuration example in place and fill the secret value.
+
+```sh
+cp config.json.example config.json
+```
+
+<details><summary>In case of need, adapt the wiki pages to your wiki domain.</summary>
+
+```sh
+sed 's/ROSTER search.fed.wiki.org:3030/ROSTER query.search.federatedwiki.org/' -i pages/federation-search
+sed 's/ROSTER search.fed.wiki.org/ROSTER query.search.federatedwiki.org/' -i pages/federation-search
+xargs -L1 sed 's|http://search.fed.wiki.org:3030|http://query.search.federatedwiki.org|g' -i <<<"pages/federation-search
+pages/search-help"
+sed 's/"search.fed.wiki.org:3030"/"query.search.federatedwiki.org"/g' -i pages/federation-search
+```
+
+</details>
+
+Now you can try to run the wiki.
+
+```
+wiki --data "${PWD}" --config "${PWD}/config.json"
+```
+
+If everything looks good when visiting <http://search.federatedwiki.org:3000>,
+you can add the service to your service manager and reverse proxy.
+
+```sh
+systemctl edit --user --force --full wiki
+```
+
+Add the following unit:
+
+```ini
+[Unit]
+Description=Wiki service
+Requires=default.target
+
+[Service]
+Type=simple
+Environment=NODE_VERSION=lts/jod
+Environment=NODE_ENV=production
+WorkingDirectory=/home/ubuntu/src/github.com/WardCunningham/search/demo/wiki
+ExecStart=/home/ubuntu/.nvm/nvm-exec wiki --data ./ --config ./config.json --host 127.0.0.1 --port 3000
+Restart=always
+TimeoutSec=10
+
+[Install]
+WantedBy=default.target
+```
+
+Tell your service manager about it:
+
+```sh
+systemctl --user daemon-reload
+```
+
+And enable it:
+
+```sh
+systemctl --user enable --now wiki
+```
+
+Next add the service to the proxy:
+
+```sh
+cat <<CADDYFILE >> /etc/caddy/Caddyfile
+
+http://search.federatedwiki.org {
+  reverse_proxy localhost:3000
+}
+CADDYFILE
+```
+
+```sh
+systemctl reload caddy
+```
+
+The wiki is now available at <http://search.federatedwiki.org/>.

@@ -4,7 +4,7 @@
     {
       "type": "paragraph",
       "id": "055352e0caf16e24",
-      "text": "The search web application will report what it has found scraping the visible federation based on search terms you provide and options you select. [http://search.fed.wiki.org:3030/ site]"
+      "text": "The search web application will report what it has found scraping the visible federation based on search terms you provide and options you select. [http://query.search.federatedwiki.org/ site]"
     },
     {
       "type": "pagefold",
@@ -423,7 +423,7 @@
       "item": {
         "type": "paragraph",
         "id": "055352e0caf16e24",
-        "text": "The search web application will report what it has found scraping the visible federation based on search terms you provide and options you select. [http://search.fed.wiki.org:3030/ site]"
+        "text": "The search web application will report what it has found scraping the visible federation based on search terms you provide and options you select. [http://query.search.federatedwiki.org/ site]"
       },
       "date": 1512277807495
     }

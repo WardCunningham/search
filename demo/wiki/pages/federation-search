@@ -4,7 +4,7 @@
     {
       "type": "paragraph",
       "id": "35ef8c871dc5b524",
-      "text": "We're experimenting with full text search of the federation. For the moment this is both easier to code and easier to host than searching the web. [http://search.fed.wiki.org:3030 search]"
+      "text": "We're experimenting with full text search of the federation. For the moment this is both easier to code and easier to host than searching the web. [http://query.search.federatedwiki.org search]"
     },
     {
       "type": "paragraph",
@@ -71,7 +71,7 @@
       "item": {
         "type": "paragraph",
         "id": "35ef8c871dc5b524",
-        "text": "We're experimenting with full text search of the federation. For the moment this is both easier to code and easier to host than searching the web. Maybe it will stay that way. [http://search.fed.wiki.org:3030 search]"
+        "text": "We're experimenting with full text search of the federation. For the moment this is both easier to code and easier to host than searching the web. Maybe it will stay that way. [http://query.search.federatedwiki.org search]"
       },
       "date": 1437341347024
     },
@@ -81,7 +81,7 @@
       "item": {
         "type": "paragraph",
         "id": "35ef8c871dc5b524",
-        "text": "We're experimenting with full text search of the federation. For the moment this is both easier to code and easier to host than searching the web. [http://search.fed.wiki.org:3030 search]"
+        "text": "We're experimenting with full text search of the federation. For the moment this is both easier to code and easier to host than searching the web. [http://query.search.federatedwiki.org search]"
       },
       "date": 1437341360054
     },
