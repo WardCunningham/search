@@ -1,0 +1,1040 @@
+{
+  "title": "Federation Search",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "35ef8c871dc5b524",
+      "text": "We're experimenting with full text search of the federation. For the moment this is both easier to code and easier to host than searching the web. [http://query.search.federatedwiki.org search]"
+    },
+    {
+      "type": "paragraph",
+      "id": "2f9e59bed4eefd57",
+      "text": "[[Search Help]] using the web interface."
+    },
+    {
+      "type": "paragraph",
+      "id": "6e6083e8ed5622d2",
+      "text": "[[Search Findings]] reported as a Roster of active sites."
+    },
+    {
+      "type": "paragraph",
+      "id": "924eda2931f04265",
+      "text": "This is an experimental service that we expect to change dramatically as we bring more search technology to bear and have more sites to search."
+    },
+    {
+      "type": "paragraph",
+      "id": "d249b014a83af1ac",
+      "text": "First we will make this interesting, then we'll make it fast, then we will integrate it with wiki itself making the whole federation close at hand."
+    },
+    {
+      "type": "paragraph",
+      "id": "115edeb95dbec45f",
+      "text": "Future versions will do stemmed and multi-word queries."
+    },
+    {
+      "type": "paragraph",
+      "id": "3de693abcc3e0f3a",
+      "text": "Future versions will quote site and page counts."
+    },
+    {
+      "type": "paragraph",
+      "id": "ad88fd7655f84a1e",
+      "text": "Future versions will plot page and site networks."
+    },
+    {
+      "type": "paragraph",
+      "id": "4330b62208e84008",
+      "text": "Future versions will be included in each wiki server."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Federation Search",
+        "story": []
+      },
+      "date": 1437341216997
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "35ef8c871dc5b524"
+      },
+      "id": "35ef8c871dc5b524",
+      "type": "add",
+      "date": 1437341231013
+    },
+    {
+      "type": "edit",
+      "id": "35ef8c871dc5b524",
+      "item": {
+        "type": "paragraph",
+        "id": "35ef8c871dc5b524",
+        "text": "We're experimenting with full text search of the federation. For the moment this is both easier to code and easier to host than searching the web. Maybe it will stay that way. [http://query.search.federatedwiki.org search]"
+      },
+      "date": 1437341347024
+    },
+    {
+      "type": "edit",
+      "id": "35ef8c871dc5b524",
+      "item": {
+        "type": "paragraph",
+        "id": "35ef8c871dc5b524",
+        "text": "We're experimenting with full text search of the federation. For the moment this is both easier to code and easier to host than searching the web. [http://query.search.federatedwiki.org search]"
+      },
+      "date": 1437341360054
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "7af72b0cdcb1c394"
+      },
+      "id": "7af72b0cdcb1c394",
+      "type": "add",
+      "after": "35ef8c871dc5b524",
+      "date": 1437342358271
+    },
+    {
+      "type": "edit",
+      "id": "7af72b0cdcb1c394",
+      "item": {
+        "type": "paragraph",
+        "id": "7af72b0cdcb1c394",
+        "text": "We search the text property of all story items for exact matches of alphanumeric strings."
+      },
+      "date": 1437342520954
+    },
+    {
+      "type": "add",
+      "id": "115edeb95dbec45f",
+      "item": {
+        "type": "paragraph",
+        "id": "115edeb95dbec45f",
+        "text": "Future versions will do word stemming and multi-word queries."
+      },
+      "after": "7af72b0cdcb1c394",
+      "date": 1437342553577
+    },
+    {
+      "type": "add",
+      "id": "52f7aebca568a4de",
+      "item": {
+        "type": "paragraph",
+        "id": "52f7aebca568a4de",
+        "text": "Future versions will support \"who links here\"."
+      },
+      "after": "115edeb95dbec45f",
+      "date": 1437342611230
+    },
+    {
+      "type": "edit",
+      "id": "115edeb95dbec45f",
+      "item": {
+        "type": "paragraph",
+        "id": "115edeb95dbec45f",
+        "text": "Future versions will do stemmed and multi-word queries."
+      },
+      "date": 1437342650829
+    },
+    {
+      "type": "add",
+      "id": "3de693abcc3e0f3a",
+      "item": {
+        "type": "paragraph",
+        "id": "3de693abcc3e0f3a",
+        "text": "Future versions will quote the size of the federation."
+      },
+      "after": "52f7aebca568a4de",
+      "date": 1437342688066
+    },
+    {
+      "type": "edit",
+      "id": "3de693abcc3e0f3a",
+      "item": {
+        "type": "paragraph",
+        "id": "3de693abcc3e0f3a",
+        "text": "Future versions will quote site and page counts."
+      },
+      "date": 1437342717922
+    },
+    {
+      "type": "add",
+      "id": "6ee19517037c5fab",
+      "item": {
+        "type": "paragraph",
+        "id": "6ee19517037c5fab",
+        "text": "Future versions will report pages as well as sites."
+      },
+      "after": "7af72b0cdcb1c394",
+      "date": 1437342776727
+    },
+    {
+      "type": "edit",
+      "id": "7af72b0cdcb1c394",
+      "item": {
+        "type": "paragraph",
+        "id": "7af72b0cdcb1c394",
+        "text": "We search the text property of all story items for exact matches of alphanumeric strings and report sites where they are found."
+      },
+      "date": 1437342838259
+    },
+    {
+      "type": "add",
+      "id": "ad88fd7655f84a1e",
+      "item": {
+        "type": "paragraph",
+        "id": "ad88fd7655f84a1e",
+        "text": "Future versions will plot page and site networks."
+      },
+      "after": "3de693abcc3e0f3a",
+      "date": 1437342881961
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "40dfb6607974b68b"
+      },
+      "id": "40dfb6607974b68b",
+      "type": "add",
+      "after": "ad88fd7655f84a1e",
+      "date": 1437489869643
+    },
+    {
+      "type": "edit",
+      "id": "40dfb6607974b68b",
+      "item": {
+        "type": "paragraph",
+        "id": "40dfb6607974b68b",
+        "text": "See [[Recent Activity]]"
+      },
+      "date": 1437489894825
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "reference",
+        "id": "6135de790833050f",
+        "site": "search.fed.wiki.org:3030",
+        "slug": "recent-activity",
+        "title": "Recent Activity",
+        "text": "Here we report sites we find with recently edited pages."
+      },
+      "after": "ad88fd7655f84a1e",
+      "id": "6135de790833050f",
+      "date": 1437839305523
+    },
+    {
+      "type": "remove",
+      "id": "40dfb6607974b68b",
+      "date": 1437839309202
+    },
+    {
+      "type": "edit",
+      "id": "6135de790833050f",
+      "item": {
+        "type": "reference",
+        "id": "6135de790833050f",
+        "site": "search.fed.wiki.org:3030",
+        "slug": "recent-activity",
+        "title": "Recent Activity",
+        "text": "Here we report sites we find with recently edited pages. Note: the server on this port serves only this one page, not everything expected of a wiki."
+      },
+      "date": 1437840388728
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "74e3ae29140d3a01"
+      },
+      "id": "74e3ae29140d3a01",
+      "type": "add",
+      "after": "6135de790833050f",
+      "date": 1437950799601
+    },
+    {
+      "type": "remove",
+      "id": "74e3ae29140d3a01",
+      "date": 1437950816509
+    },
+    {
+      "type": "edit",
+      "id": "7af72b0cdcb1c394",
+      "item": {
+        "type": "paragraph",
+        "id": "7af72b0cdcb1c394",
+        "text": "We search the text property of all story items for exact matches of alphanumeric strings and"
+      },
+      "date": 1437951130796
+    },
+    {
+      "type": "add",
+      "id": "84380411e6889f51",
+      "item": {
+        "type": "paragraph",
+        "id": "84380411e6889f51",
+        "text": " report sites where they are found."
+      },
+      "after": "7af72b0cdcb1c394",
+      "date": 1437951133292
+    },
+    {
+      "type": "edit",
+      "id": "7af72b0cdcb1c394",
+      "item": {
+        "type": "paragraph",
+        "id": "7af72b0cdcb1c394",
+        "text": "We search various properties of pages for exact matches of search terms."
+      },
+      "date": 1437951221970
+    },
+    {
+      "type": "edit",
+      "id": "7af72b0cdcb1c394",
+      "item": {
+        "type": "paragraph",
+        "id": "7af72b0cdcb1c394",
+        "text": "We search various properties of pages for exact matches of search terms. Select what you would like to find."
+      },
+      "date": 1437951247122
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "find:\n      <td><input type=\"radio\" name=\"find\" value=\"words\" checked>words</input>\n      <td><input type=\"radio\" name=\"find\" value=\"links\">links</input>\n      <td><input type=\"radio\" name=\"find\" value=\"sites\">sites</input>"
+      },
+      "after": "7af72b0cdcb1c394",
+      "id": "8e6df6b2da1633c4",
+      "date": 1437951255878
+    },
+    {
+      "type": "edit",
+      "id": "84380411e6889f51",
+      "item": {
+        "type": "paragraph",
+        "id": "84380411e6889f51",
+        "text": "We report either the sites or the pages within sites where the terms are found."
+      },
+      "date": 1437951487955
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "html",
+        "id": "1e14f79ab65c3d57",
+        "text": "within:\n      <td><input type=\"radio\" name=\"within\" value=\"sites\" checked>sites</input>\n      <td><input type=\"radio\" name=\"within\" value=\"pages\">pages</input>"
+      },
+      "after": "84380411e6889f51",
+      "id": "1e14f79ab65c3d57",
+      "date": 1437951529151
+    },
+    {
+      "type": "add",
+      "id": "556589aee9ec227b",
+      "item": {
+        "type": "paragraph",
+        "id": "556589aee9ec227b",
+        "text": "Enter one or more terms. Press enter to search."
+      },
+      "after": "6ee19517037c5fab",
+      "date": 1437951645416
+    },
+    {
+      "type": "move",
+      "order": [
+        "35ef8c871dc5b524",
+        "7af72b0cdcb1c394",
+        "8e6df6b2da1633c4",
+        "84380411e6889f51",
+        "1e14f79ab65c3d57",
+        "556589aee9ec227b",
+        "6ee19517037c5fab",
+        "115edeb95dbec45f",
+        "52f7aebca568a4de",
+        "3de693abcc3e0f3a",
+        "ad88fd7655f84a1e",
+        "6135de790833050f"
+      ],
+      "id": "556589aee9ec227b",
+      "date": 1437951648968
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "html",
+        "id": "68d6dcb91bc176fe",
+        "text": " <input class=query type=text size=40></input>",
+        "alias": "1e14f79ab65c3d57"
+      },
+      "after": "556589aee9ec227b",
+      "id": "68d6dcb91bc176fe",
+      "date": 1437951665793
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "742c8c14e6d4d985"
+      },
+      "id": "742c8c14e6d4d985",
+      "type": "add",
+      "after": "6135de790833050f",
+      "date": 1437951691318
+    },
+    {
+      "type": "edit",
+      "id": "742c8c14e6d4d985",
+      "item": {
+        "type": "pagefold",
+        "id": "742c8c14e6d4d985",
+        "text": "instructions"
+      },
+      "date": 1437951698363
+    },
+    {
+      "type": "move",
+      "order": [
+        "35ef8c871dc5b524",
+        "742c8c14e6d4d985",
+        "7af72b0cdcb1c394",
+        "8e6df6b2da1633c4",
+        "84380411e6889f51",
+        "1e14f79ab65c3d57",
+        "556589aee9ec227b",
+        "68d6dcb91bc176fe",
+        "6ee19517037c5fab",
+        "115edeb95dbec45f",
+        "52f7aebca568a4de",
+        "3de693abcc3e0f3a",
+        "ad88fd7655f84a1e",
+        "6135de790833050f"
+      ],
+      "id": "742c8c14e6d4d985",
+      "date": 1437951704880
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "02b79ce31feddc1b"
+      },
+      "id": "02b79ce31feddc1b",
+      "type": "add",
+      "after": "6135de790833050f",
+      "date": 1437951711468
+    },
+    {
+      "type": "edit",
+      "id": "02b79ce31feddc1b",
+      "item": {
+        "type": "pagefold",
+        "id": "02b79ce31feddc1b",
+        "text": "."
+      },
+      "date": 1437951714898
+    },
+    {
+      "type": "move",
+      "order": [
+        "35ef8c871dc5b524",
+        "742c8c14e6d4d985",
+        "7af72b0cdcb1c394",
+        "8e6df6b2da1633c4",
+        "84380411e6889f51",
+        "1e14f79ab65c3d57",
+        "556589aee9ec227b",
+        "68d6dcb91bc176fe",
+        "02b79ce31feddc1b",
+        "6ee19517037c5fab",
+        "115edeb95dbec45f",
+        "52f7aebca568a4de",
+        "3de693abcc3e0f3a",
+        "ad88fd7655f84a1e",
+        "6135de790833050f"
+      ],
+      "id": "02b79ce31feddc1b",
+      "date": 1437951719986
+    },
+    {
+      "type": "fork",
+      "date": 1437951779510
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "19ca0d2881e0c693"
+      },
+      "id": "19ca0d2881e0c693",
+      "type": "add",
+      "after": "6135de790833050f",
+      "date": 1437951786443
+    },
+    {
+      "type": "edit",
+      "id": "19ca0d2881e0c693",
+      "item": {
+        "type": "pagefold",
+        "id": "19ca0d2881e0c693",
+        "text": "done"
+      },
+      "date": 1437951791038
+    },
+    {
+      "type": "move",
+      "order": [
+        "35ef8c871dc5b524",
+        "742c8c14e6d4d985",
+        "7af72b0cdcb1c394",
+        "8e6df6b2da1633c4",
+        "84380411e6889f51",
+        "1e14f79ab65c3d57",
+        "556589aee9ec227b",
+        "68d6dcb91bc176fe",
+        "02b79ce31feddc1b",
+        "6ee19517037c5fab",
+        "115edeb95dbec45f",
+        "52f7aebca568a4de",
+        "3de693abcc3e0f3a",
+        "ad88fd7655f84a1e",
+        "19ca0d2881e0c693",
+        "6135de790833050f"
+      ],
+      "id": "19ca0d2881e0c693",
+      "date": 1437951797080
+    },
+    {
+      "type": "move",
+      "order": [
+        "35ef8c871dc5b524",
+        "742c8c14e6d4d985",
+        "7af72b0cdcb1c394",
+        "8e6df6b2da1633c4",
+        "84380411e6889f51",
+        "1e14f79ab65c3d57",
+        "556589aee9ec227b",
+        "68d6dcb91bc176fe",
+        "02b79ce31feddc1b",
+        "115edeb95dbec45f",
+        "52f7aebca568a4de",
+        "3de693abcc3e0f3a",
+        "ad88fd7655f84a1e",
+        "19ca0d2881e0c693",
+        "6ee19517037c5fab",
+        "6135de790833050f"
+      ],
+      "id": "6ee19517037c5fab",
+      "date": 1437951802103
+    },
+    {
+      "type": "move",
+      "order": [
+        "35ef8c871dc5b524",
+        "742c8c14e6d4d985",
+        "7af72b0cdcb1c394",
+        "8e6df6b2da1633c4",
+        "84380411e6889f51",
+        "1e14f79ab65c3d57",
+        "556589aee9ec227b",
+        "68d6dcb91bc176fe",
+        "02b79ce31feddc1b",
+        "115edeb95dbec45f",
+        "3de693abcc3e0f3a",
+        "ad88fd7655f84a1e",
+        "19ca0d2881e0c693",
+        "6ee19517037c5fab",
+        "52f7aebca568a4de",
+        "6135de790833050f"
+      ],
+      "id": "52f7aebca568a4de",
+      "date": 1437951806819
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "24f518e1eeb55e10"
+      },
+      "id": "24f518e1eeb55e10",
+      "type": "add",
+      "after": "6135de790833050f",
+      "date": 1437951817650
+    },
+    {
+      "type": "edit",
+      "id": "24f518e1eeb55e10",
+      "item": {
+        "type": "pagefold",
+        "id": "24f518e1eeb55e10",
+        "text": "."
+      },
+      "date": 1437951821229
+    },
+    {
+      "type": "move",
+      "order": [
+        "35ef8c871dc5b524",
+        "742c8c14e6d4d985",
+        "7af72b0cdcb1c394",
+        "8e6df6b2da1633c4",
+        "84380411e6889f51",
+        "1e14f79ab65c3d57",
+        "556589aee9ec227b",
+        "68d6dcb91bc176fe",
+        "02b79ce31feddc1b",
+        "115edeb95dbec45f",
+        "3de693abcc3e0f3a",
+        "ad88fd7655f84a1e",
+        "19ca0d2881e0c693",
+        "6ee19517037c5fab",
+        "52f7aebca568a4de",
+        "24f518e1eeb55e10",
+        "6135de790833050f"
+      ],
+      "id": "24f518e1eeb55e10",
+      "date": 1437951829386
+    },
+    {
+      "type": "remove",
+      "id": "52f7aebca568a4de",
+      "date": 1437954656247
+    },
+    {
+      "type": "remove",
+      "id": "6ee19517037c5fab",
+      "date": 1437954660372
+    },
+    {
+      "type": "remove",
+      "id": "19ca0d2881e0c693",
+      "date": 1437954665759
+    },
+    {
+      "type": "remove",
+      "id": "24f518e1eeb55e10",
+      "date": 1437954671433
+    },
+    {
+      "type": "add",
+      "id": "924eda2931f04265",
+      "item": {
+        "type": "paragraph",
+        "id": "924eda2931f04265",
+        "text": "This is an experimental service that we expect to change dramatically as we bring more search technology to bear and have more sites to search."
+      },
+      "after": "ad88fd7655f84a1e",
+      "date": 1437954861385
+    },
+    {
+      "type": "move",
+      "order": [
+        "35ef8c871dc5b524",
+        "742c8c14e6d4d985",
+        "7af72b0cdcb1c394",
+        "8e6df6b2da1633c4",
+        "84380411e6889f51",
+        "1e14f79ab65c3d57",
+        "556589aee9ec227b",
+        "68d6dcb91bc176fe",
+        "02b79ce31feddc1b",
+        "924eda2931f04265",
+        "115edeb95dbec45f",
+        "3de693abcc3e0f3a",
+        "ad88fd7655f84a1e",
+        "6135de790833050f"
+      ],
+      "id": "924eda2931f04265",
+      "date": 1437954864961
+    },
+    {
+      "type": "edit",
+      "id": "6135de790833050f",
+      "item": {
+        "type": "reference",
+        "id": "6135de790833050f",
+        "site": "search.fed.wiki.org:3030",
+        "slug": "recent-activity",
+        "title": "Recent Activity",
+        "text": "Here we report sites we find with recently edited pages. You can incorporate this roster in pages you visit often using the Roster plugin with the ROSTER markup. "
+      },
+      "date": 1437962132421
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "code",
+        "id": "582903af82dd2a96",
+        "text": "ROSTER search.fed.wiki.org/recent-activity"
+      },
+      "after": "6135de790833050f",
+      "id": "582903af82dd2a96",
+      "date": 1437962140763
+    },
+    {
+      "type": "edit",
+      "id": "582903af82dd2a96",
+      "item": {
+        "type": "code",
+        "id": "582903af82dd2a96",
+        "text": "ROSTER search.fed.wiki.org:3030/recent-activity"
+      },
+      "date": 1437962148027
+    },
+    {
+      "type": "add",
+      "id": "d249b014a83af1ac",
+      "item": {
+        "type": "paragraph",
+        "id": "d249b014a83af1ac",
+        "text": "First we will make this interesting, then we'll make it fast, then we will integrate it with wiki itself making the whole federation close at hand."
+      },
+      "after": "35ef8c871dc5b524",
+      "date": 1438537340080
+    },
+    {
+      "type": "move",
+      "order": [
+        "35ef8c871dc5b524",
+        "742c8c14e6d4d985",
+        "7af72b0cdcb1c394",
+        "8e6df6b2da1633c4",
+        "84380411e6889f51",
+        "1e14f79ab65c3d57",
+        "556589aee9ec227b",
+        "68d6dcb91bc176fe",
+        "02b79ce31feddc1b",
+        "924eda2931f04265",
+        "d249b014a83af1ac",
+        "115edeb95dbec45f",
+        "3de693abcc3e0f3a",
+        "ad88fd7655f84a1e",
+        "6135de790833050f",
+        "582903af82dd2a96"
+      ],
+      "id": "d249b014a83af1ac",
+      "date": 1438537360582
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "7ff25c9d84b3becf"
+      },
+      "id": "7ff25c9d84b3becf",
+      "type": "add",
+      "after": "582903af82dd2a96",
+      "date": 1438537462515
+    },
+    {
+      "type": "remove",
+      "id": "7ff25c9d84b3becf",
+      "date": 1438537487363
+    },
+    {
+      "type": "edit",
+      "id": "8e6df6b2da1633c4",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "find:\n      <td><input type=\"radio\" name=\"find\" value=\"words\" checked>words</input>\n      <td><input type=\"radio\" name=\"find\" value=\"links\">links</input>\n      <td><input type=\"radio\" name=\"find\" value=\"sites\">sites</input>\n      <td><input type=\"radio\" name=\"find\" value=\"sites\">sites</input>\n      <td><input type=\"radio\" name=\"find\" value=\"sites\">sites</input>"
+      },
+      "date": 1439355114656
+    },
+    {
+      "type": "edit",
+      "id": "8e6df6b2da1633c4",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "find:\n      <td><input type=\"radio\" checked>words</input>\n      <td><input type=\"radio\" name=\"find\" value=\"links\">links</input>\n      <td><input type=\"radio\" name=\"find\" value=\"sites\">sites</input>\n      <td><input type=\"radio\" name=\"find\" value=\"sites\">sites</input>\n      <td><input type=\"radio\" name=\"find\" value=\"sites\">sites</input>"
+      },
+      "date": 1439355169520
+    },
+    {
+      "type": "edit",
+      "id": "8e6df6b2da1633c4",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "find:\n      <td><input type=\"radio\" checked>words</input>\n      <td><input type=\"radio\">links</input>\n      <td><input type=\"radio\">sites</input>\n      <td><input type=\"radio\">items</input>\n      <td><input type=\"radio\">plugins</input>"
+      },
+      "date": 1439355221715
+    },
+    {
+      "type": "edit",
+      "id": "1e14f79ab65c3d57",
+      "item": {
+        "type": "html",
+        "id": "1e14f79ab65c3d57",
+        "text": "within:\n      <td><input type=\"radio\" checked>sites</input>\n      <td><input type=\"radio\">pages</input>"
+      },
+      "date": 1439355243244
+    },
+    {
+      "type": "edit",
+      "id": "1e14f79ab65c3d57",
+      "item": {
+        "type": "html",
+        "id": "1e14f79ab65c3d57",
+        "text": "within:\n<td><input type=\"radio\" checked>sites</input>\n<td><input type=\"radio\">pages</input>"
+      },
+      "date": 1439355254572
+    },
+    {
+      "type": "edit",
+      "id": "8e6df6b2da1633c4",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "find:\n<td><input type=\"radio\" checked>words</input>\n<td><input type=\"radio\">links</input>\n<td><input type=\"radio\">sites</input>\n<td><input type=\"radio\">items</input>\n<td><input type=\"radio\">plugins</input>"
+      },
+      "date": 1439355280578
+    },
+    {
+      "type": "add",
+      "id": "d4652dad49a7a8f7",
+      "item": {
+        "type": "paragraph",
+        "id": "d4652dad49a7a8f7",
+        "text": "We select based on matches of any or all these terms."
+      },
+      "after": "7af72b0cdcb1c394",
+      "date": 1439355421875
+    },
+    {
+      "type": "move",
+      "order": [
+        "35ef8c871dc5b524",
+        "742c8c14e6d4d985",
+        "7af72b0cdcb1c394",
+        "8e6df6b2da1633c4",
+        "d4652dad49a7a8f7",
+        "84380411e6889f51",
+        "1e14f79ab65c3d57",
+        "556589aee9ec227b",
+        "68d6dcb91bc176fe",
+        "02b79ce31feddc1b",
+        "924eda2931f04265",
+        "d249b014a83af1ac",
+        "115edeb95dbec45f",
+        "3de693abcc3e0f3a",
+        "ad88fd7655f84a1e",
+        "6135de790833050f",
+        "582903af82dd2a96"
+      ],
+      "id": "d4652dad49a7a8f7",
+      "date": 1439355426724
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "a2bb7187d44efb09"
+      },
+      "id": "a2bb7187d44efb09",
+      "type": "add",
+      "after": "582903af82dd2a96",
+      "date": 1439355434216
+    },
+    {
+      "type": "remove",
+      "id": "a2bb7187d44efb09",
+      "date": 1439355445381
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "html",
+        "id": "051452b060a3721d",
+        "text": "within:\n<td><input type=\"radio\" checked>sites</input>\n<td><input type=\"radio\">pages</input>",
+        "alias": "1e14f79ab65c3d57"
+      },
+      "after": "d4652dad49a7a8f7",
+      "id": "051452b060a3721d",
+      "date": 1439355501285
+    },
+    {
+      "type": "edit",
+      "id": "1e14f79ab65c3d57",
+      "item": {
+        "type": "html",
+        "id": "1e14f79ab65c3d57",
+        "text": "match:\n<td><input type=\"radio\" checked>all</input>\n<td><input type=\"radio\">any</input>"
+      },
+      "date": 1439355518735
+    },
+    {
+      "type": "move",
+      "order": [
+        "35ef8c871dc5b524",
+        "742c8c14e6d4d985",
+        "7af72b0cdcb1c394",
+        "8e6df6b2da1633c4",
+        "d4652dad49a7a8f7",
+        "1e14f79ab65c3d57",
+        "051452b060a3721d",
+        "84380411e6889f51",
+        "556589aee9ec227b",
+        "68d6dcb91bc176fe",
+        "02b79ce31feddc1b",
+        "924eda2931f04265",
+        "d249b014a83af1ac",
+        "115edeb95dbec45f",
+        "3de693abcc3e0f3a",
+        "ad88fd7655f84a1e",
+        "6135de790833050f",
+        "582903af82dd2a96"
+      ],
+      "id": "1e14f79ab65c3d57",
+      "date": 1439355537575
+    },
+    {
+      "type": "move",
+      "order": [
+        "35ef8c871dc5b524",
+        "742c8c14e6d4d985",
+        "7af72b0cdcb1c394",
+        "8e6df6b2da1633c4",
+        "d4652dad49a7a8f7",
+        "1e14f79ab65c3d57",
+        "84380411e6889f51",
+        "051452b060a3721d",
+        "556589aee9ec227b",
+        "68d6dcb91bc176fe",
+        "02b79ce31feddc1b",
+        "924eda2931f04265",
+        "d249b014a83af1ac",
+        "115edeb95dbec45f",
+        "3de693abcc3e0f3a",
+        "ad88fd7655f84a1e",
+        "6135de790833050f",
+        "582903af82dd2a96"
+      ],
+      "id": "051452b060a3721d",
+      "date": 1439355541066
+    },
+    {
+      "type": "remove",
+      "id": "556589aee9ec227b",
+      "date": 1439355610454
+    },
+    {
+      "type": "remove",
+      "id": "68d6dcb91bc176fe",
+      "date": 1439355614998
+    },
+    {
+      "type": "fork",
+      "date": 1439355897018
+    },
+    {
+      "type": "add",
+      "id": "2f9e59bed4eefd57",
+      "item": {
+        "type": "paragraph",
+        "id": "2f9e59bed4eefd57",
+        "text": "[[Search Help]]"
+      },
+      "after": "35ef8c871dc5b524",
+      "date": 1439356690501
+    },
+    {
+      "type": "edit",
+      "id": "2f9e59bed4eefd57",
+      "item": {
+        "type": "paragraph",
+        "id": "2f9e59bed4eefd57",
+        "text": "[[Search Help]] using the web interface."
+      },
+      "date": 1439356778339
+    },
+    {
+      "type": "remove",
+      "id": "742c8c14e6d4d985",
+      "date": 1439357132726
+    },
+    {
+      "type": "remove",
+      "id": "7af72b0cdcb1c394",
+      "date": 1439357138395
+    },
+    {
+      "type": "remove",
+      "id": "8e6df6b2da1633c4",
+      "date": 1439357142895
+    },
+    {
+      "type": "remove",
+      "id": "d4652dad49a7a8f7",
+      "date": 1439357146959
+    },
+    {
+      "type": "remove",
+      "id": "1e14f79ab65c3d57",
+      "date": 1439357150990
+    },
+    {
+      "type": "remove",
+      "id": "84380411e6889f51",
+      "date": 1439357155222
+    },
+    {
+      "type": "remove",
+      "id": "051452b060a3721d",
+      "date": 1439357159593
+    },
+    {
+      "type": "remove",
+      "id": "02b79ce31feddc1b",
+      "date": 1439357170240
+    },
+    {
+      "type": "add",
+      "id": "6e6083e8ed5622d2",
+      "item": {
+        "type": "paragraph",
+        "id": "6e6083e8ed5622d2",
+        "text": "[[Search Discoveries]] reported as a Roster of active sites."
+      },
+      "after": "2f9e59bed4eefd57",
+      "date": 1439358724202
+    },
+    {
+      "type": "edit",
+      "id": "6e6083e8ed5622d2",
+      "item": {
+        "type": "paragraph",
+        "id": "6e6083e8ed5622d2",
+        "text": "[[Search News]] reported as a Roster of active sites."
+      },
+      "date": 1439358742766
+    },
+    {
+      "type": "edit",
+      "id": "6e6083e8ed5622d2",
+      "item": {
+        "type": "paragraph",
+        "id": "6e6083e8ed5622d2",
+        "text": "[[Search Findings]] reported as a Roster of active sites."
+      },
+      "date": 1439358757873
+    },
+    {
+      "type": "remove",
+      "id": "6135de790833050f",
+      "date": 1439359241081
+    },
+    {
+      "type": "remove",
+      "id": "582903af82dd2a96",
+      "date": 1439359244857
+    },
+    {
+      "type": "add",
+      "id": "4330b62208e84008",
+      "item": {
+        "type": "paragraph",
+        "id": "4330b62208e84008",
+        "text": "Future versions will be included in each wiki server."
+      },
+      "after": "ad88fd7655f84a1e",
+      "date": 1439359457755
+    }
+  ]
+}

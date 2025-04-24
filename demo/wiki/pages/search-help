@@ -1,0 +1,431 @@
+{
+  "title": "Search Help",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "055352e0caf16e24",
+      "text": "The search web application will report what it has found scraping the visible federation based on search terms you provide and options you select. [http://query.search.federatedwiki.org/ site]"
+    },
+    {
+      "type": "pagefold",
+      "id": "742c8c14e6d4d985",
+      "text": "choices"
+    },
+    {
+      "type": "paragraph",
+      "id": "7af72b0cdcb1c394",
+      "text": "We search various properties of pages for exact matches of search terms. Select what you would like to find."
+    },
+    {
+      "type": "html",
+      "id": "8e6df6b2da1633c4",
+      "text": "<td><input type=\"radio\" checked>words</input>\n― whole words found in item text. <br>\n\n<td><input type=\"radio\">links</input>\n― whole words found in link slugs.<br>\n\n<td><input type=\"radio\">sites</input>\n― sites found in items or actions.<br>\n\n<td><input type=\"radio\">items</input>\n― item ids found in stories.<br>\n\n<td><input type=\"radio\">plugins</input>\n― plugin types used in stories."
+    },
+    {
+      "type": "paragraph",
+      "id": "d4652dad49a7a8f7",
+      "text": "We select based on matches of any or all these terms."
+    },
+    {
+      "type": "html",
+      "id": "1e14f79ab65c3d57",
+      "text": "<td><input type=\"radio\" checked>all</input>\n― match when all terms are present.<br>\n\n<td><input type=\"radio\">any</input>\n― match when any one term is present."
+    },
+    {
+      "type": "paragraph",
+      "id": "84380411e6889f51",
+      "text": "We report either the sites or the pages within sites where the terms are found."
+    },
+    {
+      "type": "html",
+      "id": "051452b060a3721d",
+      "text": "<td><input type=\"radio\" checked>sites</input>\n― sites were any combination of pages match.<br>\n\n<td><input type=\"radio\">pages</input>\n― pages that match by themselves.",
+      "alias": "1e14f79ab65c3d57"
+    },
+    {
+      "type": "pagefold",
+      "id": "02b79ce31feddc1b",
+      "text": "."
+    },
+    {
+      "type": "paragraph",
+      "id": "94c13ed91cf0c3c2",
+      "text": "Search terms and choices appear in the browser's location bar as a url that can be saved and rerun at any time. See [[Federation Search]] for other options."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Search Help",
+        "story": []
+      },
+      "date": 1439356848173
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "055352e0caf16e24"
+      },
+      "id": "055352e0caf16e24",
+      "type": "add",
+      "date": 1439356850344
+    },
+    {
+      "type": "edit",
+      "id": "055352e0caf16e24",
+      "item": {
+        "type": "paragraph",
+        "id": "055352e0caf16e24",
+        "text": "The search web application will what it has found in the visible federation based on search terms and options selected with radio buttons."
+      },
+      "date": 1439356981715
+    },
+    {
+      "type": "edit",
+      "id": "055352e0caf16e24",
+      "item": {
+        "type": "paragraph",
+        "id": "055352e0caf16e24",
+        "text": "The search web application will report what it has found scraping the visible federation based on search terms you provide and options you select."
+      },
+      "date": 1439357110332
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "pagefold",
+        "id": "742c8c14e6d4d985",
+        "text": "instructions"
+      },
+      "after": "055352e0caf16e24",
+      "id": "742c8c14e6d4d985",
+      "date": 1439357132728
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "7af72b0cdcb1c394",
+        "text": "We search various properties of pages for exact matches of search terms. Select what you would like to find."
+      },
+      "after": "742c8c14e6d4d985",
+      "id": "7af72b0cdcb1c394",
+      "date": 1439357138397
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "find:\n<td><input type=\"radio\" checked>words</input>\n<td><input type=\"radio\">links</input>\n<td><input type=\"radio\">sites</input>\n<td><input type=\"radio\">items</input>\n<td><input type=\"radio\">plugins</input>"
+      },
+      "after": "7af72b0cdcb1c394",
+      "id": "8e6df6b2da1633c4",
+      "date": 1439357142896
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "d4652dad49a7a8f7",
+        "text": "We select based on matches of any or all these terms."
+      },
+      "after": "8e6df6b2da1633c4",
+      "id": "d4652dad49a7a8f7",
+      "date": 1439357146961
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "html",
+        "id": "1e14f79ab65c3d57",
+        "text": "match:\n<td><input type=\"radio\" checked>all</input>\n<td><input type=\"radio\">any</input>"
+      },
+      "after": "d4652dad49a7a8f7",
+      "id": "1e14f79ab65c3d57",
+      "date": 1439357150994
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "84380411e6889f51",
+        "text": "We report either the sites or the pages within sites where the terms are found."
+      },
+      "after": "1e14f79ab65c3d57",
+      "id": "84380411e6889f51",
+      "date": 1439357155224
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "html",
+        "id": "051452b060a3721d",
+        "text": "within:\n<td><input type=\"radio\" checked>sites</input>\n<td><input type=\"radio\">pages</input>",
+        "alias": "1e14f79ab65c3d57"
+      },
+      "after": "84380411e6889f51",
+      "id": "051452b060a3721d",
+      "date": 1439357159596
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "pagefold",
+        "id": "02b79ce31feddc1b",
+        "text": "."
+      },
+      "after": "051452b060a3721d",
+      "id": "02b79ce31feddc1b",
+      "date": 1439357170242
+    },
+    {
+      "type": "edit",
+      "id": "742c8c14e6d4d985",
+      "item": {
+        "type": "pagefold",
+        "id": "742c8c14e6d4d985",
+        "text": "choices"
+      },
+      "date": 1439357187303
+    },
+    {
+      "type": "edit",
+      "id": "8e6df6b2da1633c4",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "<td><input type=\"radio\" checked>words</input>\n\nLook for whole words found in the text of items on pages.\n\n<td><input type=\"radio\">links</input>\n<td><input type=\"radio\">sites</input>\n<td><input type=\"radio\">items</input>\n<td><input type=\"radio\">plugins</input>"
+      },
+      "date": 1439357292133
+    },
+    {
+      "type": "edit",
+      "id": "8e6df6b2da1633c4",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "<td><input type=\"radio\" checked>words</input>\n<p>Look for whole words found in the text of items on pages.\n\n<td><input type=\"radio\">links</input>\n<td><input type=\"radio\">sites</input>\n<td><input type=\"radio\">items</input>\n<td><input type=\"radio\">plugins</input>"
+      },
+      "date": 1439357311425
+    },
+    {
+      "type": "edit",
+      "id": "8e6df6b2da1633c4",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "<td><input type=\"radio\" checked>words</input>\n<p>Look for whole words found in the text of items on pages.\n<td><input type=\"radio\">links</input>\n<td><input type=\"radio\">sites</input>\n<td><input type=\"radio\">items</input>\n<td><input type=\"radio\">plugins</input>"
+      },
+      "date": 1439357349203
+    },
+    {
+      "type": "edit",
+      "id": "8e6df6b2da1633c4",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "<td><input type=\"radio\" checked>words</input>\n<br>Look for whole words found in the text of items on pages.\n<td><input type=\"radio\">links</input>\n<td><input type=\"radio\">sites</input>\n<td><input type=\"radio\">items</input>\n<td><input type=\"radio\">plugins</input>"
+      },
+      "date": 1439357359452
+    },
+    {
+      "type": "edit",
+      "id": "8e6df6b2da1633c4",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "<td><input type=\"radio\" checked>words</input>\n<br> Look for whole words found in the text of items on pages.\n\n<td><input type=\"radio\">links</input>\n<br> look for words found in internal links.\n\n\n<td><input type=\"radio\">sites</input>\n<td><input type=\"radio\">items</input>\n<td><input type=\"radio\">plugins</input>"
+      },
+      "date": 1439357427035
+    },
+    {
+      "type": "edit",
+      "id": "8e6df6b2da1633c4",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "<td><input type=\"radio\" checked>words</input>\n-- Look for whole words found in the text of items on pages.\n\n<td><input type=\"radio\">links</input>\n-- look for words found in internal links.\n\n\n<td><input type=\"radio\">sites</input>\n<td><input type=\"radio\">items</input>\n<td><input type=\"radio\">plugins</input>"
+      },
+      "date": 1439357453118
+    },
+    {
+      "type": "edit",
+      "id": "8e6df6b2da1633c4",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "<td><input type=\"radio\" checked>words</input>\n-- Look for whole words found in the text of items on pages. <br>\n\n<td><input type=\"radio\">links</input>\n-- look for words found in internal links.\n\n\n<td><input type=\"radio\">sites</input>\n<td><input type=\"radio\">items</input>\n<td><input type=\"radio\">plugins</input>"
+      },
+      "date": 1439357464696
+    },
+    {
+      "type": "edit",
+      "id": "8e6df6b2da1633c4",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "<td><input type=\"radio\" checked>words</input>\n-- Look for whole words found in text. <br>\n\n<td><input type=\"radio\">links</input>\n-- look for whole words found in internal links.\n\n\n<td><input type=\"radio\">sites</input>\n<td><input type=\"radio\">items</input>\n<td><input type=\"radio\">plugins</input>"
+      },
+      "date": 1439357496296
+    },
+    {
+      "type": "edit",
+      "id": "8e6df6b2da1633c4",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "<td><input type=\"radio\" checked>words</input>\n-- Look for whole words found in text. <br>\n\n<td><input type=\"radio\">links</input>\n-- Look for whole words found in internal links.<br>\n\n<td><input type=\"radio\">sites</input>\n-- Look for sites found in items or actions.<br>\n\n<td><input type=\"radio\">items</input>\n-- Look for item ids found in stories.<br>\n\n<td><input type=\"radio\">plugins</input>\n-- Look for plugin types used in stories."
+      },
+      "date": 1439357671123
+    },
+    {
+      "type": "edit",
+      "id": "8e6df6b2da1633c4",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "<td><input type=\"radio\" checked>words</input>\n-- whole words found in text. <br>\n\n<td><input type=\"radio\">links</input>\n-- whole words found in internal links.<br>\n\n<td><input type=\"radio\">sites</input>\n-- sites found in items or actions.<br>\n\n<td><input type=\"radio\">items</input>\n-- item ids found in stories.<br>\n\n<td><input type=\"radio\">plugins</input>\n-- plugin types used in stories."
+      },
+      "date": 1439357705996
+    },
+    {
+      "type": "edit",
+      "id": "1e14f79ab65c3d57",
+      "item": {
+        "type": "html",
+        "id": "1e14f79ab65c3d57",
+        "text": "<td><input type=\"radio\" checked>all</input>\n-- match when all terms are present.<br>\n\n<td><input type=\"radio\">any</input>\n-- match when any one term is present."
+      },
+      "date": 1439357836638
+    },
+    {
+      "type": "edit",
+      "id": "051452b060a3721d",
+      "item": {
+        "type": "html",
+        "id": "051452b060a3721d",
+        "text": "<td><input type=\"radio\" checked>sites</input>\n-- sites were any combination of pages match.<br>\n\n<td><input type=\"radio\">pages</input>\n-- pages that match by themselves.",
+        "alias": "1e14f79ab65c3d57"
+      },
+      "date": 1439358062665
+    },
+    {
+      "type": "edit",
+      "id": "8e6df6b2da1633c4",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "<td><input type=\"radio\" checked>words</input>\n-- whole words found in text. <br>\n\n<td><input type=\"radio\">links</input>\n-- whole words found in links as slugs.<br>\n\n<td><input type=\"radio\">sites</input>\n-- sites found in items or actions.<br>\n\n<td><input type=\"radio\">items</input>\n-- item ids found in stories.<br>\n\n<td><input type=\"radio\">plugins</input>\n-- plugin types used in stories."
+      },
+      "date": 1439358178581
+    },
+    {
+      "type": "edit",
+      "id": "8e6df6b2da1633c4",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "<td><input type=\"radio\" checked>words</input>\n-- whole words found in item text. <br>\n\n<td><input type=\"radio\">links</input>\n-- whole words found in link slugs.<br>\n\n<td><input type=\"radio\">sites</input>\n-- sites found in items or actions.<br>\n\n<td><input type=\"radio\">items</input>\n-- item ids found in stories.<br>\n\n<td><input type=\"radio\">plugins</input>\n-- plugin types used in stories."
+      },
+      "date": 1439358203665
+    },
+    {
+      "type": "edit",
+      "id": "8e6df6b2da1633c4",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "<td><input type=\"radio\" checked>words</input>\n-- whole words found in item text. <br>\n\n<td><input type=\"radio\">links</input>\n-- whole words found in link slugs.<br>\n\n<td><input type=\"radio\">sites</input>\n-- sites found mentioned in items or actions.<br>\n\n<td><input type=\"radio\">items</input>\n-- item ids found in stories.<br>\n\n<td><input type=\"radio\">plugins</input>\n-- plugin types used in stories."
+      },
+      "date": 1439358232831
+    },
+    {
+      "type": "edit",
+      "id": "8e6df6b2da1633c4",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "<td><input type=\"radio\" checked>words</input>\n-- whole words found in item text. <br>\n\n<td><input type=\"radio\">links</input>\n-- whole words found in link slugs.<br>\n\n<td><input type=\"radio\">sites</input>\n-- sites found in items or actions.<br>\n\n<td><input type=\"radio\">items</input>\n-- item ids found in stories.<br>\n\n<td><input type=\"radio\">plugins</input>\n-- plugin types used in stories."
+      },
+      "date": 1439358242309
+    },
+    {
+      "type": "edit",
+      "id": "8e6df6b2da1633c4",
+      "item": {
+        "type": "html",
+        "id": "8e6df6b2da1633c4",
+        "text": "<td><input type=\"radio\" checked>words</input>\n― whole words found in item text. <br>\n\n<td><input type=\"radio\">links</input>\n― whole words found in link slugs.<br>\n\n<td><input type=\"radio\">sites</input>\n― sites found in items or actions.<br>\n\n<td><input type=\"radio\">items</input>\n― item ids found in stories.<br>\n\n<td><input type=\"radio\">plugins</input>\n― plugin types used in stories."
+      },
+      "date": 1439358359542
+    },
+    {
+      "type": "edit",
+      "id": "1e14f79ab65c3d57",
+      "item": {
+        "type": "html",
+        "id": "1e14f79ab65c3d57",
+        "text": "<td><input type=\"radio\" checked>all</input>\n― match when all terms are present.<br>\n\n<td><input type=\"radio\">any</input>\n― match when any one term is present."
+      },
+      "date": 1439358369487
+    },
+    {
+      "type": "edit",
+      "id": "051452b060a3721d",
+      "item": {
+        "type": "html",
+        "id": "051452b060a3721d",
+        "text": "<td><input type=\"radio\" checked>sites</input>\n― sites were any combination of pages match.<br>\n\n<td><input type=\"radio\">pages</input>\n― pages that match by themselves.",
+        "alias": "1e14f79ab65c3d57"
+      },
+      "date": 1439358379814
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "94c13ed91cf0c3c2"
+      },
+      "id": "94c13ed91cf0c3c2",
+      "type": "add",
+      "after": "02b79ce31feddc1b",
+      "date": 1439358408830
+    },
+    {
+      "type": "edit",
+      "id": "94c13ed91cf0c3c2",
+      "item": {
+        "type": "paragraph",
+        "id": "94c13ed91cf0c3c2",
+        "text": "Search terms and choices appear in the browser's location bar as a url that can be saved and rerun at any time."
+      },
+      "date": 1439358598344
+    },
+    {
+      "type": "edit",
+      "id": "94c13ed91cf0c3c2",
+      "item": {
+        "type": "paragraph",
+        "id": "94c13ed91cf0c3c2",
+        "text": "Search terms and choices appear in the browser's location bar as a url that can be saved and rerun at any time. See [[Federation Search]] for other options."
+      },
+      "date": 1439358659455
+    },
+    {
+      "type": "fork",
+      "site": "search.fed.wiki.org",
+      "date": 1512277782257
+    },
+    {
+      "type": "edit",
+      "id": "055352e0caf16e24",
+      "item": {
+        "type": "paragraph",
+        "id": "055352e0caf16e24",
+        "text": "The search web application will report what it has found scraping the visible federation based on search terms you provide and options you select. [http://query.search.federatedwiki.org/ site]"
+      },
+      "date": 1512277807495
+    }
+  ]
+}
