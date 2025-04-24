@@ -144,20 +144,7 @@ get '/search' do
       when 'sites'
         search sites(find, query, match)
       when 'pages'
-        if find=='plugins' || find=='items'
-          find = find.gsub(/s$/,'')
-          if match == 'or'
-            cond = (query.map {|value| "#{find} = \"#{value}\"" }).join(" or ")
-            sql = "select distinct site,slug from pages where #{cond} limit 100"
-          else
-            cond = query.map {|value| "select site,slug from pages where #{find} = \"#{value}\""}
-            sql = cond.join(" intersect ")
-          end
-          puts sql
-          format selected `sqlite3 public/pages.db '#{sql}'`
-        else
-          format references pages(find, query, sites(find, query, match), match)
-        end
+        format references pages(find, query, sites(find, query, match), match)
       else
         "Don't yet know within: '#{params['within']}'"
     end
@@ -183,19 +170,7 @@ post '/match', :provides => :json do
   find = params['find'] || 'words'
   match = params['match'] || 'and'
   query = split find, params['query']
-  if find=='plugins' || find=='items'
-    find = find.gsub(/s$/,'')
-    if match == 'or'
-      cond = (query.map {|value| "#{find} = \"#{value}\"" }).join(" or ")
-      sql = "select distinct site,slug from pages where #{cond} limit 100"
-    else
-      cond = query.map {|value| "select site,slug from pages where #{find} = \"#{value}\""}
-      sql = cond.join(" intersect ")
-    end
-    result = selected `sqlite3 public/pages.db '#{sql}'`
-  else
-    result = references pages(find, query, sites(find, query, match), match)
-  end
+  result = references pages(find, query, sites(find, query, match), match)
   halt 200, {:params => params, :result => result}.to_json
 end
 
