@@ -8,7 +8,7 @@ require 'date'
 def read
   Dir.new('sites').each do |site|
     next if site.match /^\./
-    next unless Dir.exists?("sites/#{site}/pages")
+    next unless Dir.exist?("sites/#{site}/pages")
     next if (Date.today - File.mtime("sites/#{site}/pages").to_date).to_i > 365
     size = Dir["sites/#{site}/pages/*"].size
     next if size < 10

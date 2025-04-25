@@ -6,7 +6,7 @@ require 'set'
 def read
   Dir.new('sites').each do |site|
     next if site.match /^\./
-    next unless Dir.exists?("sites/#{site}/pages")
+    next unless Dir.exist?("sites/#{site}/pages")
     Dir["sites/#{site}/pages/*"].each do |path|
       slug = (path.chomp.split(/\//))[3]
       @web[slug][:forks] += 1
