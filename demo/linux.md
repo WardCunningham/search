@@ -33,8 +33,11 @@ export PATH="$GEM_HOME/bin:$PATH"
 Install the Ruby dependencies with:
 
 ```sh
-bundle install
+bundle install --without development
 ```
+
+This spares you from installing the `solargraph` development dependency for the
+Ruby language server into your demo system.
 
 ## Preparation
 
@@ -47,13 +50,6 @@ xargs -L1 sed 's/search.fed.wiki.org/search.federatedwiki.org/g' -i <<<"online.p
   public/title-search.html
   public/title.html
   server.rb"
-```
-
-We also need a little upgrade, if we want to run from Ruby 3.
-
-```sh
-xargs -L1 sed 's/Dir.exists/Dir.exist/' -i <<<"slug-web.rb
-site-web.rb"
 ```
 
 You will need at least one seed site to start from. Additionally we prepare the
@@ -245,3 +241,40 @@ systemctl reload caddy
 ```
 
 The wiki is now available at <http://search.federatedwiki.org/>.
+
+## Updating
+
+To update your search service, stop its runtime components, keep your modifications,
+pull available changes, reapply your changes and boot up again.
+
+We'll walk you through the steps.
+
+1. Stop services
+
+```sh
+systemctl --user stop wiki-search wiki
+```
+
+2. Keep local motifications
+
+```sh
+git stash push
+```
+
+3. Pull remote motifications
+
+```sh
+git pull
+```
+
+4. Restore local motifications
+
+```sh
+git stash pop
+```
+
+5. Restart services
+
+```sh
+systemctl --user start wiki-search wiki
+```
