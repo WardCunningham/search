@@ -41,8 +41,9 @@ Ruby language server into your demo system.
 
 ## Preparation
 
-The code assumes in many place from where it is made available.
-Adapt this location to your preference.
+The code references the assumed public location of its endpoint and the endpoint
+of the associated search wiki in many places. Adapt this location to your
+preference.
 
 ```sh
 xargs -L1 sed 's/search.fed.wiki.org/search.federatedwiki.org/g' -i <<<"online.pl
@@ -64,13 +65,17 @@ LANG="en_US.UTF-8" sh cron.sh
 
 Initially, this will take a lot of time. Wait for the process to complete.
 
-Observe its doings for a current time window with e.g.:
+Observe its doings for a current interval with e.g.:
 
 ```sh
 tail -f logs/Tue-1800
 ```
 
-An exemplary initial run took four and a half hours.
+An exemplary initial run took four and a half hours. It took ten runs of the
+scheduled crawling to discover a stable set of federated domains.
+
+This allows [the logs](http://search.federatedwiki.org:3030/logs) to be used as
+an activity monitor for each interval they cover.
 
 ## Running
 
@@ -127,19 +132,22 @@ systemctl enable --user --now wiki-search
 
 The search is now available at <http://search.federatedwiki.org:3030>.
 
-Persist the user service with enabling linger mode:
+Persist the user service across reboots with enabling user lingering:
 
 ```sh
 sudo loginctl enable-linger ubuntu
 ```
 
-### Proxy
+### HTTP & HTTPS/ACME proxy Caddy
 
-For serving the query interface using the default HTTP port, use:
+For serving the query interface using the default HTTP port and separately via
+HTTPS without issuing a redirect, you can use the caddy HTTP server.
 
-```
+Modify the email address and domain to match your environment.
+
+```sh
 sudo cat <<CADDYFILE > /etc/caddy/Caddyfile
-> {
+{
   email acme@search.federatedwiki.org
 }
 
@@ -147,10 +155,17 @@ http://query.search.federatedwiki.org, https://query.search.federatedwiki.org {
   reverse_proxy localhost:3030
 }
 CADDYFILE
-sudo systemctl restart caddy
 ```
 
-The query interface for the search is then also available at <http://query.search.federatedwiki.org>.
+```sh
+sudo systemctl reload caddy
+```
+
+The query interface for the search is then also available at
+<http://query.search.federatedwiki.org> and
+<https://query.search.federatedwiki.org>.
+
+The latter offers HTTPS-enabled wikis to use the search.
 
 ### Wiki
 
@@ -162,7 +177,7 @@ This needs an additional installation of
 
 You can grab one at <https://nvm.sh>.
 
-Copy the configuration example in place and fill the secret value.
+Copy the configuration example and fill the secret value.
 
 ```sh
 cp config.json.example config.json
@@ -172,7 +187,7 @@ cp config.json.example config.json
 
 ```sh
 sed 's/ROSTER search.fed.wiki.org:3030/ROSTER query.search.federatedwiki.org/' -i pages/federation-search
-sed 's/ROSTER search.fed.wiki.org/ROSTER query.search.federatedwiki.org/' -i pages/federation-search
+sed 's/ROSTER search.fed.wiki.org/ROSTER search.federatedwiki.org/' -i pages/federation-search
 xargs -L1 sed 's|http://search.fed.wiki.org:3030|http://query.search.federatedwiki.org|g' -i <<<"pages/federation-search
 pages/search-help"
 sed 's/"search.fed.wiki.org:3030"/"query.search.federatedwiki.org"/g' -i pages/federation-search
@@ -180,7 +195,7 @@ sed 's/"search.fed.wiki.org:3030"/"query.search.federatedwiki.org"/g' -i pages/f
 
 </details>
 
-Now you can try to run the wiki.
+You can now try to run the wiki.
 
 ```
 wiki --data "${PWD}" --config "${PWD}/config.json"
@@ -188,6 +203,8 @@ wiki --data "${PWD}" --config "${PWD}/config.json"
 
 If everything looks good when visiting <http://search.federatedwiki.org:3000>,
 you can add the service to your service manager and reverse proxy.
+
+### Persistent system service
 
 ```sh
 systemctl edit --user --force --full wiki
@@ -216,14 +233,16 @@ WantedBy=default.target
 Tell your service manager about it:
 
 ```sh
-systemctl --user daemon-reload
+systemctl daemon-reload --user
 ```
 
 And enable it:
 
 ```sh
-systemctl --user enable --now wiki
+systemctl enable --user --now wiki
 ```
+
+### Proxy configuration
 
 Next add the service to the proxy:
 
@@ -244,7 +263,7 @@ The wiki is now available at <http://search.federatedwiki.org/>.
 
 ## Updating
 
-To update your search service, stop its runtime components, keep your modifications,
+To update your search service, stop its runtime, keep your modifications,
 pull available changes, reapply your changes and boot up again.
 
 We'll walk you through the steps.
@@ -252,7 +271,7 @@ We'll walk you through the steps.
 1. Stop services
 
 ```sh
-systemctl --user stop wiki-search wiki
+systemctl stop --user wiki-search wiki
 ```
 
 2. Keep local motifications
@@ -276,5 +295,7 @@ git stash pop
 5. Restart services
 
 ```sh
-systemctl --user start wiki-search wiki
+systemctl start --user wiki-search wiki
 ```
+
+You're now up to date and benefitting from latest changes.
