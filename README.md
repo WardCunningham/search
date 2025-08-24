@@ -6,3 +6,5 @@ scrape and search the federation
 view interactive system maps
 
 [launch viewer](http://search.dojo.fed.wiki/assets/pages/solo-super-collaborator/README.html?read=https://raw.githubusercontent.com/WardCunningham/search/master/README.graph.jsonl)
+
+<img width="1016" height="707" alt="image" src="https://github.com/user-attachments/assets/cbcbff01-1061-45f6-91ba-f38ec980aefd" />
